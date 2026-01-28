@@ -1,0 +1,4001 @@
+{
+  "version": 0.1,
+  "files": {
+    "../components/AliasesOverview.jsx": {
+      "scopes": {
+        "2/declaration/body/3/argument/1/1/1": {
+          "type": "element",
+          "hash": "3ceefb757990d79c1588fbf21902cfde",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Your Email Aliases"
+        },
+        "2/declaration/body/3/argument/1/1/3": {
+          "type": "element",
+          "hash": "76714f259b162b162184ec0488605110",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "{aliases.length} alias<expression/><expression/>"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/1": {
+          "type": "element",
+          "hash": "b2cca45294f1b27e38e9166219f0bf8c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Personal Aliases"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/3": {
+          "type": "element",
+          "hash": "3d3fc0aaddf33e53cf3d21d262192034",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📬"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/3-title": {
+          "type": "attribute",
+          "hash": "ce18a578408ef8b2e77befa2e2822b3d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View Inbox"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/5": {
+          "type": "element",
+          "hash": "584ecc01fb2bd41c90c813214591ed7f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✉️"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/5-title": {
+          "type": "attribute",
+          "hash": "11d380c15cdc68f42d4afa70360b4e10",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Send Email"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/7": {
+          "type": "element",
+          "hash": "4e9843dec5d5bbe82446f784cb96870f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🗑️"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/11/7-title": {
+          "type": "attribute",
+          "hash": "4a9de3cec7a8fb2c6c541cad2406fd39",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Delete Alias"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/3/1/3/3": {
+          "type": "element",
+          "hash": "a96adea17723292d3dcaedc0a7310b86",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Forwards to: {alias.realEmail}"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/7/3/3": {
+          "type": "element",
+          "hash": "01b803329590ea067a0e9b41b3193353",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sent"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/3/expression/right/3/expression/0/body/1/7/5/3": {
+          "type": "element",
+          "hash": "fcf3cc658c8d4be28b865398d5efa4fc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Received"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/1": {
+          "type": "element",
+          "hash": "8ffa504d2aa152ebcf41d3e1d200d120",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Collaborative Aliases"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/3": {
+          "type": "element",
+          "hash": "dab82a8aafcd4189cab366ac54b31b76",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📬"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/3-title": {
+          "type": "attribute",
+          "hash": "ce18a578408ef8b2e77befa2e2822b3d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View Inbox"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/5": {
+          "type": "element",
+          "hash": "3c10b4eaad4fd64bf8d709e70aa4d2bf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✉️"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/5-title": {
+          "type": "attribute",
+          "hash": "11d380c15cdc68f42d4afa70360b4e10",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Send Email"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/7/expression/right": {
+          "type": "element",
+          "hash": "2e49efe08504d5bde1edfeab2018e61e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🗑️"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/11/7/expression/right-title": {
+          "type": "attribute",
+          "hash": "4a9de3cec7a8fb2c6c541cad2406fd39",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Delete Alias"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/3/1/3/3": {
+          "type": "element",
+          "hash": "5cf35d71bb470a23ae8b90123e972dc5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Owner: <expression/>"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/7/3/3": {
+          "type": "element",
+          "hash": "01b803329590ea067a0e9b41b3193353",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sent"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/1/7/5/3": {
+          "type": "element",
+          "hash": "fcf3cc658c8d4be28b865398d5efa4fc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Received"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/1": {
+          "type": "element",
+          "hash": "f4bfaab85a6187fcb5ee618771202ccf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Collaborators"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/3/1/expression/0/body/1": {
+          "type": "element",
+          "hash": "3d774ca0e00676b0fc0bc5752d17186f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<expression/> ({c.role})"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/3/1/expression/0/body/3/expression/right": {
+          "type": "element",
+          "hash": "0013df60d0b69d696c0519751f76834f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Remove"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/3/3/expression/right": {
+          "type": "element",
+          "hash": "943e977b2589f47291f316447e6ca45c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No collaborators yet."
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/5/expression/right/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "c28843c4cce5ab4aab2c41173896be7c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add user by email"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/3/5/expression/right/1/3": {
+          "type": "element",
+          "hash": "253435d738adfc2d079cc3f987519919",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/7/1": {
+          "type": "element",
+          "hash": "d4b07b3b4faedbd20762ab8a665d979d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Recent Activity"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/7/3/1/expression/0/body/3": {
+          "type": "element",
+          "hash": "1409f9e98be0e57da01149ada6e30953",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "(<function:Date.toLocaleDateString/>)"
+        },
+        "2/declaration/body/3/argument/3/1/expression/alternate/7/expression/right/3/expression/0/body/1/argument/5/1/7/3/3/expression/right": {
+          "type": "element",
+          "hash": "9bdb596f32edf0d1df22852d79987758",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No activity recorded."
+        },
+        "2/declaration/body/3/argument/3/1/expression/consequent/1": {
+          "type": "element",
+          "hash": "a002204238bf136c435bb51665576474",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📭"
+        },
+        "2/declaration/body/3/argument/3/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "93068c97418ba1ecfc2ee728062d43ff",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No aliases created yet."
+        },
+        "2/declaration/body/3/argument/3/1/expression/consequent/5": {
+          "type": "element",
+          "hash": "52ca393356119963a531a0e7386bc815",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create your first alias to start receiving emails at custom addresses."
+        }
+      }
+    },
+    "../components/AssistantChatPhase2.jsx": {
+      "scopes": {
+        "11/body/0/argument/11/1/expression/right/3": {
+          "type": "element",
+          "hash": "52c0531e534a289861e627be24337b50",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "How can I help you?"
+        },
+        "11/body/0/argument/11/1/expression/right/5": {
+          "type": "element",
+          "hash": "39df5ece5b5824504446ee379294751f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Ask me anything about your emails or use quick actions above!"
+        },
+        "11/body/0/argument/15/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "4008b1f253209d175716ab5b78014cd6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Type your message..."
+        },
+        "11/body/0/argument/15/1/3-aria-label": {
+          "type": "attribute",
+          "hash": "76a8497d7b546628b03bb81d5c1ce995",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Send"
+        },
+        "11/body/0/argument/3/1/3/1": {
+          "type": "element",
+          "hash": "681d31e7af6ada0fc088f144c4d2697e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Assistant"
+        },
+        "11/body/0/argument/3/1/3/3": {
+          "type": "element",
+          "hash": "d8c3d78bcf6e7c9f028ca9a40f3334da",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "AI-Powered Helper"
+        },
+        "11/body/0/argument/3/3-aria-label": {
+          "type": "attribute",
+          "hash": "7d740c90056fe051c3d874a483c97be7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close chat"
+        },
+        "11/body/0/argument/3/3/1": {
+          "type": "element",
+          "hash": "bdbc827b3d224e03394dfd56304500f2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "×"
+        },
+        "11/body/0/argument/7/1": {
+          "type": "element",
+          "hash": "157a51ac3ffbc527a52379a547499fe2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Quick Actions"
+        },
+        "12/declaration/body/17/argument/5/1/expression/consequent": {
+          "type": "element",
+          "hash": "bdbc827b3d224e03394dfd56304500f2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "×"
+        }
+      }
+    },
+    "../components/CreateAliasForm.jsx": {
+      "scopes": {
+        "2/declaration/body/2/argument/1/1/3/1": {
+          "type": "element",
+          "hash": "5f7242781ea9c4112547323a14aa51a4",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create New Email Alias"
+        },
+        "2/declaration/body/2/argument/1/1/3/3": {
+          "type": "element",
+          "hash": "0665cda25a5df668cbf9b04781041fbc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Generate a custom email address that forwards to your inbox."
+        },
+        "2/declaration/body/2/argument/1/5/1/1/3": {
+          "type": "element",
+          "hash": "3fce6e79c653ac9bdf65f7416d2bda14",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Current Plan Status"
+        },
+        "2/declaration/body/2/argument/1/5/3/expression/right/1/1": {
+          "type": "element",
+          "hash": "4b9aaf192a1e5003099ff89dee748d4a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Personal aliases used:"
+        },
+        "2/declaration/body/2/argument/1/5/3/expression/right/1/3": {
+          "type": "element",
+          "hash": "496d569bf8add9dc6c16f7df8485f374",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "{personalAliasesCount}/5"
+        },
+        "2/declaration/body/2/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "3c6ad70205723b50933ff493f1e6cdd7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Alias Name <element:span>*</element:span>"
+        },
+        "2/declaration/body/2/argument/3/1/1/3/1-placeholder": {
+          "type": "attribute",
+          "hash": "8d4cafe8cc59c546850616c55fe15f4f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "e.g., support, contact, info"
+        },
+        "2/declaration/body/2/argument/3/1/1/3/1-title": {
+          "type": "attribute",
+          "hash": "7e018dacaf06a00413bc11c66ff243a3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Only letters, numbers, dots, hyphens and underscores allowed"
+        },
+        "2/declaration/body/2/argument/3/1/1/3/3": {
+          "type": "element",
+          "hash": "8504668edc849ba500f8777c2a9e4013",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "@<expression/>"
+        },
+        "2/declaration/body/2/argument/3/1/1/5": {
+          "type": "element",
+          "hash": "7378024723f2f9405c40e902808108b2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Use letters, numbers, dots (.), hyphens (-), and underscores (_) only. 2-50 characters."
+        },
+        "2/declaration/body/2/argument/3/1/11/1/1/expression/right": {
+          "type": "element",
+          "hash": "f66a99551039a2ed365b13ac3388a200",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade to Pro to create more aliases"
+        },
+        "2/declaration/body/2/argument/3/1/11/3/1/expression/consequent": {
+          "type": "element",
+          "hash": "e8c576485a3fde1687b31ba6eb51a76b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:div></element:div> Creating..."
+        },
+        "2/declaration/body/2/argument/3/1/5/expression/right/1": {
+          "type": "element",
+          "hash": "2518f2174084e72a31b221d2eff385bb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiGlobe></element:FiGlobe> Select Domain"
+        },
+        "2/declaration/body/2/argument/3/1/5/expression/right/3/1": {
+          "type": "element",
+          "hash": "7879c18b97052954b07be6d27658fbf7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "{defaultDomain} (Default)"
+        },
+        "2/declaration/body/2/argument/3/1/5/expression/right/3/3/expression/0/body": {
+          "type": "element",
+          "hash": "f2f0b156490c57506348be9276cd2cfd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "{dom.domain} (Custom)"
+        },
+        "2/declaration/body/2/argument/3/1/5/expression/right/5": {
+          "type": "element",
+          "hash": "302606b27b283e2ce42b1ac510a353d0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Choose a verified custom domain or use the default."
+        },
+        "2/declaration/body/2/argument/3/1/7/expression/right/1/3/1": {
+          "type": "element",
+          "hash": "e72c0026b1a463ffdc0e41b780774ac0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiStar></element:FiStar> Make this a collaborative alias"
+        },
+        "2/declaration/body/2/argument/3/1/7/expression/right/1/3/3": {
+          "type": "element",
+          "hash": "e061432748c04f4d5710089fb315f2a8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Allow team members to send and receive emails from this alias. You can add collaborators after creation."
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/1": {
+          "type": "element",
+          "hash": "276824c4b5b8c8e6742d6398132ecd41",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unlock Pro Features"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/3/1": {
+          "type": "element",
+          "hash": "6c76029eac7a4cf70d230f3ab7a7cde3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Unlimited email aliases"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/3/3": {
+          "type": "element",
+          "hash": "721cbc2f2e84ee2d032ba6d260b88f26",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Collaborative team aliases"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/3/5": {
+          "type": "element",
+          "hash": "fc82e711a03afeb476472f38c9c1b7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Custom domains"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/3/7": {
+          "type": "element",
+          "hash": "1a747c1ada4739c82444bb3e48d880cf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Advanced analytics"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/3/9": {
+          "type": "element",
+          "hash": "f0038a290e3592b99f36efc249a82d86",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Priority support"
+        },
+        "2/declaration/body/2/argument/3/5/expression/right/1/3/5": {
+          "type": "element",
+          "hash": "cbe5a2080b9f79b1a4eda395b019dc0c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Starting at ₹499/month"
+        }
+      }
+    },
+    "../components/DomainManagement.jsx": {
+      "scopes": {
+        "2/declaration/body/19/0/init/body/4/argument/1": {
+          "type": "element",
+          "hash": "7a164d98c3d02fe10f6a5175d4dc567f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Required DNS Records:"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/1/1": {
+          "type": "element",
+          "hash": "bdea9a2106a3d0cedcced851872a1abc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Name:"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/3/1": {
+          "type": "element",
+          "hash": "e089afed9997c871dd26f376078cca9f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Value:"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/5/expression/right/1": {
+          "type": "element",
+          "hash": "0d75a98ef137e95d2f3639b699b075df",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Priority:"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/7/1/expression/alternate/alternate/3": {
+          "type": "element",
+          "hash": "a290daedb61e6d2be10ce698d78c12c0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Not Configured"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/7/1/expression/alternate/consequent/3": {
+          "type": "element",
+          "hash": "bb722dd30f4f9d130b95061aec5ab968",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pending Verification"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/3/expression/0/body/3/7/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "3c0671feaabf660951709ea3f7a72a5a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Configured"
+        },
+        "2/declaration/body/19/0/init/body/4/argument/5": {
+          "type": "element",
+          "hash": "3c0530f0440ae053eecead672aca4be9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add these DNS records in your domain provider's dashboard. DNS changes may take 5-60 minutes to propagate."
+        },
+        "2/declaration/body/21/consequent/0/argument/1/1": {
+          "type": "element",
+          "hash": "c926a49f7a78679096f2728a8e84aa0c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Custom Domains"
+        },
+        "2/declaration/body/21/consequent/0/argument/1/3": {
+          "type": "element",
+          "hash": "da943a340bf3f483e20844553123905c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Use your own domain for email aliases"
+        },
+        "2/declaration/body/21/consequent/0/argument/3/1/3": {
+          "type": "element",
+          "hash": "ee5cdd588a0255b6e6ba7ffe18b027f9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pro Feature"
+        },
+        "2/declaration/body/21/consequent/0/argument/3/1/5": {
+          "type": "element",
+          "hash": "87e71adda72d48a36eed876b3d71cbf0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Custom domains are available for Pro users. Upgrade to use your own domain for email aliases."
+        },
+        "2/declaration/body/21/consequent/0/argument/3/1/7": {
+          "type": "element",
+          "hash": "037bc2fc0ed03c2414fdd76a098da578",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade to Pro"
+        },
+        "2/declaration/body/22/argument/1/1/1/1": {
+          "type": "element",
+          "hash": "c926a49f7a78679096f2728a8e84aa0c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Custom Domains"
+        },
+        "2/declaration/body/22/argument/1/1/1/3": {
+          "type": "element",
+          "hash": "fc3ccc724fcf0772e80b394742ba9ee6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Manage your custom domains for creating email aliases"
+        },
+        "2/declaration/body/22/argument/1/1/3/expression/right": {
+          "type": "element",
+          "hash": "4b83936c9d49e6ffa39b59c486a28901",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiPlus></element:FiPlus> Add Domain"
+        },
+        "2/declaration/body/22/argument/3/5/expression/right/1": {
+          "type": "element",
+          "hash": "a0289189bae7680e4096d145fc07cd58",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add New Domain"
+        },
+        "2/declaration/body/22/argument/3/5/expression/right/3/1-placeholder": {
+          "type": "attribute",
+          "hash": "285d79d2783cf0769ab9e767362c1499",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "example.com"
+        },
+        "2/declaration/body/22/argument/3/5/expression/right/3/5": {
+          "type": "element",
+          "hash": "5936f87dccc089542c7871a72ed1dacf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Cancel"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/1/1/3/3/3/expression/right": {
+          "type": "element",
+          "hash": "ab4c96c086b17fa2151f57aa1baf2c22",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Added <function:Date.toLocaleDateString/>"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/1/3/1/expression/right": {
+          "type": "element",
+          "hash": "5dcacce5079f4b671d8c634a16307d16",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiClock></element:FiClock> Verifying..."
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/1/3/3/expression/right/1/expression/alternate": {
+          "type": "element",
+          "hash": "4f6e40ac045fa112ca36e33e87e10bf1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiRefreshCw></element:FiRefreshCw> Check Status"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/1/3/3/expression/right/1/expression/consequent": {
+          "type": "element",
+          "hash": "e94fe44a2b601253e9883d7035c931e6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiRefreshCw></element:FiRefreshCw> Checking..."
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/1/3/5": {
+          "type": "element",
+          "hash": "e48fa8ddf05318c54aae1e4963b4d3e7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiTrash2></element:FiTrash2> Delete"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/1": {
+          "type": "element",
+          "hash": "8b82660f46b9cbbcb806a470cdf60419",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Domain Verification Required"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/3": {
+          "type": "element",
+          "hash": "d06f5b5cad9fc2ece79d10fc88243e91",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Please add the following TXT record to your DNS settings to verify ownership:"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/5/1/1": {
+          "type": "element",
+          "hash": "fce9d6a826b5cddb6f87a11cdc11eb04",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Type:"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/5/1/3": {
+          "type": "element",
+          "hash": "23aad00a1cc99dc356ff150ed7e47184",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "TXT"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/5/3/1": {
+          "type": "element",
+          "hash": "bdea9a2106a3d0cedcced851872a1abc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Name:"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/5/3/3/1": {
+          "type": "element",
+          "hash": "8577a3694469d28ef0e19b8f9f152d44",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "_mailalias-verification.{domain.domain}"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/5/5/1": {
+          "type": "element",
+          "hash": "e089afed9997c871dd26f376078cca9f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Value:"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/7": {
+          "type": "element",
+          "hash": "bab893af746848812b6de7f7a5a314cc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "DNS changes may take 5-60 minutes to propagate. We're checking automatically every 30 seconds."
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/3/expression/right/9/expression/right": {
+          "type": "element",
+          "hash": "87d774489b2aee8fb9e20e9bf397bf92",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Last checked: <function:Date.toLocaleTimeString/>"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/5/expression/right/1/1": {
+          "type": "element",
+          "hash": "df0961fad9a0bf44adf27c042d3dc2eb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Complete DNS Setup for Email Delivery"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/5/expression/right/3": {
+          "type": "element",
+          "hash": "476e014d9a488128461680aa9d2cbd9d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Your domain is verified! Now add these DNS records to enable email sending and receiving:"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/5/expression/right/7/1": {
+          "type": "element",
+          "hash": "64db46c32ab378d31dc801dc2c07c0bc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "After adding these records, click \"Check Status\" button above to verify the configuration."
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/7/expression/right/1/3": {
+          "type": "element",
+          "hash": "dca56c3a717d7596868a0619d8878b95",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Domain Active and Ready"
+        },
+        "2/declaration/body/22/argument/3/7/expression/alternate/1/expression/0/body/7/expression/right/3": {
+          "type": "element",
+          "hash": "a7ba79a57b68c6bdc336755832125667",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Your domain is fully configured and ready for creating email aliases."
+        },
+        "2/declaration/body/22/argument/3/7/expression/consequent/1": {
+          "type": "element",
+          "hash": "1d60acdcf20a4e1df684fb4a213bf64f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐"
+        },
+        "2/declaration/body/22/argument/3/7/expression/consequent/3": {
+          "type": "element",
+          "hash": "f552c86705147bdb6472ce25cc738c58",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No custom domains added yet"
+        },
+        "2/declaration/body/22/argument/3/7/expression/consequent/5": {
+          "type": "element",
+          "hash": "cb5df86879852552e388be2daf80dcc4",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add your first domain to start using custom email aliases"
+        }
+      }
+    },
+    "../components/Header.jsx": {
+      "scopes": {
+        "1/declaration/body/0/argument/1/3/1/3-placeholder": {
+          "type": "attribute",
+          "hash": "fe877a75eac472fc5b188c135c78a558",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search..."
+        },
+        "1/declaration/body/0/argument/1/7/7/expression/right": {
+          "type": "element",
+          "hash": "cd8746e409486b64fab8d4a5b0de6260",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade"
+        },
+        "1/declaration/body/0/argument/1/7/9": {
+          "type": "element",
+          "hash": "bc57cf2fdca87f8c6e8fdd6adbce7262",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout<element:FiLogOut></element:FiLogOut>"
+        },
+        "2/declaration/body/0/argument/1/3/1/3-placeholder": {
+          "type": "attribute",
+          "hash": "fe877a75eac472fc5b188c135c78a558",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search..."
+        },
+        "2/declaration/body/0/argument/1/7/11/expression/right/1": {
+          "type": "element",
+          "hash": "972773025e763ddf53273df6d37a729a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade to Pro"
+        },
+        "2/declaration/body/0/argument/1/7/19-aria-label": {
+          "type": "attribute",
+          "hash": "07948fdf20705e04a7bf68ab197512bf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "2/declaration/body/0/argument/1/7/19/1": {
+          "type": "element",
+          "hash": "07948fdf20705e04a7bf68ab197512bf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "2/declaration/body/0/argument/1/7/3-aria-label": {
+          "type": "attribute",
+          "hash": "c52df856139b50dbb1cae7bfb1cf73bb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Notifications"
+        },
+        "2/declaration/body/0/argument/1/7/7-aria-label": {
+          "type": "attribute",
+          "hash": "8df6777277469c1fd88cc18dde2f1cc3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Settings"
+        }
+      }
+    },
+    "../components/LandingPage.jsx": {
+      "scopes": {
+        "3/declaration/body/3/argument/11/1": {
+          "type": "element",
+          "hash": "92d14fa0b7bd867d6b905f34cf196b7b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Why InvisiMail?"
+        },
+        "3/declaration/body/3/argument/11/3/1/1": {
+          "type": "element",
+          "hash": "341ce8c84c6fa74fe341717432949c02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🛡 Privacy Protection"
+        },
+        "3/declaration/body/3/argument/11/3/1/3": {
+          "type": "element",
+          "hash": "d9defd42cec1c15dbef5a5ad33873c54",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Use disposable aliases to hide your real email from spammers and trackers."
+        },
+        "3/declaration/body/3/argument/11/3/3/1": {
+          "type": "element",
+          "hash": "fed555762a980505740069a83d72655e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "⚡ Instant Setup"
+        },
+        "3/declaration/body/3/argument/11/3/3/3": {
+          "type": "element",
+          "hash": "e915dc3ecf2122b5b265176b753dee07",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create aliases in seconds with a simple dashboard or API integration."
+        },
+        "3/declaration/body/3/argument/11/3/5/1": {
+          "type": "element",
+          "hash": "3f23b8380113fa13e13d24203dd93aa2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📂 Organized Inbox"
+        },
+        "3/declaration/body/3/argument/11/3/5/3": {
+          "type": "element",
+          "hash": "a28825397c2d01fb28050be14720f512",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Filter, forward, or block messages so you only see what matters."
+        },
+        "3/declaration/body/3/argument/15/1": {
+          "type": "element",
+          "hash": "30ebc716ab55855dc1ecdc1a9bbd549b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trusted by Developers"
+        },
+        "3/declaration/body/3/argument/15/3/1/1": {
+          "type": "element",
+          "hash": "aa96d2c7179ce9385c39c1422f265d94",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Finally, I can sign up everywhere without worrying about spam.”"
+        },
+        "3/declaration/body/3/argument/15/3/1/3": {
+          "type": "element",
+          "hash": "de83dcd9f8b50a5468d69e2377a809f8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Alex, Indie Hacker"
+        },
+        "3/declaration/body/3/argument/15/3/3/1": {
+          "type": "element",
+          "hash": "9aaaed13fdbb4b2060e42282645ad998",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“The API made it super easy to integrate aliases into my workflow.”"
+        },
+        "3/declaration/body/3/argument/15/3/3/3": {
+          "type": "element",
+          "hash": "0c4876dd8de5e54efe88266e3a6c4380",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Priya, Backend Dev"
+        },
+        "3/declaration/body/3/argument/15/3/5/1": {
+          "type": "element",
+          "hash": "1727b44c01bae41deb6584348c746a28",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Simple, fast, and secure. Exactly what I needed.”"
+        },
+        "3/declaration/body/3/argument/15/3/5/3": {
+          "type": "element",
+          "hash": "51424bc22f154380f916a86be09e7f6c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Mark, Freelancer"
+        },
+        "3/declaration/body/3/argument/19/1": {
+          "type": "element",
+          "hash": "dc36d7992372ccd419b39ef51cf5b16c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQs"
+        },
+        "3/declaration/body/3/argument/19/3/1/1": {
+          "type": "element",
+          "hash": "fb8ed4a9178cb2c8ee2e86b6f9154f36",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Is it free?"
+        },
+        "3/declaration/body/3/argument/19/3/1/3": {
+          "type": "element",
+          "hash": "5bca68e0b128631e43b903f9a539371f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Yes, InvisiMail has a free plan with essential features. Paid tiers unlock more aliases and filters."
+        },
+        "3/declaration/body/3/argument/19/3/3/1": {
+          "type": "element",
+          "hash": "842542c75361282fe97d841c96ce5c21",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "How secure is it?"
+        },
+        "3/declaration/body/3/argument/19/3/3/3": {
+          "type": "element",
+          "hash": "e09378495ea607b7fa88bca9858be899",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "All aliases forward through encrypted channels. You stay fully anonymous."
+        },
+        "3/declaration/body/3/argument/19/3/5/1": {
+          "type": "element",
+          "hash": "2e75b63f873ad75188d21bd644db3b24",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Do I need to install anything?"
+        },
+        "3/declaration/body/3/argument/19/3/5/3": {
+          "type": "element",
+          "hash": "02d02a0ebbbe04b5b23539a435e6db58",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No. Everything works from your browser dashboard or via API."
+        },
+        "3/declaration/body/3/argument/23/1": {
+          "type": "element",
+          "hash": "7187b911e265872922addd5c57c08747",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Take control of your inbox today"
+        },
+        "3/declaration/body/3/argument/23/3": {
+          "type": "element",
+          "hash": "e47452ee70e9dc60e34106671c06ab3e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias"
+        },
+        "3/declaration/body/3/argument/27/1": {
+          "type": "element",
+          "hash": "c4710ad217dda424523ad45d687c1b08",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "© 2025 InvisiMail. All rights reserved."
+        },
+        "3/declaration/body/3/argument/27/3": {
+          "type": "element",
+          "hash": "af39a96aeb182d29a91e3e6be88b3f34",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:a>Privacy Policy</element:a> |<element:a>Terms</element:a> |<element:a>Contact</element:a>"
+        },
+        "3/declaration/body/3/argument/3-alt": {
+          "type": "attribute",
+          "hash": "2abddcd1f65750bb25a69b9018b69306",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "gradient"
+        },
+        "3/declaration/body/3/argument/7/3/3/1-alt": {
+          "type": "attribute",
+          "hash": "0643cd9553ef53f82914836d0c3fea2f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Gemini Generated Logo"
+        },
+        "3/declaration/body/3/argument/7/3/3/5": {
+          "type": "element",
+          "hash": "92462a9e9fed43616663bc19ec2fe8bc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "3/declaration/body/3/argument/7/3/5/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "3/declaration/body/3/argument/7/3/5/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "3/declaration/body/3/argument/7/3/5/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "3/declaration/body/3/argument/7/3/5/7/1": {
+          "type": "element",
+          "hash": "101de0ca563410398b86627e548b6fe6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login/Signup"
+        },
+        "3/declaration/body/3/argument/7/3/5/7/3/expression/right/1": {
+          "type": "element",
+          "hash": "54d63dfc2b1bdb600a102054ac0b2185",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "3/declaration/body/3/argument/7/3/5/7/3/expression/right/3": {
+          "type": "element",
+          "hash": "4a4650a9ae3efca7b04420cb73af2672",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "3/declaration/body/3/argument/7/7/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "3/declaration/body/3/argument/7/7/1/3": {
+          "type": "element",
+          "hash": "09a5e35d714eb4e2ddd3117ba86790a1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email for <element:br></element:br> Developers & Creators"
+        },
+        "3/declaration/body/3/argument/7/7/1/5": {
+          "type": "element",
+          "hash": "6e76bd884118f794076b3b05ce3d1345",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Alias gives you privacy-first disposable emails. Keep your real inbox safe, filter spam, and stay in control."
+        },
+        "3/declaration/body/3/argument/7/7/1/7/1": {
+          "type": "element",
+          "hash": "2758ec1595487c6ec95d5b222c47af49",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Documentation >"
+        },
+        "3/declaration/body/3/argument/7/7/1/7/3": {
+          "type": "element",
+          "hash": "b6756f9c53a86d0165b6b5dc098aa0ea",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started >"
+        },
+        "4/declaration/body/3/argument/11/1": {
+          "type": "element",
+          "hash": "92d14fa0b7bd867d6b905f34cf196b7b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Why InvisiMail?"
+        },
+        "4/declaration/body/3/argument/11/3/1/1": {
+          "type": "element",
+          "hash": "341ce8c84c6fa74fe341717432949c02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🛡 Privacy Protection"
+        },
+        "4/declaration/body/3/argument/11/3/1/3": {
+          "type": "element",
+          "hash": "d9defd42cec1c15dbef5a5ad33873c54",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Use disposable aliases to hide your real email from spammers and trackers."
+        },
+        "4/declaration/body/3/argument/11/3/3/1": {
+          "type": "element",
+          "hash": "fed555762a980505740069a83d72655e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "⚡ Instant Setup"
+        },
+        "4/declaration/body/3/argument/11/3/3/3": {
+          "type": "element",
+          "hash": "e915dc3ecf2122b5b265176b753dee07",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create aliases in seconds with a simple dashboard or API integration."
+        },
+        "4/declaration/body/3/argument/11/3/5/1": {
+          "type": "element",
+          "hash": "3f23b8380113fa13e13d24203dd93aa2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📂 Organized Inbox"
+        },
+        "4/declaration/body/3/argument/11/3/5/3": {
+          "type": "element",
+          "hash": "a28825397c2d01fb28050be14720f512",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Filter, forward, or block messages so you only see what matters."
+        },
+        "4/declaration/body/3/argument/15/1": {
+          "type": "element",
+          "hash": "30ebc716ab55855dc1ecdc1a9bbd549b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trusted by Developers"
+        },
+        "4/declaration/body/3/argument/15/3/1/1": {
+          "type": "element",
+          "hash": "aa96d2c7179ce9385c39c1422f265d94",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Finally, I can sign up everywhere without worrying about spam.”"
+        },
+        "4/declaration/body/3/argument/15/3/1/3": {
+          "type": "element",
+          "hash": "de83dcd9f8b50a5468d69e2377a809f8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Alex, Indie Hacker"
+        },
+        "4/declaration/body/3/argument/15/3/3/1": {
+          "type": "element",
+          "hash": "9aaaed13fdbb4b2060e42282645ad998",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“The API made it super easy to integrate aliases into my workflow.”"
+        },
+        "4/declaration/body/3/argument/15/3/3/3": {
+          "type": "element",
+          "hash": "0c4876dd8de5e54efe88266e3a6c4380",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Priya, Backend Dev"
+        },
+        "4/declaration/body/3/argument/15/3/5/1": {
+          "type": "element",
+          "hash": "1727b44c01bae41deb6584348c746a28",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Simple, fast, and secure. Exactly what I needed.”"
+        },
+        "4/declaration/body/3/argument/15/3/5/3": {
+          "type": "element",
+          "hash": "51424bc22f154380f916a86be09e7f6c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "- Mark, Freelancer"
+        },
+        "4/declaration/body/3/argument/19/1": {
+          "type": "element",
+          "hash": "dc36d7992372ccd419b39ef51cf5b16c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQs"
+        },
+        "4/declaration/body/3/argument/19/3/1/1": {
+          "type": "element",
+          "hash": "fb8ed4a9178cb2c8ee2e86b6f9154f36",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Is it free?"
+        },
+        "4/declaration/body/3/argument/19/3/1/3": {
+          "type": "element",
+          "hash": "5bca68e0b128631e43b903f9a539371f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Yes, InvisiMail has a free plan with essential features. Paid tiers unlock more aliases and filters."
+        },
+        "4/declaration/body/3/argument/19/3/3/1": {
+          "type": "element",
+          "hash": "842542c75361282fe97d841c96ce5c21",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "How secure is it?"
+        },
+        "4/declaration/body/3/argument/19/3/3/3": {
+          "type": "element",
+          "hash": "e09378495ea607b7fa88bca9858be899",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "All aliases forward through encrypted channels. You stay fully anonymous."
+        },
+        "4/declaration/body/3/argument/19/3/5/1": {
+          "type": "element",
+          "hash": "2e75b63f873ad75188d21bd644db3b24",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Do I need to install anything?"
+        },
+        "4/declaration/body/3/argument/19/3/5/3": {
+          "type": "element",
+          "hash": "02d02a0ebbbe04b5b23539a435e6db58",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No. Everything works from your browser dashboard or via API."
+        },
+        "4/declaration/body/3/argument/23/1": {
+          "type": "element",
+          "hash": "7187b911e265872922addd5c57c08747",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Take control of your inbox today"
+        },
+        "4/declaration/body/3/argument/23/3": {
+          "type": "element",
+          "hash": "e47452ee70e9dc60e34106671c06ab3e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias"
+        },
+        "4/declaration/body/3/argument/27/1": {
+          "type": "element",
+          "hash": "c4710ad217dda424523ad45d687c1b08",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "© 2025 InvisiMail. All rights reserved."
+        },
+        "4/declaration/body/3/argument/27/3": {
+          "type": "element",
+          "hash": "af39a96aeb182d29a91e3e6be88b3f34",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:a>Privacy Policy</element:a> |<element:a>Terms</element:a> |<element:a>Contact</element:a>"
+        },
+        "4/declaration/body/3/argument/3-alt": {
+          "type": "attribute",
+          "hash": "2abddcd1f65750bb25a69b9018b69306",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "gradient"
+        },
+        "4/declaration/body/3/argument/7/3/3/1-alt": {
+          "type": "attribute",
+          "hash": "0643cd9553ef53f82914836d0c3fea2f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Gemini Generated Logo"
+        },
+        "4/declaration/body/3/argument/7/3/3/5": {
+          "type": "element",
+          "hash": "92462a9e9fed43616663bc19ec2fe8bc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "4/declaration/body/3/argument/7/3/5/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "4/declaration/body/3/argument/7/3/5/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "4/declaration/body/3/argument/7/3/5/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/3/argument/7/3/5/7/1": {
+          "type": "element",
+          "hash": "f68b050934203a33d4817d72f5e8a214",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/3/argument/7/3/5/7/3/expression/right/1": {
+          "type": "element",
+          "hash": "54d63dfc2b1bdb600a102054ac0b2185",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/3/argument/7/3/5/7/3/expression/right/3": {
+          "type": "element",
+          "hash": "4a4650a9ae3efca7b04420cb73af2672",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/3/argument/7/3/5/9/1": {
+          "type": "element",
+          "hash": "101de0ca563410398b86627e548b6fe6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login/Signup"
+        },
+        "4/declaration/body/3/argument/7/3/5/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "54d63dfc2b1bdb600a102054ac0b2185",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/3/argument/7/3/5/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "4a4650a9ae3efca7b04420cb73af2672",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/3/argument/7/7/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/3/argument/7/7/1/3": {
+          "type": "element",
+          "hash": "09a5e35d714eb4e2ddd3117ba86790a1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email for <element:br></element:br> Developers & Creators"
+        },
+        "4/declaration/body/3/argument/7/7/1/5": {
+          "type": "element",
+          "hash": "6e76bd884118f794076b3b05ce3d1345",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Alias gives you privacy-first disposable emails. Keep your real inbox safe, filter spam, and stay in control."
+        },
+        "4/declaration/body/3/argument/7/7/1/7/1": {
+          "type": "element",
+          "hash": "2758ec1595487c6ec95d5b222c47af49",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Documentation >"
+        },
+        "4/declaration/body/3/argument/7/7/1/7/3": {
+          "type": "element",
+          "hash": "b6756f9c53a86d0165b6b5dc098aa0ea",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started >"
+        },
+        "4/declaration/body/5/argument/11/1": {
+          "type": "element",
+          "hash": "30ebc716ab55855dc1ecdc1a9bbd549b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trusted by Developers"
+        },
+        "4/declaration/body/5/argument/11/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/5/argument/11/1/3": {
+          "type": "element",
+          "hash": "a449415796f36e6d21b75686e5be7264",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Private Email <element:br></element:br> for Developers & Creators"
+        },
+        "4/declaration/body/5/argument/11/1/5": {
+          "type": "element",
+          "hash": "94210c4cfefe6806c6c94822eb02435f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create disposable email aliases. Protect your real inbox. Block spam. Stay anonymous."
+        },
+        "4/declaration/body/5/argument/11/1/7/1": {
+          "type": "element",
+          "hash": "d9a45102bac19d2d7762da0d38b75213",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started →"
+        },
+        "4/declaration/body/5/argument/11/3/1/1": {
+          "type": "element",
+          "hash": "f697a1b6cbe3cde04bb89a8c6d1e26d4",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“I finally sign up for services without destroying my real inbox.”"
+        },
+        "4/declaration/body/5/argument/11/3/1/3": {
+          "type": "element",
+          "hash": "2ba2768e9badb582672ed48e81e09142",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Alex, Indie Hacker"
+        },
+        "4/declaration/body/5/argument/11/3/3/1": {
+          "type": "element",
+          "hash": "aa5c0a7c6c14319d2e848094b5bcecab",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Clean API, fast forwarding, zero hassle. Perfect for automation.”"
+        },
+        "4/declaration/body/5/argument/11/3/3/3": {
+          "type": "element",
+          "hash": "6e9b0071bf7f35d05b9e3c5501353122",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Priya, Backend Engineer"
+        },
+        "4/declaration/body/5/argument/11/3/5/1": {
+          "type": "element",
+          "hash": "d1667a3b56ce65e6be089ee0292a3191",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Simple, fast, secure. Exactly what I needed for side projects.”"
+        },
+        "4/declaration/body/5/argument/11/3/5/3": {
+          "type": "element",
+          "hash": "3f0cddfeb93554e8cd0e434c46997737",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Mark, Freelancer"
+        },
+        "4/declaration/body/5/argument/13/1": {
+          "type": "element",
+          "hash": "212c5c784d5580b2f8b9481cb102cb4c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Frequently Asked Questions"
+        },
+        "4/declaration/body/5/argument/13/3": {
+          "type": "element",
+          "hash": "a3707ce2f0a727abcbed69ed0c1dd83f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias →"
+        },
+        "4/declaration/body/5/argument/13/3/1/1": {
+          "type": "element",
+          "hash": "b9badecd4616c88ef67ad9f58e142f86",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Is there a free plan?"
+        },
+        "4/declaration/body/5/argument/13/3/1/3": {
+          "type": "element",
+          "hash": "41601f0b7c4c91947bf100c40e23b3ab",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Yes — solid free tier with core features. Paid plans give more aliases & filters."
+        },
+        "4/declaration/body/5/argument/13/3/3/1": {
+          "type": "element",
+          "hash": "842542c75361282fe97d841c96ce5c21",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "How secure is it?"
+        },
+        "4/declaration/body/5/argument/13/3/3/3": {
+          "type": "element",
+          "hash": "501deaf2ffa1cbddb4c7ca4833fcab9f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Encrypted forwarding. No content logging. True alias anonymity."
+        },
+        "4/declaration/body/5/argument/13/3/5/1": {
+          "type": "element",
+          "hash": "2e75b63f873ad75188d21bd644db3b24",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Do I need to install anything?"
+        },
+        "4/declaration/body/5/argument/13/3/5/3": {
+          "type": "element",
+          "hash": "bb825f79d2fd7333f8367d8be9dbd389",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No installs — works entirely in browser or via API."
+        },
+        "4/declaration/body/5/argument/15/1": {
+          "type": "element",
+          "hash": "7187b911e265872922addd5c57c08747",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Take control of your inbox today"
+        },
+        "4/declaration/body/5/argument/15/3": {
+          "type": "element",
+          "hash": "a3707ce2f0a727abcbed69ed0c1dd83f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias →"
+        },
+        "4/declaration/body/5/argument/15/3/1/1": {
+          "type": "element",
+          "hash": "32ef6668e1a40455da2ef9456267947c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🛡️ Privacy First"
+        },
+        "4/declaration/body/5/argument/15/3/1/3": {
+          "type": "element",
+          "hash": "50a073d15b18ea9cbecd7dd72448a54e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Hide your real email behind disposable aliases — never exposed to trackers or spam."
+        },
+        "4/declaration/body/5/argument/15/3/3/1": {
+          "type": "element",
+          "hash": "544f69f241d4ee1143d391dc632f9e76",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "⚡ Instant Aliases"
+        },
+        "4/declaration/body/5/argument/15/3/3/3": {
+          "type": "element",
+          "hash": "62356069fc18014ff6b4987d551545b7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create new emails in seconds — from dashboard or via simple API calls."
+        },
+        "4/declaration/body/5/argument/15/3/5/1": {
+          "type": "element",
+          "hash": "8fe75a511224a9b80f6ad3ff01a0bf15",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📬 Clean Inbox"
+        },
+        "4/declaration/body/5/argument/15/3/5/3": {
+          "type": "element",
+          "hash": "ca07e15eb27cf9cf1a557debf79098b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Smart forwarding, auto-filters, block rules — only important messages reach you."
+        },
+        "4/declaration/body/5/argument/17/1": {
+          "type": "element",
+          "hash": "da1c197bbed220c33e5d2a6245454f98",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "© 2025–2026 InvisiMail. All rights reserved."
+        },
+        "4/declaration/body/5/argument/17/3": {
+          "type": "element",
+          "hash": "a38a5f91cf98160ff4afa8a8c787d7b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:a>Privacy Policy</element:a> • <element:a>Terms</element:a> • <element:a>Contact</element:a>"
+        },
+        "4/declaration/body/5/argument/19/1": {
+          "type": "element",
+          "hash": "30ebc716ab55855dc1ecdc1a9bbd549b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trusted by Developers"
+        },
+        "4/declaration/body/5/argument/19/3": {
+          "type": "element",
+          "hash": "a38a5f91cf98160ff4afa8a8c787d7b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:a>Privacy Policy</element:a> • <element:a>Terms of Service</element:a> • <element:a>Contact</element:a>"
+        },
+        "4/declaration/body/5/argument/19/3/1/1": {
+          "type": "element",
+          "hash": "f697a1b6cbe3cde04bb89a8c6d1e26d4",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“I finally sign up for services without destroying my real inbox.”"
+        },
+        "4/declaration/body/5/argument/19/3/1/3": {
+          "type": "element",
+          "hash": "2ba2768e9badb582672ed48e81e09142",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Alex, Indie Hacker"
+        },
+        "4/declaration/body/5/argument/19/3/3/1": {
+          "type": "element",
+          "hash": "aa5c0a7c6c14319d2e848094b5bcecab",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Clean API, fast forwarding, zero hassle. Perfect for automation.”"
+        },
+        "4/declaration/body/5/argument/19/3/3/3": {
+          "type": "element",
+          "hash": "6e9b0071bf7f35d05b9e3c5501353122",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Priya, Backend Engineer"
+        },
+        "4/declaration/body/5/argument/19/3/5/1": {
+          "type": "element",
+          "hash": "d1667a3b56ce65e6be089ee0292a3191",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "“Simple, fast, secure. Exactly what I needed for side projects.”"
+        },
+        "4/declaration/body/5/argument/19/3/5/3": {
+          "type": "element",
+          "hash": "3f0cddfeb93554e8cd0e434c46997737",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "— Mark, Freelancer"
+        },
+        "4/declaration/body/5/argument/23/1": {
+          "type": "element",
+          "hash": "212c5c784d5580b2f8b9481cb102cb4c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Frequently Asked Questions"
+        },
+        "4/declaration/body/5/argument/23/3": {
+          "type": "element",
+          "hash": "e47452ee70e9dc60e34106671c06ab3e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias"
+        },
+        "4/declaration/body/5/argument/23/3/1/1": {
+          "type": "element",
+          "hash": "b9badecd4616c88ef67ad9f58e142f86",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Is there a free plan?"
+        },
+        "4/declaration/body/5/argument/23/3/1/3": {
+          "type": "element",
+          "hash": "41601f0b7c4c91947bf100c40e23b3ab",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Yes — solid free tier with core features. Paid plans give more aliases & filters."
+        },
+        "4/declaration/body/5/argument/23/3/3/1": {
+          "type": "element",
+          "hash": "842542c75361282fe97d841c96ce5c21",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "How secure is it?"
+        },
+        "4/declaration/body/5/argument/23/3/3/3": {
+          "type": "element",
+          "hash": "501deaf2ffa1cbddb4c7ca4833fcab9f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Encrypted forwarding. No content logging. True alias anonymity."
+        },
+        "4/declaration/body/5/argument/23/3/5/1": {
+          "type": "element",
+          "hash": "2e75b63f873ad75188d21bd644db3b24",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Do I need to install anything?"
+        },
+        "4/declaration/body/5/argument/23/3/5/3": {
+          "type": "element",
+          "hash": "bb825f79d2fd7333f8367d8be9dbd389",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No installs — works entirely in browser or via API."
+        },
+        "4/declaration/body/5/argument/27/1": {
+          "type": "element",
+          "hash": "7187b911e265872922addd5c57c08747",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Take control of your inbox today"
+        },
+        "4/declaration/body/5/argument/27/3": {
+          "type": "element",
+          "hash": "a3707ce2f0a727abcbed69ed0c1dd83f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create Free Alias →"
+        },
+        "4/declaration/body/5/argument/3-alt": {
+          "type": "attribute",
+          "hash": "2abddcd1f65750bb25a69b9018b69306",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "gradient"
+        },
+        "4/declaration/body/5/argument/3/1/1-alt": {
+          "type": "attribute",
+          "hash": "f730b35b44058d2245ffaaf62da73daa",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail Logo"
+        },
+        "4/declaration/body/5/argument/3/1/3": {
+          "type": "element",
+          "hash": "8e12a939d4e0182126bdda46b8a49f0c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "4/declaration/body/5/argument/3/3/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "4/declaration/body/5/argument/3/3/13/1": {
+          "type": "element",
+          "hash": "a5ca9b6cead80a3f6f96c45e89ca119e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/5/argument/3/3/13/3/expression/right/1": {
+          "type": "element",
+          "hash": "a07ab477f26ae387ec241dc6eb29f7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/3/3/13/3/expression/right/3": {
+          "type": "element",
+          "hash": "d9455e8078c2c8c02d5e08a4bc915553",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/3/3/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "4/declaration/body/5/argument/3/3/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/5/argument/3/3/7/1": {
+          "type": "element",
+          "hash": "8453dff6397447cb7d11e2d0f30a1a2e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/5/argument/3/3/9/1": {
+          "type": "element",
+          "hash": "a5ca9b6cead80a3f6f96c45e89ca119e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/5/argument/3/3/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "a07ab477f26ae387ec241dc6eb29f7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/3/3/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "d9455e8078c2c8c02d5e08a4bc915553",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/31/1": {
+          "type": "element",
+          "hash": "da1c197bbed220c33e5d2a6245454f98",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "© 2025–2026 InvisiMail. All rights reserved."
+        },
+        "4/declaration/body/5/argument/31/3": {
+          "type": "element",
+          "hash": "a38a5f91cf98160ff4afa8a8c787d7b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:a>Privacy Policy</element:a> • <element:a>Terms</element:a> • <element:a>Contact</element:a>"
+        },
+        "4/declaration/body/5/argument/5/1/1-alt": {
+          "type": "attribute",
+          "hash": "f730b35b44058d2245ffaaf62da73daa",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail Logo"
+        },
+        "4/declaration/body/5/argument/5/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/5/argument/5/1/3": {
+          "type": "element",
+          "hash": "a449415796f36e6d21b75686e5be7264",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Private Email <element:br></element:br> for Developers & Creators"
+        },
+        "4/declaration/body/5/argument/5/1/5": {
+          "type": "element",
+          "hash": "94210c4cfefe6806c6c94822eb02435f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create disposable email aliases. Protect your real inbox. Block spam. Stay anonymous."
+        },
+        "4/declaration/body/5/argument/5/1/7/1": {
+          "type": "element",
+          "hash": "d9a45102bac19d2d7762da0d38b75213",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started →"
+        },
+        "4/declaration/body/5/argument/5/3/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "4/declaration/body/5/argument/5/3/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "4/declaration/body/5/argument/5/3/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/5/argument/5/3/7/1": {
+          "type": "element",
+          "hash": "8453dff6397447cb7d11e2d0f30a1a2e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/5/argument/5/3/9/1": {
+          "type": "element",
+          "hash": "a5ca9b6cead80a3f6f96c45e89ca119e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/5/argument/5/3/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "a07ab477f26ae387ec241dc6eb29f7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/5/3/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "d9455e8078c2c8c02d5e08a4bc915553",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/7/1": {
+          "type": "element",
+          "hash": "92d14fa0b7bd867d6b905f34cf196b7b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Why InvisiMail?"
+        },
+        "4/declaration/body/5/argument/7/1/1-alt": {
+          "type": "attribute",
+          "hash": "f730b35b44058d2245ffaaf62da73daa",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail Logo"
+        },
+        "4/declaration/body/5/argument/7/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/5/argument/7/1/3": {
+          "type": "element",
+          "hash": "8e12a939d4e0182126bdda46b8a49f0c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "4/declaration/body/5/argument/7/1/5": {
+          "type": "element",
+          "hash": "94210c4cfefe6806c6c94822eb02435f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create disposable email aliases. Protect your real inbox. Block spam. Stay anonymous."
+        },
+        "4/declaration/body/5/argument/7/1/7/1": {
+          "type": "element",
+          "hash": "d9a45102bac19d2d7762da0d38b75213",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started →"
+        },
+        "4/declaration/body/5/argument/7/3/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "4/declaration/body/5/argument/7/3/1/1": {
+          "type": "element",
+          "hash": "32ef6668e1a40455da2ef9456267947c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🛡️ Privacy First"
+        },
+        "4/declaration/body/5/argument/7/3/1/1-alt": {
+          "type": "attribute",
+          "hash": "f730b35b44058d2245ffaaf62da73daa",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail Logo"
+        },
+        "4/declaration/body/5/argument/7/3/1/3": {
+          "type": "element",
+          "hash": "50a073d15b18ea9cbecd7dd72448a54e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Hide your real email behind disposable aliases — never exposed to trackers or spam."
+        },
+        "4/declaration/body/5/argument/7/3/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "4/declaration/body/5/argument/7/3/3/1": {
+          "type": "element",
+          "hash": "544f69f241d4ee1143d391dc632f9e76",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "⚡ Instant Aliases"
+        },
+        "4/declaration/body/5/argument/7/3/3/1-alt": {
+          "type": "attribute",
+          "hash": "0643cd9553ef53f82914836d0c3fea2f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Gemini Generated Logo"
+        },
+        "4/declaration/body/5/argument/7/3/3/3": {
+          "type": "element",
+          "hash": "62356069fc18014ff6b4987d551545b7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create new emails in seconds — from dashboard or via simple API calls."
+        },
+        "4/declaration/body/5/argument/7/3/3/5": {
+          "type": "element",
+          "hash": "92462a9e9fed43616663bc19ec2fe8bc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "4/declaration/body/5/argument/7/3/3/7/1": {
+          "type": "element",
+          "hash": "67b35586a27052c5a9630c6a11457931",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/5/argument/7/3/3/9/1": {
+          "type": "element",
+          "hash": "f2aa8490c3ae63ff6a54cdad5a9c89d6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/5/argument/7/3/3/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "54d63dfc2b1bdb600a102054ac0b2185",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/7/3/3/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "4a4650a9ae3efca7b04420cb73af2672",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/7/3/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/5/argument/7/3/5/1": {
+          "type": "element",
+          "hash": "8fe75a511224a9b80f6ad3ff01a0bf15",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📬 Clean Inbox"
+        },
+        "4/declaration/body/5/argument/7/3/5/3": {
+          "type": "element",
+          "hash": "ca07e15eb27cf9cf1a557debf79098b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Smart forwarding, auto-filters, block rules — only important messages reach you."
+        },
+        "4/declaration/body/5/argument/7/3/5/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/5/argument/7/3/5/7/1": {
+          "type": "element",
+          "hash": "f68b050934203a33d4817d72f5e8a214",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/5/argument/7/3/5/9/1": {
+          "type": "element",
+          "hash": "101de0ca563410398b86627e548b6fe6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login/Signup"
+        },
+        "4/declaration/body/5/argument/7/3/5/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "54d63dfc2b1bdb600a102054ac0b2185",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/7/3/5/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "4a4650a9ae3efca7b04420cb73af2672",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/7/3/7/1": {
+          "type": "element",
+          "hash": "8453dff6397447cb7d11e2d0f30a1a2e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/5/argument/7/3/9/1": {
+          "type": "element",
+          "hash": "a5ca9b6cead80a3f6f96c45e89ca119e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/5/argument/7/3/9/3/expression/right/1": {
+          "type": "element",
+          "hash": "a07ab477f26ae387ec241dc6eb29f7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/5/argument/7/3/9/3/expression/right/3": {
+          "type": "element",
+          "hash": "d9455e8078c2c8c02d5e08a4bc915553",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/5/argument/7/7/1/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/5/argument/7/7/1/3": {
+          "type": "element",
+          "hash": "09a5e35d714eb4e2ddd3117ba86790a1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email for <element:br></element:br> Developers & Creators"
+        },
+        "4/declaration/body/5/argument/7/7/1/5": {
+          "type": "element",
+          "hash": "6e76bd884118f794076b3b05ce3d1345",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Alias gives you privacy-first disposable emails. Keep your real inbox safe, filter spam, and stay in control."
+        },
+        "4/declaration/body/5/argument/7/7/1/7/1": {
+          "type": "element",
+          "hash": "8354d4bfb39735da65cb0752757c845e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started →"
+        },
+        "4/declaration/body/5/argument/7/7/1/7/3": {
+          "type": "element",
+          "hash": "b6756f9c53a86d0165b6b5dc098aa0ea",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Get Started >"
+        },
+        "4/declaration/body/5/argument/9/1": {
+          "type": "element",
+          "hash": "92d14fa0b7bd867d6b905f34cf196b7b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Why InvisiMail?"
+        },
+        "4/declaration/body/5/argument/9/3/1/1": {
+          "type": "element",
+          "hash": "32ef6668e1a40455da2ef9456267947c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🛡️ Privacy First"
+        },
+        "4/declaration/body/5/argument/9/3/1/3": {
+          "type": "element",
+          "hash": "50a073d15b18ea9cbecd7dd72448a54e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Hide your real email behind disposable aliases — never exposed to trackers or spam."
+        },
+        "4/declaration/body/5/argument/9/3/3/1": {
+          "type": "element",
+          "hash": "544f69f241d4ee1143d391dc632f9e76",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "⚡ Instant Aliases"
+        },
+        "4/declaration/body/5/argument/9/3/3/3": {
+          "type": "element",
+          "hash": "62356069fc18014ff6b4987d551545b7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create new emails in seconds — from dashboard or via simple API calls."
+        },
+        "4/declaration/body/5/argument/9/3/5/1": {
+          "type": "element",
+          "hash": "8fe75a511224a9b80f6ad3ff01a0bf15",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "📬 Clean Inbox"
+        },
+        "4/declaration/body/5/argument/9/3/5/3": {
+          "type": "element",
+          "hash": "ca07e15eb27cf9cf1a557debf79098b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Smart forwarding, auto-filters, block rules — only important messages reach you."
+        },
+        "4/declaration/body/6/argument/3/3/1-alt": {
+          "type": "attribute",
+          "hash": "ab7fcfe33af795f928ad71ce45644474",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "logo"
+        },
+        "4/declaration/body/6/argument/3/3/3": {
+          "type": "element",
+          "hash": "e1acc5e8ff153503cc465957455e8925",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "InvisiMail"
+        },
+        "4/declaration/body/6/argument/3/7/1": {
+          "type": "element",
+          "hash": "341ff316a339b106a178f0b8d362951b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Features"
+        },
+        "4/declaration/body/6/argument/3/7/13/1": {
+          "type": "element",
+          "hash": "a5ca9b6cead80a3f6f96c45e89ca119e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Login / Signup"
+        },
+        "4/declaration/body/6/argument/3/7/13/3/expression/right/1": {
+          "type": "element",
+          "hash": "ec7b8f314fe9bc6591006707484ede61",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign In"
+        },
+        "4/declaration/body/6/argument/3/7/13/3/expression/right/3": {
+          "type": "element",
+          "hash": "0dd2ae69be4618c1f9e615774a4509ca",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sign Up"
+        },
+        "4/declaration/body/6/argument/3/7/3": {
+          "type": "element",
+          "hash": "e125972de8780250c9978eb4b3bfd33b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Trust"
+        },
+        "4/declaration/body/6/argument/3/7/5": {
+          "type": "element",
+          "hash": "47e0ee2eb40b4e7e732e05e2233fc71c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "FAQ"
+        },
+        "4/declaration/body/6/argument/3/7/9/1": {
+          "type": "element",
+          "hash": "8453dff6397447cb7d11e2d0f30a1a2e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "🌐 <expression/>"
+        },
+        "4/declaration/body/6/argument/7/1/1": {
+          "type": "element",
+          "hash": "b750f19651e5aff6a16b7542df536eba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Protect Your Inbox"
+        },
+        "4/declaration/body/6/argument/7/1/3": {
+          "type": "element",
+          "hash": "edcedca2fe873c70e2928edf8e5f5145",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email for <element:br></element:br> Developers & Creators"
+        },
+        "4/declaration/body/6/argument/7/1/5": {
+          "type": "element",
+          "hash": "be04ddac31a7c02860d222b8e935067e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Privacy-first disposable emails. Hide your real inbox, block spam, stay in control."
+        }
+      }
+    },
+    "../components/LanguageSwitcher.jsx": {
+      "scopes": {
+        "3/declaration/body/7/argument/3-aria-label": {
+          "type": "attribute",
+          "hash": "d75cf5fbce8a4c7a9055e2210af74480",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Select Language"
+        }
+      }
+    },
+    "../components/Sidebar.jsx": {
+      "scopes": {
+        "3/declaration/body/6/argument": {
+          "type": "element",
+          "hash": "af60c0d58e0803f2e00c9d0f7bb9290d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:div><element:div><element:div><expression/></element:div></element:div><element:div><element:h3><expression/></element:h3><element:p><expression/></element:p><element:div><expression/><expression/></element:div></element:div></element:div><element:nav><element:ul><function:navigationItems.map/></element:ul><expression/><expression/></element:nav> // At the bottom of sidebar, before logout<element:div><element:LanguageSwitcher></element:LanguageSwitcher></element:div><element:div><element:button><element:FiLogOut></element:FiLogOut><element:span>Logout</element:span></element:button></element:div>"
+        },
+        "3/declaration/body/6/argument/13/1/3": {
+          "type": "element",
+          "hash": "07948fdf20705e04a7bf68ab197512bf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "3/declaration/body/6/argument/9/11/expression/right/1/1/3": {
+          "type": "element",
+          "hash": "5de8dce1bc8b98b9af17c12708c1d2c3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pro Benefits Active"
+        },
+        "3/declaration/body/6/argument/9/11/expression/right/1/3/1": {
+          "type": "element",
+          "hash": "6c76029eac7a4cf70d230f3ab7a7cde3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Unlimited email aliases"
+        },
+        "3/declaration/body/6/argument/9/11/expression/right/1/3/3": {
+          "type": "element",
+          "hash": "a2e3e5ccee5eaca00c68375ed46aa647",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Team collaboration"
+        },
+        "3/declaration/body/6/argument/9/11/expression/right/1/3/5": {
+          "type": "element",
+          "hash": "fc82e711a03afeb476472f38c9c1b7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Custom domains"
+        },
+        "3/declaration/body/6/argument/9/11/expression/right/1/3/7": {
+          "type": "element",
+          "hash": "1a747c1ada4739c82444bb3e48d880cf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Advanced analytics"
+        },
+        "3/declaration/body/6/argument/9/7/expression/right/1/3": {
+          "type": "element",
+          "hash": "972773025e763ddf53273df6d37a729a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade to Pro"
+        },
+        "3/declaration/body/6/argument/9/7/expression/right/3": {
+          "type": "element",
+          "hash": "917f373f335fc9389a175e193c476192",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unlock unlimited aliases & collaboration"
+        },
+        "4/declaration/body/5/argument/11/3/1": {
+          "type": "element",
+          "hash": "9e6d79e6cf4d8baa22217babc7c8ee0b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiGlobe></element:FiGlobe> Language"
+        },
+        "4/declaration/body/5/argument/11/7": {
+          "type": "element",
+          "hash": "b4e7f9d75e7217b13756311f235ccb91",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiLogOut></element:FiLogOut> Logout"
+        },
+        "4/declaration/body/5/argument/7/5/expression/right/1": {
+          "type": "element",
+          "hash": "5e3efbc97fd4f065e9c5d82c51c942d8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiStar></element:FiStar> Upgrade to Pro"
+        },
+        "4/declaration/body/5/argument/7/5/expression/right/3": {
+          "type": "element",
+          "hash": "e4a7db76f2910a38c926351d09ffbc9f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unlock unlimited aliases & more"
+        },
+        "4/declaration/body/5/argument/7/9/expression/right/1/1/3": {
+          "type": "element",
+          "hash": "3bf135eb9be554551514424ddd4aeb25",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pro Active"
+        },
+        "4/declaration/body/5/argument/7/9/expression/right/1/3/1": {
+          "type": "element",
+          "hash": "3842d4ba5916c5061caa953f89abdc65",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✓ Unlimited aliases"
+        },
+        "4/declaration/body/5/argument/7/9/expression/right/1/3/3": {
+          "type": "element",
+          "hash": "4cd1f27b3be09432ebf98711aae52eb5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✓ Team collaboration"
+        },
+        "4/declaration/body/5/argument/7/9/expression/right/1/3/5": {
+          "type": "element",
+          "hash": "e2adb742f2988f140069bf5654ebc165",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✓ Custom domains"
+        },
+        "4/declaration/body/5/argument/7/9/expression/right/1/3/7": {
+          "type": "element",
+          "hash": "40584b7b315a2727a9d37421be885a53",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "✓ Priority support"
+        },
+        "4/declaration/body/6/argument/11/3/1": {
+          "type": "element",
+          "hash": "c18f655084c664ab67b9cdb8f1b7bf46",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Language"
+        },
+        "4/declaration/body/6/argument/11/7/3": {
+          "type": "element",
+          "hash": "07948fdf20705e04a7bf68ab197512bf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "4/declaration/body/6/argument/7/5/expression/right/1/3": {
+          "type": "element",
+          "hash": "972773025e763ddf53273df6d37a729a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Upgrade to Pro"
+        },
+        "4/declaration/body/6/argument/7/5/expression/right/3": {
+          "type": "element",
+          "hash": "917f373f335fc9389a175e193c476192",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unlock unlimited aliases & collaboration"
+        },
+        "4/declaration/body/6/argument/7/9/expression/right/1/1/3": {
+          "type": "element",
+          "hash": "26f8264a3a418fe01121c43a828f2b96",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pro Benefits Active"
+        },
+        "4/declaration/body/6/argument/7/9/expression/right/1/3/1": {
+          "type": "element",
+          "hash": "6c76029eac7a4cf70d230f3ab7a7cde3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Unlimited email aliases"
+        },
+        "4/declaration/body/6/argument/7/9/expression/right/1/3/3": {
+          "type": "element",
+          "hash": "a2e3e5ccee5eaca00c68375ed46aa647",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Team collaboration"
+        },
+        "4/declaration/body/6/argument/7/9/expression/right/1/3/5": {
+          "type": "element",
+          "hash": "fc82e711a03afeb476472f38c9c1b7fb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Custom domains"
+        },
+        "4/declaration/body/6/argument/7/9/expression/right/1/3/7": {
+          "type": "element",
+          "hash": "1a747c1ada4739c82444bb3e48d880cf",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "• Advanced analytics"
+        }
+      }
+    },
+    "admin/aliases/page.jsx": {
+      "scopes": {
+        "4/declaration/body/11/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "174c53dec2e04a467f67fc8ba89b91ff",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "← Dashboard"
+        },
+        "4/declaration/body/11/argument/3/1/1/3/1": {
+          "type": "element",
+          "hash": "b4bb5325d4eb2d29400077623abe132d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Alias Management"
+        },
+        "4/declaration/body/11/argument/3/1/1/3/3": {
+          "type": "element",
+          "hash": "cb4f5f180d8dc7c7e2f8235a54f05c85",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View all email aliases"
+        },
+        "4/declaration/body/11/argument/3/1/3": {
+          "type": "element",
+          "hash": "d31707170eb994136ea779104467f466",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiLogOut></element:FiLogOut> Logout"
+        },
+        "4/declaration/body/11/argument/5/5/1/1/3-placeholder": {
+          "type": "attribute",
+          "hash": "44aaf5708d0f94f4d550637b05c0a9d9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search aliases..."
+        },
+        "4/declaration/body/11/argument/5/5/1/3": {
+          "type": "element",
+          "hash": "6c79a6892c90e08cc5f5277e0c51cf47",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/1": {
+          "type": "element",
+          "hash": "87e592cc48d819d7fdcf4597c1c63e7a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Alias"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/11": {
+          "type": "element",
+          "hash": "6045b4ff97fb7dca19ebadfa2e34a700",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Created"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/3": {
+          "type": "element",
+          "hash": "9c0b3aeca046c3ebd3bdc352edc83e88",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Owner"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/5": {
+          "type": "element",
+          "hash": "f04471a7ddac844b9ad145eb9911ef75",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Type"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/7": {
+          "type": "element",
+          "hash": "4e1fcce15854d824919b4a582c697c90",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Status"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/1/1/9": {
+          "type": "element",
+          "hash": "1948763de8e531483a798b68195e297e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Activity"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/9/1/1": {
+          "type": "element",
+          "hash": "703907a5cea49b393f74c601af94106f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sent: <expression/>"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/9/1/3": {
+          "type": "element",
+          "hash": "a252da7d6e9bdea12dab561b3a7a90db",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Received: <expression/>"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/5/expression/right/1": {
+          "type": "element",
+          "hash": "d44be71e203622ce9e735dbf9377b3cb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Page {pagination.currentPage} of {pagination.totalPages}"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/1": {
+          "type": "element",
+          "hash": "99302e05a985b32998d29f8955cf302b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Previous"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/3": {
+          "type": "element",
+          "hash": "dc1d291900e6fba9450762e72dd58e8d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Next"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/alternate/consequent": {
+          "type": "element",
+          "hash": "b4de1994f182686e09cad10fb6605928",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No aliases found"
+        },
+        "4/declaration/body/11/argument/5/9/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "d388acb124ac32b7c669d03ddba0dc02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading aliases..."
+        }
+      }
+    },
+    "admin/emails/page.jsx": {
+      "scopes": {
+        "4/declaration/body/10/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "174c53dec2e04a467f67fc8ba89b91ff",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "← Dashboard"
+        },
+        "4/declaration/body/10/argument/3/1/1/3/1": {
+          "type": "element",
+          "hash": "6b8bb0307fb6434d4ff991baf9bd7517",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Activity"
+        },
+        "4/declaration/body/10/argument/3/1/1/3/3": {
+          "type": "element",
+          "hash": "df4770a70f5872004f434b72dc0dcd68",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Monitor system-wide email traffic"
+        },
+        "4/declaration/body/10/argument/3/1/3": {
+          "type": "element",
+          "hash": "d31707170eb994136ea779104467f466",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiLogOut></element:FiLogOut> Logout"
+        },
+        "4/declaration/body/10/argument/5/5/1/1": {
+          "type": "element",
+          "hash": "712cd45f2c858b2fb705581641594186",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiMail></element:FiMail> All Emails"
+        },
+        "4/declaration/body/10/argument/5/5/1/3": {
+          "type": "element",
+          "hash": "f7d8c05f0ea79f479695ffef3e7d5b72",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiSend></element:FiSend> Sent"
+        },
+        "4/declaration/body/10/argument/5/5/1/5": {
+          "type": "element",
+          "hash": "270cb3738c718ba6d93b7b27930d8c93",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiInbox></element:FiInbox> Received"
+        },
+        "4/declaration/body/10/argument/5/5/1/7": {
+          "type": "element",
+          "hash": "aab62296b247b10d6ae096d891ef4eee",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiAlertTriangle></element:FiAlertTriangle> Spam"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/1/1/1": {
+          "type": "element",
+          "hash": "3d84daca8c92c8609deeab4b294b4afb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "From"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/1/1/3": {
+          "type": "element",
+          "hash": "24ef32707b456cff90a91d438df59bbe",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "To"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/1/1/5": {
+          "type": "element",
+          "hash": "de5b885eb327b2f233f3b67aab4c4c0a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Subject"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/1/1/7": {
+          "type": "element",
+          "hash": "f04471a7ddac844b9ad145eb9911ef75",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Type"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/1/1/9": {
+          "type": "element",
+          "hash": "56f41c5d30a76295bb087b20b7bee4c3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Date"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/7/1/expression/alternate/alternate": {
+          "type": "element",
+          "hash": "16c3d46a7ecbcf1acdcd4d115c804c57",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Received"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/7/1/expression/alternate/consequent": {
+          "type": "element",
+          "hash": "7c0c0b829da059bd4a07e57b82e90fa7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sent"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/7/1/expression/consequent": {
+          "type": "element",
+          "hash": "c19207111c3d66f127a92297ece3c9cb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Spam"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/5/expression/right/1": {
+          "type": "element",
+          "hash": "d44be71e203622ce9e735dbf9377b3cb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Page {pagination.currentPage} of {pagination.totalPages}"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/1": {
+          "type": "element",
+          "hash": "99302e05a985b32998d29f8955cf302b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Previous"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/3": {
+          "type": "element",
+          "hash": "dc1d291900e6fba9450762e72dd58e8d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Next"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/alternate/consequent": {
+          "type": "element",
+          "hash": "d62045701133193f16bc5fbaf68dc2d0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No emails found"
+        },
+        "4/declaration/body/10/argument/5/9/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "d2f2a5b6f58484f6c3dde02ecd3758c3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading emails..."
+        }
+      }
+    },
+    "admin/page.jsx": {
+      "scopes": {
+        "4/declaration/body/7/consequent/0/argument/1/3": {
+          "type": "element",
+          "hash": "70e30418916b2bb76da595d7114ce726",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading admin dashboard..."
+        },
+        "4/declaration/body/9/argument/1/1/1/1": {
+          "type": "element",
+          "hash": "bbb5815b611504951063a4dab820f36f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Admin Dashboard"
+        },
+        "4/declaration/body/9/argument/1/1/1/3": {
+          "type": "element",
+          "hash": "aaea4148de8e07bdd4cb5908f123e962",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "System overview and management"
+        },
+        "4/declaration/body/9/argument/1/1/3": {
+          "type": "element",
+          "hash": "d31707170eb994136ea779104467f466",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiLogOut></element:FiLogOut> Logout"
+        },
+        "4/declaration/body/9/argument/3/11/expression/right/1": {
+          "type": "element",
+          "hash": "3ea4c70ee974e5c2f6458fea56ce2cba",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiActivity></element:FiActivity> Email Volume (Last 7 Days)"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/1": {
+          "type": "element",
+          "hash": "0d061ff0227fa54030d8040b0e22d52e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Most Active Users"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/3/1/1/1/1": {
+          "type": "element",
+          "hash": "61073457a5c3901084b557d065f876be",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "User"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/3/1/1/1/3": {
+          "type": "element",
+          "hash": "c6a08c771f97d86b02cf10d8f5f2d788",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Plan"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/3/1/1/1/5": {
+          "type": "element",
+          "hash": "2682dccdd63032e84e10faf29d5eae1c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Aliases"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/3/1/1/1/7": {
+          "type": "element",
+          "hash": "57e0248ee180edeba6223aaa868f75b0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Emails Sent"
+        },
+        "4/declaration/body/9/argument/3/15/expression/right/3/1/1/1/9": {
+          "type": "element",
+          "hash": "d6b01ecf5d8081e95efa68d3533eaff7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Emails Received"
+        },
+        "4/declaration/body/9/argument/3/3/1-title": {
+          "type": "attribute",
+          "hash": "6909485d66e5e6a9e9b8391996f3cf41",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Total Users"
+        },
+        "4/declaration/body/9/argument/3/3/3-title": {
+          "type": "attribute",
+          "hash": "45dab9a42d1cbc1065ab125c00b04b60",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Total Emails"
+        },
+        "4/declaration/body/9/argument/3/3/5-title": {
+          "type": "attribute",
+          "hash": "f8a4548f7cced9fb2913b6aa04b54a02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Total Aliases"
+        },
+        "4/declaration/body/9/argument/3/3/7-title": {
+          "type": "attribute",
+          "hash": "ff03ab827646d3027cc63ed72943c03d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Revenue"
+        },
+        "4/declaration/body/9/argument/3/7/1-description": {
+          "type": "attribute",
+          "hash": "166459f758e389cbafef1178c529d072",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View, suspend, or modify user accounts"
+        },
+        "4/declaration/body/9/argument/3/7/1-title": {
+          "type": "attribute",
+          "hash": "d5cb3188d0294ca71f368ebf5e64a6df",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Manage Users"
+        },
+        "4/declaration/body/9/argument/3/7/3-description": {
+          "type": "attribute",
+          "hash": "2f2eb55047689afc832a631a1c160ddd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Monitor all email aliases across the system"
+        },
+        "4/declaration/body/9/argument/3/7/3-title": {
+          "type": "attribute",
+          "hash": "82813fe8b812dff1ae2279c54084c9e9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View Aliases"
+        },
+        "4/declaration/body/9/argument/3/7/5-description": {
+          "type": "attribute",
+          "hash": "d2129daf797569fd66a5e8b9bb192b0d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Track email volume and spam detection"
+        },
+        "4/declaration/body/9/argument/3/7/5-title": {
+          "type": "attribute",
+          "hash": "6b8bb0307fb6434d4ff991baf9bd7517",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Activity"
+        }
+      }
+    },
+    "admin/users/page.jsx": {
+      "scopes": {
+        "4/declaration/body/13/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "174c53dec2e04a467f67fc8ba89b91ff",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "← Dashboard"
+        },
+        "4/declaration/body/13/argument/3/1/1/3/1": {
+          "type": "element",
+          "hash": "82b1e7d9d4c8a8592d956c2ef21bd58c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "User Management"
+        },
+        "4/declaration/body/13/argument/3/1/1/3/3": {
+          "type": "element",
+          "hash": "ee558c8ef5e089dc1638cb0c5234ff34",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Manage all user accounts"
+        },
+        "4/declaration/body/13/argument/3/1/3": {
+          "type": "element",
+          "hash": "d31707170eb994136ea779104467f466",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiLogOut></element:FiLogOut> Logout"
+        },
+        "4/declaration/body/13/argument/5/5/1/1/3-placeholder": {
+          "type": "attribute",
+          "hash": "2b794b909ade465134250844427b8651",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search by name or email..."
+        },
+        "4/declaration/body/13/argument/5/5/1/3/1": {
+          "type": "element",
+          "hash": "aea3b4e95887b5cbaf5cb2e732e1812e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "All Plans"
+        },
+        "4/declaration/body/13/argument/5/5/1/3/3": {
+          "type": "element",
+          "hash": "0326365539c004f6088656f692602078",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Free"
+        },
+        "4/declaration/body/13/argument/5/5/1/3/5": {
+          "type": "element",
+          "hash": "682b3c9feab30112b4454cb5bb7974b1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Pro"
+        },
+        "4/declaration/body/13/argument/5/5/1/5": {
+          "type": "element",
+          "hash": "6c79a6892c90e08cc5f5277e0c51cf47",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Search"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/1": {
+          "type": "element",
+          "hash": "61073457a5c3901084b557d065f876be",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "User"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/11": {
+          "type": "element",
+          "hash": "c46571856723b03262fd33f511116298",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Actions"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/3": {
+          "type": "element",
+          "hash": "c6a08c771f97d86b02cf10d8f5f2d788",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Plan"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/5": {
+          "type": "element",
+          "hash": "2682dccdd63032e84e10faf29d5eae1c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Aliases"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/7": {
+          "type": "element",
+          "hash": "1948763de8e531483a798b68195e297e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Activity"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/1/1/9": {
+          "type": "element",
+          "hash": "23f25c607ede93b0610497ccc3b001ae",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Joined"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/11/1/1/expression/alternate": {
+          "type": "element",
+          "hash": "0c5f96a41263f92dd44937caee6de83a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Suspend"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/11/1/1/expression/consequent": {
+          "type": "element",
+          "hash": "3875e6e3d89fd4816abd3951c16b218f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unsuspend"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/3/3/expression/right": {
+          "type": "element",
+          "hash": "90b9a01e9ccc08d2962b1dade647df9d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Suspended"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/7/1/1": {
+          "type": "element",
+          "hash": "703907a5cea49b393f74c601af94106f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Sent: <expression/>"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/1/1/3/1/expression/0/body/7/1/3": {
+          "type": "element",
+          "hash": "a252da7d6e9bdea12dab561b3a7a90db",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Received: <expression/>"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/5/expression/right/1": {
+          "type": "element",
+          "hash": "fbfd7c66b64da375e90efd99629b0148",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Page {pagination.currentPage} of {pagination.totalPages} ({pagination.totalCount} total users)"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/1": {
+          "type": "element",
+          "hash": "99302e05a985b32998d29f8955cf302b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Previous"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/alternate/5/expression/right/3/3": {
+          "type": "element",
+          "hash": "dc1d291900e6fba9450762e72dd58e8d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Next"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/alternate/consequent": {
+          "type": "element",
+          "hash": "de77574a8013306768e759f5897a59e5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No users found"
+        },
+        "4/declaration/body/13/argument/5/9/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "ade8aa3cd0bdd475591249ef16ed70bb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading users..."
+        }
+      }
+    },
+    "dashboard/aliases/page.jsx": {
+      "scopes": {
+        "5/declaration/body/20/consequent/0/argument/1/3": {
+          "type": "element",
+          "hash": "d388acb124ac32b7c669d03ddba0dc02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading aliases..."
+        },
+        "5/declaration/body/22/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "51c9a27014e030bd3885502d88a0b539",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "All Email Aliases"
+        },
+        "5/declaration/body/22/argument/3/1/1/3": {
+          "type": "element",
+          "hash": "dce8a3be8e608bed041ce72db5cdaed1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Manage all your email aliases - personal and collaborative."
+        }
+      }
+    },
+    "dashboard/create-alias/page.jsx": {
+      "scopes": {
+        "5/declaration/body/24/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "9d0825bb784304ba5b772f5049a9e367",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create New Alias"
+        },
+        "5/declaration/body/24/argument/3/1/1/3": {
+          "type": "element",
+          "hash": "2afec9e8ab03df122136c7038f95220b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create a new email alias to receive emails at a custom address."
+        }
+      }
+    },
+    "dashboard/domains/page.jsx": {
+      "scopes": {
+        "5/declaration/body/11/consequent/0/argument/1/3": {
+          "type": "element",
+          "hash": "82b4ea7ed1439094d7c4be13aaba9a66",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading..."
+        },
+        "5/declaration/body/14/argument/3/1/1/1": {
+          "type": "element",
+          "hash": "ffd51c00da945e15f1e7716914fff8fe",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Manage Custom Domains"
+        },
+        "5/declaration/body/14/argument/3/1/1/3": {
+          "type": "element",
+          "hash": "e18f99a19c7841564aa33cd7e7e39dcd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add and verify your custom domains for personalized email aliases."
+        },
+        "5/declaration/body/14/argument/3/3/1/expression/right/3": {
+          "type": "element",
+          "hash": "b8029ae1e354d7339ab95589150a71f6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "×"
+        },
+        "5/declaration/body/14/argument/3/3/3/expression/right/3": {
+          "type": "element",
+          "hash": "b8029ae1e354d7339ab95589150a71f6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "×"
+        }
+      }
+    },
+    "dashboard/page.jsx": {
+      "scopes": {
+        "7/declaration/body/25/consequent/0/argument/1/7/expression/right/3": {
+          "type": "element",
+          "hash": "784547f69dcc6cee0f48f43e21ceece5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:FiZap></element:FiZap> Verify Manually"
+        },
+        "7/declaration/body/37/argument/3/1/11/1/1/1": {
+          "type": "element",
+          "hash": "f8a4548f7cced9fb2913b6aa04b54a02",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Total Aliases"
+        },
+        "7/declaration/body/37/argument/3/1/11/3/1/1": {
+          "type": "element",
+          "hash": "d73fed5cc69a73590df24d797452b488",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Unread Emails"
+        },
+        "7/declaration/body/37/argument/3/1/11/3/5": {
+          "type": "element",
+          "hash": "a2410f40a47f1a91246f7e7a8f7cc37a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View Inbox →"
+        },
+        "7/declaration/body/37/argument/3/1/11/5/1/1": {
+          "type": "element",
+          "hash": "57e0248ee180edeba6223aaa868f75b0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Emails Sent"
+        },
+        "7/declaration/body/37/argument/3/1/11/5/5": {
+          "type": "element",
+          "hash": "03a7f57ed442917c839811096994b488",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Compose New →"
+        },
+        "7/declaration/body/37/argument/3/1/15/1/1": {
+          "type": "element",
+          "hash": "fddcc88df30439795734a6b1e9badfa0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Traffic Trends"
+        },
+        "7/declaration/body/37/argument/3/1/15/1/3/1/expression/alternate/1": {
+          "type": "element",
+          "hash": "0384dc3bbf29374d6e7441760ca17968",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No traffic data available"
+        },
+        "7/declaration/body/37/argument/3/1/15/3/1": {
+          "type": "element",
+          "hash": "fd1bdadfe4865e00f19ba86d95aaf338",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Spam vs. Legitimate"
+        },
+        "7/declaration/body/37/argument/3/1/19/1": {
+          "type": "element",
+          "hash": "d4b07b3b4faedbd20762ab8a665d979d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Recent Activity"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/1/expression/right/1/3": {
+          "type": "element",
+          "hash": "3103d30e601c088c21e9479251055dbb",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Recently Created Aliases"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/1/expression/right/3/1/expression/0/body/1/3/3/3/expression/right": {
+          "type": "element",
+          "hash": "c95cbea3c99d57106cbcce440ebe03a7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Team"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/1/expression/right/3/1/expression/0/body/3/1-title": {
+          "type": "attribute",
+          "hash": "ce18a578408ef8b2e77befa2e2822b3d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View Inbox"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/1/expression/right/3/1/expression/0/body/3/3-title": {
+          "type": "attribute",
+          "hash": "11d380c15cdc68f42d4afa70360b4e10",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Send Email"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/3/1": {
+          "type": "element",
+          "hash": "cc54a2f17be9f0d768359f1884a06a82",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Activities"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/3/3/expression/alternate": {
+          "type": "element",
+          "hash": "87041e3939a88f0260fe211302f22ed0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No recent email activities."
+        },
+        "7/declaration/body/37/argument/3/1/19/3/5/1/1": {
+          "type": "element",
+          "hash": "68c0fcfc2d6d6b166c17ea576dcf8279",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View all aliases →"
+        },
+        "7/declaration/body/37/argument/3/1/19/3/5/1/3": {
+          "type": "element",
+          "hash": "4c8fca59f44a51fce328334eeb154e4d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Go to inbox →"
+        },
+        "7/declaration/body/37/argument/3/1/23/1/1": {
+          "type": "element",
+          "hash": "1180c64ae11a4d6f736cb71343480a4c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "© <function:Date.getFullYear/> Email Alias. All rights reserved."
+        },
+        "7/declaration/body/37/argument/3/1/23/1/3/1": {
+          "type": "element",
+          "hash": "7459744a63ef8af4e517a09024bd7c08",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Privacy Policy"
+        },
+        "7/declaration/body/37/argument/3/1/23/1/3/3": {
+          "type": "element",
+          "hash": "5add91f519e39025708e54a7eb7a9fc5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Terms of Service"
+        },
+        "7/declaration/body/37/argument/3/1/3/1/expression/right/3/1": {
+          "type": "element",
+          "hash": "3c95bcb32c2104b99a46f5b3dd015248",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Error"
+        },
+        "7/declaration/body/37/argument/3/1/3/1/expression/right/3/5/expression/right": {
+          "type": "element",
+          "hash": "b157fc5493dc59c9eedeb14f198bf8d9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Click to Verify Manually"
+        },
+        "7/declaration/body/37/argument/3/1/3/3/expression/right/3/1": {
+          "type": "element",
+          "hash": "c43827becada6750f7a25890905f38b9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Success"
+        },
+        "7/declaration/body/37/argument/3/1/7/1/1/1": {
+          "type": "element",
+          "hash": "150a4e5abf092905af6651b02c510703",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Welcome back, <element:span><expression/></element:span>!"
+        },
+        "7/declaration/body/37/argument/3/1/7/1/1/3": {
+          "type": "element",
+          "hash": "a842b9dd155c284617433d9bc6395935",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Here's your secure dashboard overview."
+        }
+      }
+    },
+    "dashboard/send/page.jsx": {
+      "scopes": {
+        "3/body/0/argument/1/3": {
+          "type": "element",
+          "hash": "82b4ea7ed1439094d7c4be13aaba9a66",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading..."
+        }
+      }
+    },
+    "register/page.jsx": {
+      "scopes": {
+        "4/declaration/body/6/argument/7/1/1": {
+          "type": "element",
+          "hash": "b733baa942e0b3dc5c585adde5cdf516",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Create an Account"
+        },
+        "4/declaration/body/6/argument/7/1/5/1-placeholder": {
+          "type": "attribute",
+          "hash": "ba3094a10db2bb9234cb7e0dc86e40fd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Full Name"
+        },
+        "4/declaration/body/6/argument/7/1/5/3-placeholder": {
+          "type": "attribute",
+          "hash": "0ee22bbbe989a0c61a18023407d12dc2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Address"
+        },
+        "4/declaration/body/6/argument/7/1/5/5-placeholder": {
+          "type": "attribute",
+          "hash": "fd25b88e482d9e674334ff77c11541b3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Password (min 6 characters)"
+        },
+        "4/declaration/body/6/argument/7/1/5/7-placeholder": {
+          "type": "attribute",
+          "hash": "140bae95eb2040668118c6244c4a4825",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Confirm Password"
+        },
+        "4/declaration/body/6/argument/7/1/7": {
+          "type": "element",
+          "hash": "530f7f9b9b941ae1696f37bbaab62ed9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Already have an account? <element:Link>Sign In</element:Link>"
+        }
+      }
+    },
+    "signin/SignIn.jsx": {
+      "scopes": {
+        "4/declaration/body/9/argument/7/1/1": {
+          "type": "element",
+          "hash": "3d7c5b589fe3e18a1d2d7e83de7a9cf1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Welcome Back"
+        },
+        "4/declaration/body/9/argument/7/1/7/1-placeholder": {
+          "type": "attribute",
+          "hash": "0ee22bbbe989a0c61a18023407d12dc2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email Address"
+        },
+        "4/declaration/body/9/argument/7/1/7/3-placeholder": {
+          "type": "attribute",
+          "hash": "223a61cf906ab9c40d22612c588dff48",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Password"
+        },
+        "4/declaration/body/9/argument/7/1/9": {
+          "type": "element",
+          "hash": "96f70e68b3f009eeb1aad2660e65a6d3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Don't have an account? <element:Link>Register</element:Link>"
+        }
+      }
+    }
+  }
+}
