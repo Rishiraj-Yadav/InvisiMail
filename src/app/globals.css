@@ -10,45 +10,9 @@
    ============================================= */
 
 @layer base {
-  :root {
-    /* Light Theme Palette */
-    --background: 240 5% 96%;       /* #F4F4F5 (Zinc 100) */
-    --foreground: 240 10% 4%;       /* #09090B */
-    --card: 0 0% 100%;              /* #FFFFFF */
-    --card-foreground: 240 10% 4%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 4%;
-
-    /* Accent — Indigo */
-    --primary: 239 84% 67%;         /* #6366F1 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 244 76% 60%;       /* #4F46E5 */
-    --secondary-foreground: 0 0% 100%;
-
-    /* Surfaces */
-    --muted: 240 5% 94%;            /* #F4F4F5 */
-    --muted-foreground: 240 4% 46%; /* #71717A */
-    --accent: 239 84% 67%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Feedback */
-    --destructive: 0 84% 60%;       /* #EF4444 */
-    --destructive-foreground: 0 0% 100%;
-
-    /* Borders & Input */
-    --border: 240 6% 90%;           /* #E4E4E7 */
-    --input: 240 6% 90%;
-    --ring: 239 84% 67%;
-    --radius: 1.5rem;
-
-    /* Semantic Tokens */
-    --success: 142 76% 36%;
-    --warning: 38 92% 50%;
-    --info: 217 91% 60%;
-  }
-
+  :root,
   .dark {
-    /* Dark Theme Palette (Existing) */
+    /* Core Palette — matches LandingPage.jsx */
     --background: 240 10% 4%;       /* #09090B */
     --foreground: 0 0% 98%;         /* #FAFAFA */
     --card: 240 6% 7%;              /* #111113 */
@@ -91,13 +55,15 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
+    @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     letter-spacing: -0.01em;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   html {
@@ -113,10 +79,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-black/10 dark:bg-white/10 rounded-full;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-black/20 dark:bg-white/20;
+    background: rgba(255, 255, 255, 0.15);
   }
 }
 
@@ -129,30 +96,49 @@
 
   /* Level 1: Static content cards — charts, info panels, sidebar */
   .surface-card {
-    @apply bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.06] rounded-2xl shadow-sm dark:shadow-none transition-all duration-300 ease-in-out;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
   }
 
   /* Level 2: Elevated containers — headers, modals, dropdowns */
   .surface-elevated {
-    @apply bg-white/80 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] rounded-2xl shadow-md dark:shadow-none backdrop-blur-md transition-all duration-300 ease-in-out;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
   }
 
   /* Level 3: Interactive cards — stats, alias cards (hover lifts) */
   .surface-interactive {
-    @apply bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.06] rounded-2xl cursor-pointer shadow-sm dark:shadow-none transition-all duration-300 ease-in-out;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
   }
   .surface-interactive:hover {
-    @apply bg-gray-50 dark:bg-white/[0.05] border-gray-300 dark:border-white/[0.12] -translate-y-[2px] shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)];
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
   /* Keep glass-panel for backward compat (landing/auth overlays) */
   .glass-panel {
-    @apply bg-white/80 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-[1.5rem] backdrop-blur-[16px] shadow-xl dark:shadow-none transition-all duration-300 ease-in-out;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.5rem;
+    backdrop-filter: blur(16px);
+    transition: all 0.3s ease;
   }
 
   /* Glass nav for landing page header */
   .glass-nav {
-    @apply bg-white/80 dark:bg-[#09090f]/85 backdrop-blur-[20px] border-b border-gray-200 dark:border-white/[0.06] shadow-sm dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] transition-all duration-300 ease-in-out;
+    background: rgba(9, 9, 15, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   /* =====================
@@ -161,9 +147,6 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, #a78bfa 100%);
-  }
-  .dark .text-gradient {
     background-image: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
   }
 
@@ -181,11 +164,23 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-[#4F46E5] h-11 py-2.5 px-5 rounded-full font-semibold shadow-md hover:-translate-y-[1px];
+    @apply bg-primary text-white hover:bg-[#4F46E5] h-11 py-2.5 px-5 rounded-full font-semibold;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,102,241,0.3);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 4px 16px rgba(99,102,241,0.25), 0 0 0 1px rgba(99,102,241,0.4);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    @apply h-11 py-2.5 px-5 rounded-xl font-semibold bg-gray-100 dark:bg-white/[0.06] text-foreground border border-gray-200 dark:border-white/[0.1] hover:bg-gray-200 dark:hover:bg-white/[0.1] hover:border-gray-300 dark:hover:border-white/[0.16];
+    @apply h-11 py-2.5 px-5 rounded-xl font-semibold;
+    background: rgba(255,255,255,0.06);
+    color: hsl(var(--foreground));
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.16);
   }
 
   .btn-destructive {
@@ -193,7 +188,12 @@
   }
 
   .btn-ghost {
-    @apply h-11 py-2.5 px-5 rounded-xl font-medium text-muted-foreground hover:bg-gray-100 dark:hover:bg-white/[0.05] hover:text-foreground;
+    @apply h-11 py-2.5 px-5 rounded-xl font-medium;
+    color: hsl(var(--muted-foreground));
+  }
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.05);
+    color: hsl(var(--foreground));
   }
 
   /* =====================
@@ -201,18 +201,36 @@
      ===================== */
 
   .input-field {
-    @apply w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-white dark:bg-white/[0.04] border border-gray-300 dark:border-white/[0.08] text-foreground focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-indigo-500/15 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply w-full h-12 px-4 rounded-xl text-sm font-medium transition-all;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: hsl(var(--foreground));
   }
   .input-field::placeholder {
     color: hsl(var(--muted-foreground));
   }
   .input-field:focus {
-    @apply dark:bg-white/[0.06];
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .input-field:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   /* Legacy compat */
   .input {
-    @apply flex h-10 w-full rounded-lg border px-3 py-2 text-sm bg-white dark:bg-white/[0.04] border-gray-300 dark:border-white/[0.08] text-foreground focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-indigo-500/15;
+    @apply flex h-10 w-full rounded-lg border px-3 py-2 text-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: hsl(var(--foreground));
+  }
+  .input:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
   }
 
   /* =====================
