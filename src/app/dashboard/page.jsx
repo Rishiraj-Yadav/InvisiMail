@@ -382,17 +382,30 @@ export default function Dashboard() {
                 <h3 className="text-sm font-semibold text-white">Spam vs. Legitimate</h3>
                 <button className="text-[#A1A1AA] hover:text-white transition-colors"><MoreVertical className="w-4 h-4" /></button>
               </div>
-              <div className="h-48">
+              <div className="h-48 relative">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
-                    <Pie data={displaySpamData} cx="50%" cy="50%" innerRadius={65} outerRadius={90} paddingAngle={5} dataKey="value" stroke="none">
+                    <Pie data={displaySpamData} cx="50%" cy="50%" innerRadius={65} outerRadius={90} paddingAngle={hasEmailData ? 5 : 0} dataKey="value" stroke="none">
                       {displaySpamData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={hasEmailData ? pieColors[index % pieColors.length] : '#27272A'} />
+                        <Cell key={`cell-${index}`} fill={hasEmailData ? pieColors[index % pieColors.length] : 'rgba(255, 255, 255, 0.03)'} />
                       ))}
                     </Pie>
-                    <Tooltip {...customTooltip} />
+                    {hasEmailData && <Tooltip {...customTooltip} />}
                   </PieChart>
                 </ResponsiveContainer>
+                
+                {/* Center Labels */}
+                {!hasEmailData && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <span className="text-[hsl(var(--muted-foreground))] text-xs font-semibold">Awaiting Data</span>
+                  </div>
+                )}
+                {hasEmailData && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <span className="text-white text-2xl font-bold tracking-tight">{inboxStats?.totalEmails || 0}</span>
+                    <span className="text-[hsl(var(--muted-foreground))] text-[10px] uppercase tracking-wider font-semibold mt-0.5">Total</span>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
