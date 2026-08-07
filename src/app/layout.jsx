@@ -1,5 +1,6 @@
 import { LingoProvider, loadDictionary } from "lingo.dev/react/rsc";
 import { Inter } from "next/font/google";
+import AnimationProvider from "@/components/providers/AnimationProvider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
     <LingoProvider loadDictionary={(locale) => loadDictionary(locale)}>
       <html lang="en">
         <body className={inter.className}>
-          {children}
+          <AnimationProvider>
+            {children}
+          </AnimationProvider>
         </body>
       </html>
     </LingoProvider>

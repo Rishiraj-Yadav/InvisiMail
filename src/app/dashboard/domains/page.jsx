@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
 import DomainManagement from '@/components/DomainManagement';
 import AssistantChatPhase2 from '@/components/AssistantChatPhase2';
+import { X, Menu } from 'lucide-react';
 
 export default function DomainsPage() {
   const [user, setUser] = useState(null);
@@ -13,6 +14,7 @@ export default function DomainsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -126,10 +128,10 @@ export default function DomainsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading...</p>
         </div>
       </div>
     );
@@ -139,13 +141,31 @@ export default function DomainsPage() {
 
   if (!isPro) {
     return (
-      <div className="flex h-screen bg-gray-100 overflow-hidden">
-        <Sidebar user={user} onUpgrade={handleUpgrade} />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <main className="flex-1 overflow-y-auto p-6">
+      <div className="flex h-screen bg-[#09090B] overflow-hidden relative">
+        {/* Ambient Gradients */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
+        <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+          <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
+            <div className="relative z-10 flex items-center gap-4">
+              <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+                <Menu className="w-5 h-5" />
+              </button>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-white">Manage Custom Domains</h1>
+              </div>
+            </div>
+          </header>
+          <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
             {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-                {error}
+              <div className="alert-error p-3 rounded-xl flex justify-between items-center text-sm mb-6 max-w-4xl">
+                <span>{error}</span>
+                <button onClick={() => setError('')} className="p-1 hover:bg-red-500/20 rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
+                </button>
               </div>
             )}
             {/* ADD ASSISTANT CHAT HERE FOR NON-PRO USERS */}
@@ -157,47 +177,48 @@ export default function DomainsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
-      <Sidebar user={user} onUpgrade={handleUpgrade} />
+    <div className="flex h-screen bg-[#09090B] overflow-hidden relative">
+      {/* Ambient Gradients */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
       
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">Manage Custom Domains</h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Add and verify your custom domains for personalized email aliases.
-            </p>
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+        <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
+          <div className="relative z-10 flex items-center gap-4">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+              <Menu className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-white">Manage Custom Domains</h1>
+              <p className="text-sm text-[hsl(var(--muted-foreground))] mt-0.5">
+                Add and verify your custom domains for personalized email aliases.
+              </p>
+            </div>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-6">
-          {error && (
-            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-              {error}
-              <button 
-                onClick={() => setError('')} 
-                className="float-right text-red-500 hover:text-red-700"
-              >
-                ×
-              </button>
-            </div>
-          )}
-          {success && (
-            <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
-              {success}
-              <button 
-                onClick={() => setSuccess('')} 
-                className="float-right text-green-500 hover:text-green-700"
-              >
-                ×
-              </button>
-            </div>
-          )}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+          <div className="max-w-4xl mx-auto space-y-6 pb-20">
+            {error && (
+              <div className="alert-error p-3 rounded-xl flex justify-between items-center text-sm">
+                <span>{error}</span>
+                <button onClick={() => setError('')} className="p-1 hover:bg-red-500/20 rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+            {success && (
+              <div className="alert-success p-3 rounded-xl flex justify-between items-center text-sm">
+                <span>{success}</span>
+                <button onClick={() => setSuccess('')} className="p-1 hover:bg-green-500/20 rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
 
-          {/* ADD ASSISTANT CHAT HERE */}
-          <AssistantChatPhase2 />
-
-          <div className="max-w-4xl">
             <DomainManagement 
               user={user} 
               onDomainsUpdate={(updatedDomains) => setDomains(updatedDomains)} 
@@ -205,6 +226,7 @@ export default function DomainsPage() {
           </div>
         </main>
       </div>
+      <AssistantChatPhase2 />
     </div>
   );
 }

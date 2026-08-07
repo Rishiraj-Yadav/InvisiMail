@@ -1,10 +1,9 @@
 import LandingPage from '../components/LandingPage';
-import '../styles/landing.css';
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: 'black', minHeight: '100vh', margin: 0, padding: 0 }}>
+    <main className="min-h-screen bg-background">
       <LandingPage />
-    </div>
+    </main>
   );
 }

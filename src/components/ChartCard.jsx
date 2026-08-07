@@ -14,17 +14,17 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
         <div
           className="w-24 h-24 rounded-full"
           style={{ 
-            background: `conic-gradient(from 0deg, #ef4444 ${spamPct}%, #10b981 0)`
+            background: `conic-gradient(from 0deg, rgba(255,255,255,0.2) ${spamPct}%, rgba(255,255,255,1) 0)`
           }}
         />
         <div className="text-sm space-y-2">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-3 h-3 rounded-full bg-green-400" />
-            <span className="text-gray-300">Legitimate ({legitPct}%)</span>
+            <span className="inline-block w-3 h-3 rounded-full bg-white" />
+            <span className="text-white/80 font-bold">Legitimate ({legitPct}%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-block w-3 h-3 rounded-full bg-red-400" />
-            <span className="text-gray-300">Spam ({spamPct}%)</span>
+            <span className="inline-block w-3 h-3 rounded-full bg-white/20" />
+            <span className="text-white/80 font-bold">Spam ({spamPct}%)</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
             <div key={idx} className="flex-1 flex flex-col items-center">
               <div
                 style={{ height: `${height}%` }}
-                className="w-full bg-blue-500 rounded-t transition-colors hover:bg-blue-400"
+                className="w-full bg-white/20 rounded-t transition-colors hover:bg-white"
                 title={`${value} emails`}
               />
             </div>
@@ -54,8 +54,8 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
   };
 
   return (
-    <div className="premium-card bg-gray-800 rounded-lg border border-gray-700 shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-gray-200 mb-4">{title}</h3>
+    <div className="surface-card bg-white/5 rounded-xl border border-white/5 p-6">
+      <h3 className="text-lg font-bold text-white mb-4">{title}</h3>
       
       {/* Conditionally render the correct chart based on the 'type' prop */}
       {type === 'traffic' && renderTrafficChart()}

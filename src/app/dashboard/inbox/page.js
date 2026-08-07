@@ -3,53 +3,49 @@ import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Inbox, Send, AlertOctagon, Trash2, Reply, MoreVertical, RefreshCw, LogOut, ChevronLeft, ChevronRight, User } from 'lucide-react';
-import AssistantChatPhase2 from '@/components/AssistantChatPhase2';
+import AssistantChat from '@/components/AssistantChatPhase2';
 
-// Enhanced Sidebar with hover expand/collapse
-function EnhancedSidebar({ user, counts, mailType, setMailType, onLogout, isExpanded, setIsExpanded }) {
+// ─── SIDEBAR (Inbox-specific, dark themed) ───
+function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpanded, setIsExpanded }) {
     return (
-        <aside 
-            className={`bg-white border-r border-gray-200 flex-col h-screen hidden lg:flex transition-all duration-300 ease-in-out ${
+        <aside
+            className={`surface-card border-r-0 rounded-none flex-col h-screen hidden lg:flex transition-all duration-300 ease-in-out ${
                 isExpanded ? 'w-64' : 'w-20'
             } relative group`}
             onMouseEnter={() => setIsExpanded(true)}
             onMouseLeave={() => setIsExpanded(false)}
         >
-            {/* User Profile Section */}
-            <div className="p-4 border-b border-gray-200">
+            {/* User Profile */}
+            <div className="p-4 border-b border-white/5">
                 <div className="flex items-center justify-center mb-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center text-xl font-bold text-primary">
                         {user?.name ? user.name.charAt(0).toUpperCase() : <User size={24} />}
                     </div>
                 </div>
                 {isExpanded && (
                     <div className="text-center overflow-hidden">
-                        <h3 className="font-semibold text-gray-900 text-sm truncate">{user?.name || 'User'}</h3>
-                        <p className="text-xs text-gray-600 truncate">{user?.email}</p>
+                        <h3 className="font-semibold text-white text-sm truncate">{user?.name || 'User'}</h3>
+                        <p className="text-xs text-[hsl(var(--muted-foreground))] truncate">{user?.email}</p>
                     </div>
                 )}
             </div>
 
             {/* Navigation */}
             <nav className="flex-1 p-3 overflow-y-auto">
-                <ul className="space-y-2">
-                    {/* Back to Dashboard */}
+                <ul className="space-y-1">
                     <li>
-                        <Link 
-                            href="/dashboard" 
-                            className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200 group/item"
+                        <Link
+                            href="/dashboard"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[hsl(var(--muted-foreground))] hover:bg-white/5 hover:text-white transition-all cursor-pointer"
                             title="Back to Dashboard"
                         >
                             <ChevronLeft size={20} className="flex-shrink-0" />
                             {isExpanded && <span className="text-sm font-medium">Dashboard</span>}
                         </Link>
                     </li>
-                    
-                    <li className="py-2">
-                        <hr className="border-gray-200" />
-                    </li>
 
-                    {/* Mail Categories */}
+                    <li className="py-2"><hr className="border-white/5" /></li>
+
                     {[
                         { name: 'All', type: 'all', icon: Mail, count: counts.all || 0 },
                         { name: 'Received', type: 'received', icon: Inbox, count: counts.received || 0 },
@@ -58,24 +54,24 @@ function EnhancedSidebar({ user, counts, mailType, setMailType, onLogout, isExpa
                     ].map((item) => {
                         const IconComponent = item.icon;
                         const isActive = mailType === item.type;
-                        
+
                         return (
                             <li key={item.name}>
                                 <button
                                     onClick={() => setMailType(item.type)}
-                                    className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                                         isActive
-                                            ? 'bg-blue-600 text-white shadow-md'
-                                            : 'text-gray-700 hover:bg-gray-100'
+                                            ? 'bg-primary/12 text-white'
+                                            : 'text-[hsl(var(--muted-foreground))] hover:bg-white/5 hover:text-white'
                                     }`}
                                     title={item.name}
                                 >
-                                    <IconComponent size={20} className="flex-shrink-0" />
+                                    <IconComponent size={20} className={`flex-shrink-0 ${isActive ? 'text-primary' : ''}`} />
                                     {isExpanded && (
                                         <>
                                             <span className="flex-1 text-left">{item.name}</span>
                                             <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                                                isActive ? 'bg-white/20' : 'bg-gray-200'
+                                                isActive ? 'bg-primary/20 text-primary' : 'bg-white/5 text-[hsl(var(--muted-foreground))]'
                                             }`}>
                                                 {item.count}
                                             </span>
@@ -88,11 +84,11 @@ function EnhancedSidebar({ user, counts, mailType, setMailType, onLogout, isExpa
                 </ul>
             </nav>
 
-            {/* Logout Button */}
-            <div className="p-3 border-t border-gray-200">
-                <button 
-                    onClick={onLogout} 
-                    className="w-full flex items-center justify-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200"
+            {/* Logout */}
+            <div className="p-3 border-t border-white/5">
+                <button
+                    onClick={onLogout}
+                    className="w-full flex items-center justify-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
                     title="Logout"
                 >
                     <LogOut size={20} className="flex-shrink-0" />
@@ -103,7 +99,7 @@ function EnhancedSidebar({ user, counts, mailType, setMailType, onLogout, isExpa
             {/* Expand/Collapse Toggle */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-white border border-gray-300 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 opacity-0 group-hover:opacity-100 shadow-md"
+                className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-[hsl(var(--card))] border border-white/10 rounded-full flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:text-white hover:border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
             >
                 {isExpanded ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
             </button>
@@ -111,8 +107,8 @@ function EnhancedSidebar({ user, counts, mailType, setMailType, onLogout, isExpa
     );
 }
 
-// Enhanced Email Detail View with real API integration
-function EnhancedEmailDetail({ emailId, onUpdate, user }) {
+// ─── EMAIL DETAIL VIEW ───
+function EmailDetailView({ emailId, onUpdate, user }) {
     const [email, setEmail] = useState(null);
     const [alias, setAlias] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -132,8 +128,7 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
                 const aliasRes = await fetch('/api/aliases');
                 if (aliasRes.ok) {
                     const aliases = await aliasRes.json();
-                    const foundAlias = aliases.find(a => a.aliasEmail === emailData.aliasEmail);
-                    setAlias(foundAlias);
+                    setAlias(aliases.find(a => a.aliasEmail === emailData.aliasEmail));
                 }
             }
 
@@ -152,9 +147,7 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
         }
     }, [emailId]);
 
-    useEffect(() => {
-        fetchEmailData();
-    }, [fetchEmailData]);
+    useEffect(() => { fetchEmailData(); }, [fetchEmailData]);
 
     const deleteEmail = async () => {
         if (!confirm('Are you sure you want to permanently delete this email?')) return;
@@ -162,9 +155,7 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
             const response = await fetch(`/api/inbox/${emailId}`, { method: 'DELETE' });
             if (response.ok) onUpdate();
             else alert('Failed to delete email.');
-        } catch (err) {
-            alert('A network error occurred.');
-        }
+        } catch (err) { alert('A network error occurred.'); }
     };
 
     const toggleSpamStatus = async (isSpam) => {
@@ -176,13 +167,11 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
             });
             if (response.ok) onUpdate();
             else alert('Failed to update spam status.');
-        } catch (err) {
-            alert('A network error occurred.');
-        }
+        } catch (err) { alert('A network error occurred.'); }
     };
 
-    const formatFullDate = (dateString) => new Date(dateString).toLocaleString('en-US', { 
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+    const formatFullDate = (dateString) => new Date(dateString).toLocaleString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
     });
 
     const canUserReply = () => {
@@ -195,10 +184,10 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-full bg-gradient-to-br from-slate-50 to-slate-100">
+            <div className="flex items-center justify-center h-full bg-background">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto mb-3"></div>
-                    <p className="text-gray-600">Loading email...</p>
+                    <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-3" />
+                    <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading email...</p>
                 </div>
             </div>
         );
@@ -207,8 +196,8 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
     if (error) {
         return (
             <div className="p-8 text-center">
-                <div className="text-red-600 mb-4">Error: {error}</div>
-                <button onClick={fetchEmailData} className="text-blue-600 hover:text-blue-700">Try Again</button>
+                <div className="text-red-400 mb-4 text-sm">Error: {error}</div>
+                <button onClick={fetchEmailData} className="text-primary hover:text-white text-sm cursor-pointer">Try Again</button>
             </div>
         );
     }
@@ -222,74 +211,52 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
     };
 
     return (
-        <div className="bg-white h-full flex flex-col overflow-y-auto">
+        <div className="bg-background h-full flex flex-col overflow-y-auto">
             {/* Header */}
-            <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-slate-50 to-white flex-shrink-0">
+            <div className="p-6 border-b border-white/5 surface-elevated rounded-none flex-shrink-0">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex-1 min-w-0">
-                        <h2 className="text-2xl font-bold text-slate-900 mb-2">{email.subject || '(No Subject)'}</h2>
-                        <div className="flex items-center gap-4 text-sm text-slate-600">
+                        <h2 className="text-xl font-bold text-white mb-2">{email.subject || '(No Subject)'}</h2>
+                        <div className="flex items-center gap-4 text-sm text-[hsl(var(--muted-foreground))]">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center text-primary text-xs font-semibold">
                                     {displayInfo.displayFrom.charAt(0).toUpperCase()}
                                 </div>
-                                <span className="font-medium">{displayInfo.displayFrom}</span>
+                                <span className="font-medium text-white">{displayInfo.displayFrom}</span>
                             </div>
-                            <span className="text-slate-400">•</span>
+                            <span className="text-white/20">·</span>
                             <span>{formatFullDate(email.receivedAt)}</span>
                         </div>
                     </div>
-                    
-                    {/* Action Buttons */}
-                    <div className="flex items-center gap-2">
+
+                    <div className="flex items-center gap-1">
                         {canUserReply() && (
-                            <Link 
-                                href={`/dashboard/send?reply=${emailId}`}
-                                className="p-2 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors"
-                                title="Reply"
-                            >
+                            <Link href={`/dashboard/send?reply=${emailId}`} className="p-2 rounded-lg hover:bg-primary/10 text-primary transition-colors cursor-pointer" title="Reply">
                                 <Reply size={18} />
                             </Link>
                         )}
                         {displayInfo.isSpam ? (
-                            <button 
-                                onClick={() => toggleSpamStatus(false)}
-                                className="p-2 rounded-lg hover:bg-green-50 text-green-600 transition-colors"
-                                title="Not Spam"
-                            >
+                            <button onClick={() => toggleSpamStatus(false)} className="p-2 rounded-lg hover:bg-green-500/10 text-green-400 transition-colors cursor-pointer" title="Not Spam">
                                 <AlertOctagon size={18} />
                             </button>
                         ) : (
-                            <button 
-                                onClick={() => toggleSpamStatus(true)}
-                                className="p-2 rounded-lg hover:bg-orange-50 text-orange-600 transition-colors"
-                                title="Mark as Spam"
-                            >
+                            <button onClick={() => toggleSpamStatus(true)} className="p-2 rounded-lg hover:bg-orange-500/10 text-orange-400 transition-colors cursor-pointer" title="Mark as Spam">
                                 <AlertOctagon size={18} />
                             </button>
                         )}
-                        <button 
-                            onClick={deleteEmail}
-                            className="p-2 rounded-lg hover:bg-red-50 text-red-600 transition-colors"
-                            title="Delete"
-                        >
+                        <button onClick={deleteEmail} className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-colors cursor-pointer" title="Delete">
                             <Trash2 size={18} />
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors">
+                        <button className="p-2 rounded-lg hover:bg-white/5 text-[hsl(var(--muted-foreground))] transition-colors cursor-pointer">
                             <MoreVertical size={18} />
                         </button>
                     </div>
                 </div>
 
-                {/* Tags */}
                 <div className="flex gap-2">
-                    {!email.isRead && (
-                        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
-                            Unread
-                        </span>
-                    )}
+                    {!email.isRead && <span className="badge text-xs">Unread</span>}
                     {displayInfo.isSpam && (
-                        <span className="px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">
+                        <span className="px-3 py-1 bg-red-500/12 text-red-400 text-xs font-semibold rounded-full border border-red-500/20">
                             Spam
                         </span>
                     )}
@@ -297,26 +264,26 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
             </div>
 
             {/* Email Body */}
-            <div className="flex-1 p-6 bg-white overflow-y-auto">
+            <div className="flex-1 p-6 overflow-y-auto">
                 {displayInfo.isSpam && (
-                    <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                    <div className="mb-6 p-4 alert-error rounded-xl border-l-4 border-l-red-500">
                         <div className="flex items-start gap-3">
-                            <AlertOctagon className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
+                            <AlertOctagon className="text-red-400 flex-shrink-0 mt-0.5" size={20} />
                             <div>
-                                <h3 className="font-semibold text-red-900">Spam Warning</h3>
-                                <p className="text-sm text-red-700 mt-1">This email was identified as spam. Be cautious with links and attachments.</p>
+                                <h3 className="font-semibold text-red-300">Spam Warning</h3>
+                                <p className="text-sm text-red-400 mt-1">This email was identified as spam. Be cautious with links and attachments.</p>
                             </div>
                         </div>
                     </div>
                 )}
-                
+
                 {email.bodyHtml ? (
-                    <div 
-                        className="prose max-w-none text-slate-700 leading-relaxed"
+                    <div
+                        className="prose prose-invert max-w-none leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: email.bodyHtml }}
                     />
                 ) : (
-                    <div className="whitespace-pre-wrap text-slate-700 leading-relaxed font-mono text-sm bg-gray-50 p-4 rounded-md border">
+                    <div className="whitespace-pre-wrap leading-relaxed font-mono text-sm surface-card p-4 rounded-xl text-[hsl(var(--foreground))]">
                         {email.bodyPlain || 'No content.'}
                     </div>
                 )}
@@ -325,61 +292,54 @@ function EnhancedEmailDetail({ emailId, onUpdate, user }) {
     );
 }
 
-// Enhanced Email List Item
+// ─── EMAIL LIST ITEM ───
 function EmailListItem({ email, isSelected, onClick, formatDate }) {
     const isUnread = !email.isRead;
-    
+
     return (
         <button
             onClick={onClick}
-            className={`w-full text-left p-4 border-b border-slate-100 transition-all duration-200 ${
-                isSelected 
-                    ? 'bg-blue-50 border-l-4 border-l-blue-500' 
+            className={`w-full text-left p-4 border-b border-white/5 transition-all cursor-pointer ${
+                isSelected
+                    ? 'bg-primary/8 border-l-2 border-l-primary'
                     : email.isSpam
-                    ? 'bg-red-50/50 hover:bg-red-50 border-l-4 border-l-red-300'
+                    ? 'bg-red-500/5 hover:bg-red-500/8 border-l-2 border-l-red-500/40'
                     : isUnread
-                    ? 'bg-white hover:bg-slate-50 border-l-4 border-l-blue-400'
-                    : 'bg-white hover:bg-slate-50 border-l-4 border-l-transparent'
+                    ? 'bg-white/[0.02] hover:bg-white/[0.04] border-l-2 border-l-primary/50'
+                    : 'hover:bg-white/[0.03] border-l-2 border-l-transparent'
             }`}
         >
             <div className="flex items-start gap-3">
-                {/* Avatar */}
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold flex-shrink-0 ${
-                    email.isSpam 
-                        ? 'bg-gradient-to-br from-red-400 to-red-600'
-                        : 'bg-gradient-to-br from-blue-400 to-purple-500'
+                <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-sm font-semibold flex-shrink-0 ${
+                    email.isSpam
+                        ? 'bg-red-500/15 text-red-400'
+                        : 'bg-primary/15 text-primary'
                 }`}>
                     {(email.isSentEmail ? (email.to || 'T') : (email.from || 'F')).charAt(0).toUpperCase()}
                 </div>
-                
-                {/* Email Info */}
+
                 <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-start mb-1">
-                        <p className={`truncate ${isUnread ? 'font-bold text-slate-900' : 'font-medium text-slate-700'}`}>
+                    <div className="flex justify-between items-start mb-0.5">
+                        <p className={`truncate text-sm ${isUnread ? 'font-bold text-white' : 'font-medium text-[hsl(var(--foreground))]'}`}>
                             {email.isSentEmail ? `To: ${email.to}` : email.from}
                         </p>
-                        <span className="text-xs text-slate-500 ml-2 flex-shrink-0">{formatDate(email.receivedAt)}</span>
+                        <span className="text-xs text-[hsl(var(--muted-foreground))] ml-2 flex-shrink-0">{formatDate(email.receivedAt)}</span>
                     </div>
-                    
-                    <p className={`truncate text-sm mb-1 ${isUnread ? 'text-slate-900 font-semibold' : 'text-slate-600'}`}>
+
+                    <p className={`truncate text-sm mb-1 ${isUnread ? 'text-white font-semibold' : 'text-[hsl(var(--muted-foreground))]'}`}>
                         {email.subject || '(No Subject)'}
                     </p>
-                    
-                    <p className="text-sm text-slate-500 truncate">
+
+                    <p className="text-xs text-[hsl(var(--muted-foreground))] truncate">
                         {email.bodyPlain?.substring(0, 80) || '...'}
                     </p>
-                    
-                    {/* Badges */}
+
                     <div className="flex gap-2 mt-2">
                         {email.isSpam && (
-                            <span className="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-medium rounded">
-                                Spam
-                            </span>
+                            <span className="px-2 py-0.5 bg-red-500/12 text-red-400 text-xs font-medium rounded border border-red-500/20">Spam</span>
                         )}
                         {isUnread && (
-                            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded">
-                                New
-                            </span>
+                            <span className="badge text-[10px] py-0 px-1.5">New</span>
                         )}
                     </div>
                 </div>
@@ -388,66 +348,66 @@ function EmailListItem({ email, isSelected, onClick, formatDate }) {
     );
 }
 
-// Enhanced Email List Pane with real API integration
-function EnhancedEmailList({ emails, loading, selectedEmailId, onSelectEmail, mailType, aliases, selectedAlias, setSelectedAlias, unreadOnly, setUnreadOnly, onRefresh, formatDate }) {
+// ─── EMAIL LIST PANE ───
+function EmailListPane({ emails, loading, selectedEmailId, onSelectEmail, mailType, aliases, selectedAlias, setSelectedAlias, unreadOnly, setUnreadOnly, onRefresh, formatDate }) {
     return (
-        <div className="bg-white flex flex-col h-full border-r border-slate-200">
+        <div className="bg-transparent flex flex-col h-full border-r border-white/5 relative z-10">
             {/* Header */}
-            <header className="p-4 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-white flex-shrink-0">
-                <div className="flex justify-between items-center mb-3">
-                    <h1 className="text-xl font-bold text-slate-900 capitalize">{mailType} Emails</h1>
+            <header className="relative p-4 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
+                <div className="relative z-10">
+                    <div className="flex justify-between items-center mb-3">
+                        <h1 className="text-xl font-bold text-white capitalize tracking-tight">{mailType} Emails</h1>
                     <div className="flex items-center gap-2">
-                        <button 
+                        <button
                             onClick={onRefresh}
-                            className="p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
+                            className="p-2 rounded-lg hover:bg-white/5 text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
                             title="Refresh"
                         >
                             <RefreshCw size={18} />
                         </button>
-                        <Link 
+                        <Link
                             href="/dashboard/send"
-                            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-5 py-2.5 rounded-lg text-base font-semibold shadow-lg shadow-blue-500/30 transition-all duration-200 flex items-center gap-2"
+                            className="btn-primary text-sm px-4 py-2 h-auto flex items-center gap-2"
                         >
-                            <Send size={18} />
+                            <Send size={16} />
                             Compose
                         </Link>
                     </div>
                 </div>
-                
+
                 {/* Filters */}
                 <div className="flex items-center gap-3">
-                    <select 
-                        value={selectedAlias} 
+                    <select
+                        value={selectedAlias}
                         onChange={(e) => setSelectedAlias(e.target.value)}
-                        className="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                        className="flex-1 input-field h-10 text-sm cursor-pointer"
                     >
                         <option value="">All Aliases</option>
                         {aliases.map((alias) => (
                             <option key={alias._id} value={alias.aliasEmail}>{alias.aliasEmail}</option>
                         ))}
                     </select>
-                    
-                    <label className="flex items-center gap-2 cursor-pointer px-3 py-2 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
-                        <input 
-                            type="checkbox" 
-                            checked={unreadOnly} 
+
+                    <label className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                        <input
+                            type="checkbox"
+                            checked={unreadOnly}
                             onChange={(e) => setUnreadOnly(e.target.checked)}
-                            className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                            className="w-4 h-4 rounded accent-primary cursor-pointer"
                         />
-                        <span className="text-sm font-medium text-slate-700">Unread only</span>
+                        <span className="text-sm font-medium text-[hsl(var(--muted-foreground))]">Unread</span>
                     </label>
+                    </div>
                 </div>
-                <div className="mt-3">
-  <AssistantChatPhase2 />
-</div>
             </header>
 
             {/* Email List */}
             {loading ? (
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent mx-auto mb-3"></div>
-                        <p className="text-slate-600">Loading emails...</p>
+                        <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-3" />
+                        <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading emails...</p>
                     </div>
                 </div>
             ) : emails.length > 0 ? (
@@ -463,11 +423,13 @@ function EnhancedEmailList({ emails, loading, selectedEmailId, onSelectEmail, ma
                     ))}
                 </div>
             ) : (
-                <div className="flex-1 flex items-center justify-center">
-                    <div className="text-center">
-                        <Mail className="mx-auto mb-3 text-slate-300" size={48} />
-                        <p className="text-slate-500 font-medium">No emails here</p>
-                        <p className="text-sm text-slate-400 mt-1">Your inbox is empty</p>
+                <div className="flex-1 flex items-center justify-center p-6">
+                    <div className="text-center surface-card border border-white/5 rounded-2xl p-10 max-w-sm w-full">
+                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <Mail className="text-primary" size={32} />
+                        </div>
+                        <p className="text-white font-semibold text-base mb-1">No emails here</p>
+                        <p className="text-sm text-[hsl(var(--muted-foreground))]">Your inbox is empty</p>
                     </div>
                 </div>
             )}
@@ -475,7 +437,7 @@ function EnhancedEmailList({ emails, loading, selectedEmailId, onSelectEmail, ma
     );
 }
 
-// Main Inbox Component with real API integration
+// ─── MAIN INBOX COMPONENT ───
 function InboxMainComponent() {
     const [emails, setEmails] = useState([]);
     const [user, setUser] = useState(null);
@@ -487,7 +449,7 @@ function InboxMainComponent() {
     const [selectedAlias, setSelectedAlias] = useState('');
     const [unreadOnly, setUnreadOnly] = useState(false);
     const [isExpanded, setIsExpanded] = useState(true);
-    
+
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -503,11 +465,11 @@ function InboxMainComponent() {
         try {
             const userResPromise = fetch('/api/user');
             const aliasesResPromise = fetch('/api/aliases');
-            
+
             const params = new URLSearchParams({ type: mailType, limit: '100' });
             if (selectedAlias) params.append('alias', selectedAlias);
             if (unreadOnly) params.append('unread', 'true');
-            
+
             const emailsRes = await fetch(`/api/inbox?${params}`);
             if (!emailsRes.ok) throw new Error('Failed to fetch emails');
             const emailData = await emailsRes.json();
@@ -515,21 +477,18 @@ function InboxMainComponent() {
             setCounts(emailData.counts || {});
 
             const userRes = await userResPromise;
-            if(userRes.ok) setUser(await userRes.json());
+            if (userRes.ok) setUser(await userRes.json());
 
             const aliasesRes = await aliasesResPromise;
-            if(aliasesRes.ok) setAliases(await aliasesRes.json() || []);
-
+            if (aliasesRes.ok) setAliases(await aliasesRes.json() || []);
         } catch (error) {
             console.error('Error fetching inbox list:', error);
         } finally {
             setLoadingList(false);
         }
     }, [mailType, selectedAlias, unreadOnly]);
-    
-    useEffect(() => {
-        fetchListData();
-    }, [fetchListData]);
+
+    useEffect(() => { fetchListData(); }, [fetchListData]);
 
     const handleSelectEmail = (emailId) => {
         router.push(`/dashboard/inbox?type=${mailType}&id=${emailId}`, { scroll: false });
@@ -550,8 +509,12 @@ function InboxMainComponent() {
     };
 
     return (
-        <div className="flex h-screen bg-white overflow-hidden">
-            <EnhancedSidebar
+        <div className="flex h-screen bg-background text-white overflow-hidden relative">
+            {/* Ambient Gradients */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+            <InboxSidebar
                 user={user}
                 counts={counts}
                 mailType={mailType}
@@ -560,28 +523,22 @@ function InboxMainComponent() {
                 isExpanded={isExpanded}
                 setIsExpanded={setIsExpanded}
             />
-            
+
             <div className="flex-1 flex overflow-hidden">
                 {selectedEmailId ? (
                     <>
-                        <div className="w-96 flex-shrink-0">
-                            <EnhancedEmailList
-                                emails={emails}
-                                loading={loadingList}
-                                selectedEmailId={selectedEmailId}
-                                onSelectEmail={handleSelectEmail}
-                                mailType={mailType}
-                                aliases={aliases}
-                                selectedAlias={selectedAlias}
-                                setSelectedAlias={setSelectedAlias}
-                                unreadOnly={unreadOnly}
-                                setUnreadOnly={setUnreadOnly}
-                                onRefresh={fetchListData}
-                                formatDate={formatDate}
+                        <div className="w-96 flex-shrink-0 hidden md:block">
+                            <EmailListPane
+                                emails={emails} loading={loadingList}
+                                selectedEmailId={selectedEmailId} onSelectEmail={handleSelectEmail}
+                                mailType={mailType} aliases={aliases}
+                                selectedAlias={selectedAlias} setSelectedAlias={setSelectedAlias}
+                                unreadOnly={unreadOnly} setUnreadOnly={setUnreadOnly}
+                                onRefresh={fetchListData} formatDate={formatDate}
                             />
                         </div>
                         <div className="flex-1">
-                            <EnhancedEmailDetail
+                            <EmailDetailView
                                 key={selectedEmailId}
                                 emailId={selectedEmailId}
                                 user={user}
@@ -593,32 +550,28 @@ function InboxMainComponent() {
                         </div>
                     </>
                 ) : (
-                    <EnhancedEmailList
-                        emails={emails}
-                        loading={loadingList}
-                        selectedEmailId={selectedEmailId}
-                        onSelectEmail={handleSelectEmail}
-                        mailType={mailType}
-                        aliases={aliases}
-                        selectedAlias={selectedAlias}
-                        setSelectedAlias={setSelectedAlias}
-                        unreadOnly={unreadOnly}
-                        setUnreadOnly={setUnreadOnly}
-                        onRefresh={fetchListData}
-                        formatDate={formatDate}
+                    <EmailListPane
+                        emails={emails} loading={loadingList}
+                        selectedEmailId={selectedEmailId} onSelectEmail={handleSelectEmail}
+                        mailType={mailType} aliases={aliases}
+                        selectedAlias={selectedAlias} setSelectedAlias={setSelectedAlias}
+                        unreadOnly={unreadOnly} setUnreadOnly={setUnreadOnly}
+                        onRefresh={fetchListData} formatDate={formatDate}
                     />
                 )}
             </div>
+
+            <AssistantChat />
         </div>
     );
 }
 
-// Page Wrapper with Suspense - This is the default export
+// Page Wrapper
 export default function UnifiedInboxPage() {
     return (
         <Suspense fallback={
-            <div className="h-screen w-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="h-screen w-screen bg-background flex items-center justify-center">
+                <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
             </div>
         }>
             <InboxMainComponent />

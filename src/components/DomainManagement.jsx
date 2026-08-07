@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import {
-  FiPlus,
-  FiCheck,
-  FiX,
-  FiAlertTriangle,
-  FiClock,
-  FiRefreshCw,
-  FiTrash2,
-  FiCopy,
-  FiInfo
-} from 'react-icons/fi';
+  Plus,
+  Check,
+  X,
+  AlertTriangle,
+  Clock,
+  RefreshCw,
+  Trash2,
+  Copy,
+  Info
+} from 'lucide-react';
 
 export default function DomainManagement({ user, onDomainsUpdate }) {
   const [domains, setDomains] = useState([]);
@@ -151,13 +151,13 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   const getStatusIcon = (domain) => {
     if (domain.isVerified && domain.mailgunStatus === 'active') {
-      return <FiCheck className="w-5 h-5 text-green-600" />;
+      return <Check className="w-5 h-5 text-green-400" />;
     } else if (domain.isVerified && domain.mailgunStatus === 'added') {
-      return <FiClock className="w-5 h-5 text-yellow-600" />;
+      return <Clock className="w-5 h-5 text-yellow-400" />;
     } else if (domain.isVerified) {
-      return <FiAlertTriangle className="w-5 h-5 text-orange-600" />;
+      return <AlertTriangle className="w-5 h-5 text-orange-400" />;
     } else {
-      return <FiX className="w-5 h-5 text-red-600" />;
+      return <X className="w-5 h-5 text-red-400" />;
     }
   };
 
@@ -175,13 +175,13 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   const getStatusColor = (domain) => {
     if (domain.isVerified && domain.mailgunStatus === 'active') {
-      return 'bg-green-100 text-green-800';
+      return 'bg-green-500/20 text-green-400';
     } else if (domain.isVerified && domain.mailgunStatus === 'added') {
-      return 'bg-yellow-100 text-yellow-800';
+      return 'bg-yellow-500/20 text-yellow-400';
     } else if (domain.isVerified) {
-      return 'bg-orange-100 text-orange-800';
+      return 'bg-orange-500/20 text-orange-400';
     } else {
-      return 'bg-red-100 text-red-800';
+      return 'bg-red-500/20 text-red-400';
     }
   };
 
@@ -195,58 +195,58 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
     return (
       <div className="mt-4 space-y-3">
-        <h5 className="text-sm font-medium text-blue-800">Required DNS Records:</h5>
+        <h5 className="text-sm font-semibold text-white">Required DNS Records:</h5>
         {allRecords.map((record, index) => (
-          <div key={index} className="bg-white border border-blue-200 rounded-lg p-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-blue-700 uppercase">{record.record_type}</span>
+          <div key={index} className="surface-interactive border border-white/10 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold text-white uppercase">{record.record_type}</span>
               <button
                 onClick={() => copyToClipboard(record.value, `${domain._id}_dns_${index}`)}
-                className="text-blue-600 hover:text-blue-800 transition-colors"
+                className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
               >
                 {copiedRecord === `${domain._id}_dns_${index}` ?
-                  <FiCheck className="w-4 h-4" /> :
-                  <FiCopy className="w-4 h-4" />
+                  <Check className="w-4 h-4" /> :
+                  <Copy className="w-4 h-4" />
                 }
               </button>
             </div>
-            <div className="space-y-1 text-xs">
-              <div className="flex">
-                <span className="font-medium text-gray-600 w-20">Name:</span>
-                <span className="text-gray-900 break-all font-mono">{record.name || '@'}</span>
+            <div className="space-y-2 text-sm text-[hsl(var(--muted-foreground))]">
+              <div className="flex items-start">
+                <span className="font-semibold text-white w-20 flex-shrink-0">Name:</span>
+                <span className="break-all font-mono text-white/90">{record.name || '@'}</span>
               </div>
-              <div className="flex">
-                <span className="font-medium text-gray-600 w-20">Value:</span>
-                <span className="text-gray-900 break-all font-mono">{record.value}</span>
+              <div className="flex items-start">
+                <span className="font-semibold text-white w-20 flex-shrink-0">Value:</span>
+                <span className="break-all font-mono text-white/90">{record.value}</span>
               </div>
               {record.priority && (
-                <div className="flex">
-                  <span className="font-medium text-gray-600 w-20">Priority:</span>
-                  <span className="text-gray-900 font-mono">{record.priority}</span>
+                <div className="flex items-center">
+                  <span className="font-semibold text-white w-20 flex-shrink-0">Priority:</span>
+                  <span className="font-mono text-white/90">{record.priority}</span>
                 </div>
               )}
-              <div className="flex items-center gap-2 mt-2">
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/10">
                 {record.valid === 'valid' || record.valid === true ? (
                   <>
-                    <FiCheck className="w-4 h-4 text-green-600" />
-                    <span className="text-green-600 font-medium">Configured</span>
+                    <Check className="w-4 h-4 text-green-400" />
+                    <span className="text-green-400 font-medium">Configured</span>
                   </>
                 ) : record.valid === 'unknown' ? (
                   <>
-                    <FiClock className="w-4 h-4 text-yellow-600" />
-                    <span className="text-yellow-600 font-medium">Pending Verification</span>
+                    <Clock className="w-4 h-4 text-yellow-400" />
+                    <span className="text-yellow-400 font-medium">Pending Verification</span>
                   </>
                 ) : (
                   <>
-                    <FiX className="w-4 h-4 text-red-600" />
-                    <span className="text-red-600 font-medium">Not Configured</span>
+                    <X className="w-4 h-4 text-red-400" />
+                    <span className="text-red-400 font-medium">Not Configured</span>
                   </>
                 )}
               </div>
             </div>
           </div>
         ))}
-        <p className="text-xs text-blue-600 mt-3">
+        <p className="text-xs text-[hsl(var(--muted-foreground))] mt-4">
           Add these DNS records in your domain provider's dashboard. DNS changes may take 5-60 minutes to propagate.
         </p>
       </div>
@@ -255,12 +255,12 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+      <div className="surface-card rounded-xl shadow-xl border border-white/5 p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="h-6 bg-white/10 rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-4 bg-gray-200 rounded"></div>
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-4 bg-white/10 rounded w-full"></div>
+            <div className="h-4 bg-white/10 rounded w-3/4"></div>
           </div>
         </div>
       </div>
@@ -269,21 +269,21 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   if (user?.plan !== 'pro') {
     return (
-      <div className="bg-white rounded-xl shadow-md border border-gray-200">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Custom Domains</h3>
-          <p className="mt-1 text-sm text-gray-600">
+      <div className="surface-card rounded-xl shadow-xl border border-white/5">
+        <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
+          <h3 className="text-lg font-bold text-white">Custom Domains</h3>
+          <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">
             Use your own domain for email aliases
           </p>
         </div>
         <div className="p-6">
-          <div className="text-center py-8">
-            <FiInfo className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-            <h4 className="text-lg font-medium text-gray-900 mb-2">Pro Feature</h4>
-            <p className="text-gray-600 mb-4">
-              Custom domains are available for Pro users. Upgrade to use your own domain for email aliases.
+          <div className="text-center py-12">
+            <Info className="w-16 h-16 text-white mx-auto mb-6" />
+            <h4 className="text-xl font-bold text-white mb-2">Pro Feature</h4>
+            <p className="text-[hsl(var(--muted-foreground))] mb-8 max-w-md mx-auto">
+              Custom domains are available for Pro users. Upgrade to use your own domain for email aliases and build a more professional presence.
             </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-bold transition-all cursor-pointer">
               Upgrade to Pro
             </button>
           </div>
@@ -293,21 +293,21 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-md border border-gray-200">
-      <div className="px-6 py-4 border-b border-gray-200">
-        <div className="flex items-center justify-between">
+    <div className="surface-card rounded-xl shadow-xl border border-white/5">
+      <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-lg font-medium text-gray-900">Custom Domains</h3>
-            <p className="mt-1 text-sm text-gray-600">
+            <h3 className="text-lg font-bold text-white">Custom Domains</h3>
+            <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">
               Manage your custom domains for creating email aliases
             </p>
           </div>
           {!showAddForm && (
             <button
               onClick={() => setShowAddForm(true)}
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+              className="inline-flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 rounded-lg hover:bg-white/90 transition-all font-bold cursor-pointer"
             >
-              <FiPlus className="w-4 h-4" />
+              <Plus className="w-4 h-4" />
               Add Domain
             </button>
           )}
@@ -315,85 +315,79 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
       </div>
 
       <div className="p-6">
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-start gap-2">
-            <FiAlertTriangle className="w-5 h-5 mt-0.5 flex-shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
-
-        {success && (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 flex items-start gap-2">
-            <FiCheck className="w-5 h-5 mt-0.5 flex-shrink-0" />
-            <span>{success}</span>
-          </div>
-        )}
-
         {showAddForm && (
-          <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-            <h4 className="text-md font-medium text-gray-900 mb-3">Add New Domain</h4>
-            <form onSubmit={handleAddDomain} className="flex gap-3">
+          <div className="mb-8 p-5 border border-white/10 rounded-xl surface-elevated">
+            <h4 className="text-md font-bold text-white mb-4">Add New Domain</h4>
+            <form onSubmit={handleAddDomain} className="flex flex-col sm:flex-row gap-3">
               <input
                 type="text"
                 value={newDomain}
                 onChange={(e) => setNewDomain(e.target.value)}
                 placeholder="example.com"
-                className="flex-1 px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 placeholder:text-gray-400 transition-colors"
+                className="flex-1 input-field"
                 required
                 disabled={submitting}
               />
-              <button
-                type="submit"
-                disabled={submitting || !newDomain.trim()}
-                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium text-sm shadow-sm"
-              >
-                {submitting ? 'Adding...' : 'Add'}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowAddForm(false);
-                  setNewDomain('');
-                }}
-                className="bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm"
-              >
-                Cancel
-              </button>
+              <div className="flex gap-3">
+                <button
+                  type="submit"
+                  disabled={submitting || !newDomain.trim()}
+                  className="flex-1 sm:flex-none bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold cursor-pointer"
+                >
+                  {submitting ? 'Adding...' : 'Add'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAddForm(false);
+                    setNewDomain('');
+                  }}
+                  className="flex-1 sm:flex-none surface-interactive text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors font-semibold border border-white/10 cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         )}
 
         {domains.length === 0 ? (
-          <div className="text-center py-8">
-            <div className="text-4xl mb-4">🌐</div>
-            <p className="text-gray-500">No custom domains added yet</p>
-            <p className="text-sm text-gray-400 mt-1">Add your first domain to start using custom email aliases</p>
+          <div className="flex items-center justify-center py-16">
+            <div className="text-center surface-card border border-white/5 rounded-2xl p-10 max-w-sm w-full">
+              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Plus className="text-white w-8 h-8" />
+              </div>
+              <p className="text-white font-semibold text-base mb-1">No custom domains</p>
+              <p className="text-sm text-[hsl(var(--muted-foreground))]">Add your first domain to start using custom email aliases</p>
+            </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {domains.map((domain) => (
-              <div key={domain._id} className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    {getStatusIcon(domain)}
+              <div key={domain._id} className="border border-white/10 rounded-xl p-5 surface-elevated shadow-lg">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-white/5 rounded-lg border border-white/10">
+                      {getStatusIcon(domain)}
+                    </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">{domain.domain}</h4>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(domain)}`}>
+                      <h4 className="font-bold text-white text-lg">{domain.domain}</h4>
+                      <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold ${getStatusColor(domain)}`}>
                           {getStatusText(domain)}
                         </span>
                         {domain.createdAt && (
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs font-medium text-[hsl(var(--muted-foreground))]">
                             Added {new Date(domain.createdAt).toLocaleDateString()}
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap md:flex-nowrap">
                     {!domain.isVerified && (
-                      <span className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-800 px-3 py-1.5 rounded-lg text-sm">
-                        <FiClock className="w-4 h-4" />
+                      <span className="inline-flex items-center gap-2 bg-yellow-500/20 text-yellow-400 px-3 py-2 rounded-lg text-sm font-semibold">
+                        <Clock className="w-4 h-4" />
                         Verifying...
                       </span>
                     )}
@@ -401,16 +395,16 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                       <button
                         onClick={() => handleCheckMailgunStatus(domain._id)}
                         disabled={verifying[`${domain._id}_mailgun`]}
-                        className="inline-flex items-center gap-2 bg-orange-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+                        className="inline-flex items-center justify-center gap-2 bg-orange-500/20 text-orange-400 border border-orange-500/30 px-4 py-2 rounded-lg text-sm font-bold hover:bg-orange-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
                       >
                         {verifying[`${domain._id}_mailgun`] ? (
                           <>
-                            <FiRefreshCw className="w-4 h-4 animate-spin" />
+                            <RefreshCw className="w-4 h-4 animate-spin" />
                             Checking...
                           </>
                         ) : (
                           <>
-                            <FiRefreshCw className="w-4 h-4" />
+                            <RefreshCw className="w-4 h-4" />
                             Check Status
                           </>
                         )}
@@ -418,76 +412,72 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                     )}
                     <button
                       onClick={() => handleDeleteDomain(domain._id, domain.domain)}
-                      className="inline-flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-red-700 transition-colors shadow-sm"
+                      className="inline-flex items-center justify-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-500/20 hover:text-red-300 transition-all cursor-pointer"
                     >
-                      <FiTrash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4" />
                       Delete
                     </button>
                   </div>
                 </div>
 
                 {!domain.isVerified && (
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-3">
-                    <h5 className="text-sm font-medium text-yellow-800 mb-2">
+                  <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-5 mb-4">
+                    <h5 className="text-sm font-bold text-yellow-400 mb-2">
                       Domain Verification Required
                     </h5>
-                    <p className="text-sm text-yellow-700 mb-3">
+                    <p className="text-sm text-yellow-400/80 mb-4">
                       Please add the following TXT record to your DNS settings to verify ownership:
                     </p>
-                    <div className="bg-white border border-yellow-300 rounded-lg p-3 font-mono text-sm">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-gray-700">Type:</span>
-                        <span className="text-gray-900">TXT</span>
+                    <div className="bg-background border border-white/5 rounded-lg p-4 font-mono text-sm shadow-inner">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-3 border-b border-white/5">
+                        <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16">Type:</span>
+                        <span className="text-white text-right font-bold">TXT</span>
                       </div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-gray-700">Name:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="break-all text-gray-900">_mailalias-verification.{domain.domain}</span>
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3 pb-3 border-b border-white/5">
+                        <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16 flex-shrink-0 mt-0.5">Name:</span>
+                        <div className="flex items-center gap-3 justify-end w-full">
+                          <span className="break-all text-white/90">_mailalias-verification.{domain.domain}</span>
                           <button
                             onClick={() => copyToClipboard(`_mailalias-verification.${domain.domain}`, `${domain._id}_name`)}
-                            className="text-blue-600 hover:text-blue-800 transition-colors"
+                            className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors flex-shrink-0 cursor-pointer"
                           >
-                            {copiedRecord === `${domain._id}_name` ? <FiCheck className="w-4 h-4" /> : <FiCopy className="w-4 h-4" />}
+                            {copiedRecord === `${domain._id}_name` ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                           </button>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-gray-700">Value:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="break-all text-gray-900">{domain.verificationToken}</span>
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                        <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16 flex-shrink-0 mt-0.5">Value:</span>
+                        <div className="flex items-center gap-3 justify-end w-full">
+                          <span className="break-all text-white/90">{domain.verificationToken}</span>
                           <button
                             onClick={() => copyToClipboard(domain.verificationToken, `${domain._id}_value`)}
-                            className="text-blue-600 hover:text-blue-800 transition-colors"
+                            className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors flex-shrink-0 cursor-pointer"
                           >
-                            {copiedRecord === `${domain._id}_value` ? <FiCheck className="w-4 h-4" /> : <FiCopy className="w-4 h-4" />}
+                            {copiedRecord === `${domain._id}_value` ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                           </button>
                         </div>
                       </div>
                     </div>
-                    <p className="text-xs text-yellow-600 mt-2">
-                      DNS changes may take 5-60 minutes to propagate. We're checking automatically every 30 seconds.
-                    </p>
-                    {domain.lastVerificationAttempt && (
-                      <p className="text-xs text-yellow-600 mt-1">
-                        Last checked: {new Date(domain.lastVerificationAttempt).toLocaleTimeString()}
-                      </p>
-                    )}
+                    <div className="mt-4 flex items-center justify-between text-xs font-medium text-yellow-500/70">
+                      <p>DNS changes may take 5-60 minutes to propagate.</p>
+                      {domain.lastVerificationAttempt && (
+                        <p>Last checked: {new Date(domain.lastVerificationAttempt).toLocaleTimeString()}</p>
+                      )}
+                    </div>
                   </div>
                 )}
 
                 {domain.isVerified && domain.mailgunStatus !== 'active' && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h5 className="text-sm font-medium text-blue-800">
-                        Complete DNS Setup for Email Delivery
-                      </h5>
-                    </div>
-                    <p className="text-sm text-blue-700 mb-3">
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-5 mt-4">
+                    <h5 className="text-sm font-bold text-white mb-2">
+                      Complete DNS Setup for Email Delivery
+                    </h5>
+                    <p className="text-sm text-white/80 mb-4 font-medium">
                       Your domain is verified! Now add these DNS records to enable email sending and receiving:
                     </p>
                     {renderDnsRecords(domain)}
-                    <div className="mt-4 pt-3 border-t border-blue-200">
-                      <p className="text-xs text-blue-600">
+                    <div className="mt-5 pt-4 border-t border-white/10">
+                      <p className="text-xs font-medium text-[hsl(var(--muted-foreground))]">
                         After adding these records, click "Check Status" button above to verify the configuration.
                       </p>
                     </div>
@@ -495,14 +485,14 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                 )}
 
                 {domain.isVerified && domain.mailgunStatus === 'active' && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FiCheck className="w-5 h-5 text-green-600" />
-                      <h5 className="text-sm font-medium text-green-800">
+                  <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-5 mt-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Check className="w-5 h-5 text-green-400" />
+                      <h5 className="text-sm font-bold text-green-400">
                         Domain Active and Ready
                       </h5>
                     </div>
-                    <p className="text-sm text-green-700 mb-3">
+                    <p className="text-sm font-medium text-green-400/80 mb-4">
                       Your domain is fully configured and ready for creating email aliases.
                     </p>
                     {renderDnsRecords(domain)}
@@ -515,4 +505,4 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
       </div>
     </div>
   );
-}   
+}

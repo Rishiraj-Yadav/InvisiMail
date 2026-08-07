@@ -2,8 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
-import Header from '@/components/Header';
-import { FiSend, FiMail, FiZap, FiRefreshCw, FiX } from 'react-icons/fi';
+import { Send, Mail, Zap, RefreshCw, X, Menu } from 'lucide-react';
 import AssistantChatPhase2 from '@/components/AssistantChatPhase2';
 
 export default function SendEmail() {
@@ -22,6 +21,7 @@ export default function SendEmail() {
   const [success, setSuccess] = useState('');
   const [prompt, setPrompt] = useState('');
   const [replyId, setReplyId] = useState(null);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -259,68 +259,62 @@ export default function SendEmail() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+          <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
-      <Sidebar user={user} onUpgrade={handleUpgrade} />
+    <div className="flex h-screen bg-background overflow-hidden relative">
+      {/* Ambient Gradients Removed for Premium Look */}
+
+      <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
       
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header user={user} title="Compose" />
-
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
-          <div className="max-w-4xl mx-auto space-y-6">
-            
-            {/* Page Title Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border dark:border-gray-700 p-6">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                  <FiSend className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Compose Email</h1>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    Send professional emails from your aliases with AI assistance
-                  </p>
-                </div>
-              </div>
+      <div className="flex-1 flex flex-col overflow-hidden min-h-0 relative z-10">
+        <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+          <div className="absolute inset-0 bg-white/5 opacity-30 pointer-events-none" />
+          <div className="relative z-10 flex items-center gap-4">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+              <Menu className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-white">Compose Email</h1>
+              <p className="text-sm text-[hsl(var(--muted-foreground))] mt-0.5">
+                Send professional emails from your aliases with AI assistance
+              </p>
             </div>
+          </div>
+        </header>
 
+        <main className="flex-1 overflow-y-auto min-h-0 p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+          <div className="max-w-4xl mx-auto space-y-6 pb-20">
             {/* Notifications */}
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/30 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg flex justify-between items-center shadow-sm">
+              <div className="alert-error p-3 rounded-xl flex justify-between items-center text-sm">
                 <span>{error}</span>
-                <button onClick={() => setError('')} className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-full transition-colors">
-                  <FiX className="w-5 h-5" />
+                <button onClick={() => setError('')} className="p-1 hover:bg-red-500/20 rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             )}
             
             {success && (
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/30 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg flex justify-between items-center shadow-sm">
+              <div className="alert-success p-3 rounded-xl flex justify-between items-center text-sm">
                 <span>{success}</span>
-                <button onClick={() => setSuccess('')} className="p-1 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-full transition-colors">
-                  <FiX className="w-5 h-5" />
+                <button onClick={() => setSuccess('')} className="p-1 hover:bg-green-500/20 rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             )}
 
-            {/* Assistant Chat Component */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border dark:border-gray-700 overflow-hidden">
-               <AssistantChatPhase2 />
-            </div>
-
             {/* Email Form */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border dark:border-gray-700">
-              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Email Details</h3>
+            <div className="surface-card rounded-xl shadow-xl border border-white/5">
+              <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
+                <h3 className="text-lg font-bold text-white">Email Details</h3>
               </div>
               
               <form onSubmit={handleSubmit} className="p-6 space-y-6">
@@ -328,26 +322,26 @@ export default function SendEmail() {
                 {/* From Alias Selection */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      <FiMail className="inline w-4 h-4 mr-2" />
+                    <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-white" />
                       Send From Alias
                     </label>
                     <div className="relative">
                       <select
-                        className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 appearance-none"
+                        className="block w-full input-field appearance-none cursor-pointer text-sm font-medium"
                         value={selectedAlias}
                         onChange={(e) => setSelectedAlias(e.target.value)}
                         disabled={loading || sendableAliases.length === 0}
                         required
                       >
-                        <option value="">Select an alias...</option>
+                        <option value="" className="bg-[#111113] text-[#FAFAFA]">Select an alias...</option>
                         {sendableAliases.map((alias) => (
-                          <option key={alias._id.toString()} value={alias.aliasEmail}>
+                          <option key={alias._id.toString()} value={alias.aliasEmail} className="bg-[#111113] text-[#FAFAFA]">
                             {alias.aliasEmail} {alias.isCollaborative && '(Collaborative)'}
                           </option>
                         ))}
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[hsl(var(--muted-foreground))]">
                         <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"></path></svg>
                       </div>
                     </div>
@@ -355,12 +349,12 @@ export default function SendEmail() {
 
                   {/* Recipient */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-white mb-2">
                       To
                     </label>
                     <input
                       type="email"
-                      className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:placeholder-gray-400"
+                      className="block w-full input-field text-sm font-medium"
                       value={formData.to}
                       onChange={(e) => setFormData({...formData, to: e.target.value})}
                       placeholder="recipient@example.com"
@@ -371,12 +365,12 @@ export default function SendEmail() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-white mb-2">
                     Subject
                   </label>
                   <input
                     type="text"
-                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:placeholder-gray-400"
+                    className="block w-full input-field text-sm font-medium"
                     value={formData.subject}
                     onChange={(e) => setFormData({...formData, subject: e.target.value})}
                     placeholder="Email subject"
@@ -386,94 +380,99 @@ export default function SendEmail() {
 
                 {/* Message Body */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-white mb-2">
                     Message
                   </label>
                   <textarea
                     rows={12}
-                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y transition-colors text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:placeholder-gray-400 font-sans"
+                    className="block w-full input-field resize-y text-sm leading-relaxed"
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     placeholder="Type your message here..."
                     required
                   />
                   <div className="flex items-center justify-end mt-2">
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-[hsl(var(--muted-foreground))]">
                       {formData.message.length} characters
                     </p>
                   </div>
                 </div>
 
                 {/* AI Assistant Section */}
-                <div className="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800 rounded-xl p-5">
-                  <label className="block text-sm font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center">
-                    <FiZap className="w-4 h-4 mr-2 text-yellow-500" />
-                    AI Assistant
-                  </label>
-                  
-                  <div className="flex gap-2 mb-3">
-                    <input
-                      type="text"
-                      className="flex-1 px-4 py-3 border border-blue-200 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400"
-                      value={prompt}
-                      onChange={(e) => setPrompt(e.target.value)}
-                      placeholder="e.g., &apos;Write a polite follow-up for the invoice...&apos;"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault();
-                          handleAIAssist('write');
-                        }
-                      }}
-                    />
+                <div className="surface-interactive border border-white/10 rounded-xl p-5 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <Zap className="w-24 h-24 text-white" />
                   </div>
-
-                  <div className="flex flex-wrap items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => handleAIAssist('write')}
-                      disabled={aiLoading || loading || !prompt.trim()}
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 px-4 rounded-lg transition-colors shadow-sm"
-                    >
-                      {aiLoading ? <FiRefreshCw className="w-3.5 h-3.5 animate-spin" /> : <FiZap className="w-3.5 h-3.5" />}
-                      Generate
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => handleAIAssist('enhance')}
-                      disabled={aiLoading || loading || (!formData.subject.trim() && !formData.message.trim())}
-                      className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 px-4 rounded-lg transition-colors shadow-sm"
-                    >
-                      {aiLoading ? <FiRefreshCw className="w-3.5 h-3.5 animate-spin" /> : <FiZap className="w-3.5 h-3.5" />}
-                      Improve Existing
-                    </button>
+                  <div className="relative z-10">
+                    <label className="block text-sm font-bold text-white mb-3 flex items-center">
+                      <Zap className="w-4 h-4 mr-2 text-white" />
+                      AI Assistant
+                    </label>
                     
-                    <button
-                      type="button"
-                      onClick={handleClearAll}
-                      disabled={aiLoading || loading}
-                      className="ml-auto text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 underline decoration-dotted underline-offset-2"
-                    >
-                      Clear All
-                    </button>
+                    <div className="flex gap-2 mb-3">
+                      <input
+                        type="text"
+                        className="flex-1 input-field text-sm bg-background border-white/10"
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        placeholder="e.g., 'Write a polite follow-up for the invoice...'"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAIAssist('write');
+                          }
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => handleAIAssist('write')}
+                        disabled={aiLoading || loading || !prompt.trim()}
+                        className="inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
+                      >
+                        {aiLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
+                        Generate
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleAIAssist('enhance')}
+                        disabled={aiLoading || loading || (!formData.subject.trim() && !formData.message.trim())}
+                        className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
+                      >
+                        {aiLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
+                        Improve Existing
+                      </button>
+                      
+                      <button
+                        type="button"
+                        onClick={handleClearAll}
+                        disabled={aiLoading || loading}
+                        className="ml-auto text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
+                      >
+                        Clear All
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 {/* Submit Section */}
-                <div className="flex items-center justify-end pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-end pt-6 border-t border-white/5">
                   <button
                     type="submit"
                     disabled={loading || !selectedAlias || aiLoading}
-                    className="inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900 disabled:opacity-50 text-white font-medium py-3 px-8 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 shadow-lg hover:shadow-xl transform active:scale-95"
+                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold py-3 px-8 rounded-xl transition-all cursor-pointer"
                   >
                     {loading ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-black/20 border-t-black"></div>
                         Sending...
                       </>
                     ) : (
                       <>
-                        <FiSend className="w-4 h-4" />
+                        <Send className="w-4 h-4" />
                         Send Email
                       </>
                     )}
@@ -484,6 +483,7 @@ export default function SendEmail() {
           </div>
         </main>
       </div>
+      <AssistantChatPhase2 />
     </div>
   );
 }

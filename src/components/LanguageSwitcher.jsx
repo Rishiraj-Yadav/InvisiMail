@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { FiGlobe, FiCheck } from 'react-icons/fi';
+import { Globe, Check } from 'lucide-react';
 
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -63,7 +63,7 @@ export default function LanguageSwitcher() {
         aria-label="Select Language"
         aria-expanded={isOpen}
       >
-        <FiGlobe className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <Globe className="w-4 h-4 text-gray-600 dark:text-gray-400" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:inline">
           {currentLang.flag}
         </span>
@@ -100,7 +100,7 @@ export default function LanguageSwitcher() {
               </span>
             </div>
             {isSelected && (
-              <FiCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             )}
           </button>
         );

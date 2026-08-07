@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Mail, Send, Trash2, UserPlus, Users, Activity, Inbox } from 'lucide-react';
 
 export default function AliasesOverview({
   user,
@@ -11,7 +12,6 @@ export default function AliasesOverview({
   managingAliasId,
   addEmail,
   addRole,
-  // Functions passed from the parent
   onToggleStatus,
   onDelete,
   onAddCollaborator,
@@ -25,7 +25,6 @@ export default function AliasesOverview({
   const collaborativeAliases = aliases.filter(a => a.isCollaborative);
 
   const getActivityText = (act) => {
-    // This helper is specific to this component's needs
     switch (act.type) {
         case 'sent': return `Email sent to ${act.data.to}: ${act.data.subject}`;
         case 'added_collaborator': return `Added ${act.data.addedUserEmail} as ${act.data.role}`;
@@ -35,22 +34,23 @@ export default function AliasesOverview({
   };
 
   return (
-    <div id="aliases-overview" className="bg-white rounded-xl shadow-md border">
-      <div className="px-6 py-4 border-b border-gray-200">
+    <div id="aliases-overview" className="surface-card rounded-xl border border-white/5 shadow-xl">
+      <div className="px-6 py-5 border-b border-white/5">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium text-gray-900">Your Email Aliases</h3>
-          <span className="text-sm text-gray-500">
+          <h3 className="text-lg font-bold text-white">Your Email Aliases</h3>
+          <span className="text-sm text-[hsl(var(--muted-foreground))]">
             {aliases.length} alias{aliases.length !== 1 ? 'es' : ''}
-            {!isPro && <span className="text-amber-600 font-medium ml-2">({personalAliases.length}/5 personal)</span>}
+            {!isPro && <span className="text-amber-400 font-medium ml-2">({personalAliases.length}/5 personal)</span>}
           </span>
         </div>
       </div>
-      <div className="divide-y divide-gray-200">
+      
+      <div className="divide-y divide-white/5">
         {aliases.length === 0 ? (
-          <div className="px-6 py-12 text-center">
-            <span className="text-4xl mb-4 block">📭</span>
-            <p className="text-gray-500 mb-4">No aliases created yet.</p>
-            <p className="text-sm text-gray-400">
+          <div className="px-6 py-16 text-center">
+            <Mail className="w-16 h-16 mx-auto mb-4 text-[hsl(var(--muted-foreground))]" />
+            <p className="text-white font-medium mb-2">No aliases created yet.</p>
+            <p className="text-sm text-[hsl(var(--muted-foreground))]">
               Create your first alias to start receiving emails at custom addresses.
             </p>
           </div>
@@ -58,66 +58,72 @@ export default function AliasesOverview({
           <>
             {/* Personal Aliases */}
             {personalAliases.length > 0 && (
-              <div className="p-4">
-                <h4 className="text-md font-medium text-gray-900 mb-2 px-2">Personal Aliases</h4>
+              <div className="p-4 md:p-6 space-y-4">
+                <h4 className="text-sm font-semibold text-white px-2 flex items-center gap-2">
+                  <UserPlus className="w-4 h-4 text-white" /> Personal Aliases
+                </h4>
                 {personalAliases.map((alias) => (
-                  <div key={alias._id} className="p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div key={alias._id} className="surface-interactive p-4 md:p-5 rounded-xl border border-white/5">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                         {/* Alias Info */}
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-1 min-w-0 w-full">
                             <div className="flex items-center space-x-4">
                                 <div className="flex-shrink-0">
-                                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-blue-600 font-medium text-lg">
+                                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10">
+                                        <span className="text-white font-semibold text-xl">
                                             {alias.aliasEmail.charAt(0).toUpperCase()}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold text-gray-900 truncate">
+                                    <p className="text-base font-bold text-white truncate">
                                         {alias.aliasEmail}
                                     </p>
-                                    <p className="text-sm text-gray-500 truncate">
-                                        Forwards to: {alias.realEmail}
+                                    <p className="text-sm text-[hsl(var(--muted-foreground))] truncate">
+                                        Forwards to: <span className="text-white/70">{alias.realEmail}</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Status & Stats */}
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                            <div className="flex items-center gap-2">
-                                <span className={`inline-block w-2.5 h-2.5 rounded-full ${alias.isActive !== false ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                                <span>{alias.isActive !== false ? 'Active' : 'Inactive'}</span>
+                        <div className="flex items-center gap-5 text-sm">
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="text-xs text-[hsl(var(--muted-foreground))] mb-1">Status</span>
+                                <div className="flex items-center gap-1.5">
+                                    <span className={`inline-block w-2.5 h-2.5 rounded-full ${alias.isActive !== false ? 'bg-green-400' : 'bg-red-400'}`}></span>
+                                    <span className={`font-medium ${alias.isActive !== false ? 'text-green-400' : 'text-red-400'}`}>{alias.isActive !== false ? 'Active' : 'Inactive'}</span>
+                                </div>
+                            </div>
+                            <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
+                            <div className="text-center">
+                                <p className="font-bold text-white">{alias.emailsSent || 0}</p>
+                                <p className="text-xs text-[hsl(var(--muted-foreground))]">Sent</p>
                             </div>
                             <div className="text-center">
-                                <p className="font-medium">{alias.emailsSent || 0}</p>
-                                <p className="text-xs text-gray-400">Sent</p>
-                            </div>
-                            <div className="text-center">
-                                <p className="font-medium">{alias.emailsReceived || 0}</p>
-                                <p className="text-xs text-gray-400">Received</p>
+                                <p className="font-bold text-white">{alias.emailsReceived || 0}</p>
+                                <p className="text-xs text-[hsl(var(--muted-foreground))]">Received</p>
                             </div>
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 pt-2 md:pt-0 w-full md:w-auto justify-end border-t border-white/5 md:border-t-0 mt-4 md:mt-0">
                             <button
                                 onClick={() => onToggleStatus(alias._id, alias.isActive !== false)}
                                 disabled={toggleLoading[alias._id]}
-                                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${alias.isActive !== false ? 'bg-blue-600' : 'bg-gray-200'} ${toggleLoading[alias._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-background ${alias.isActive !== false ? 'bg-white' : 'bg-white/20'} ${toggleLoading[alias._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 title={`Click to ${alias.isActive !== false ? 'deactivate' : 'activate'}`}
                             >
-                                <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${alias.isActive !== false ? 'translate-x-5' : 'translate-x-0'}`} />
+                                <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out ${alias.isActive !== false ? 'translate-x-5 bg-black' : 'translate-x-0 bg-white'}`} />
                             </button>
-                            <Link href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-gray-500 hover:bg-gray-200 rounded-md" title="View Inbox">
-                                📬
+                            <Link href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="View Inbox">
+                                <Inbox className="w-5 h-5" />
                             </Link>
-                            <Link href={`/dashboard/send?alias=${alias.aliasEmail}`} className="p-2 text-gray-500 hover:bg-gray-200 rounded-md" title="Send Email">
-                                ✉️
+                            <Link href={`/dashboard/send?alias=${alias.aliasEmail}`} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Send Email">
+                                <Send className="w-5 h-5" />
                             </Link>
-                            <button onClick={() => onDelete(alias._id)} className="p-2 text-gray-500 hover:bg-red-100 hover:text-red-600 rounded-md" title="Delete Alias">
-                                🗑️
+                            <button onClick={() => onDelete(alias._id)} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors" title="Delete Alias">
+                                <Trash2 className="w-5 h-5" />
                             </button>
                         </div>
                     </div>
@@ -128,113 +134,121 @@ export default function AliasesOverview({
 
             {/* Collaborative Aliases */}
             {collaborativeAliases.length > 0 && (
-              <div className="p-4">
-                <h4 className="text-md font-medium text-gray-900 mb-2 px-2">Collaborative Aliases</h4>
+              <div className="p-4 md:p-6 space-y-4">
+                <h4 className="text-sm font-semibold text-white px-2 flex items-center gap-2">
+                  <Users className="w-4 h-4 text-white" /> Collaborative Aliases
+                </h4>
                 {collaborativeAliases.map((alias) => {
                   const isOwner = alias.ownerId?.toString() === user?._id?.toString();
                   return (
-                    <div key={alias._id} className="p-4 rounded-lg hover:bg-gray-50">
-                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div key={alias._id} className="surface-interactive p-4 md:p-5 rounded-xl border border-white/5">
+                       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                             {/* Alias Info */}
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 w-full">
                                 <div className="flex items-center space-x-4">
                                     <div className="flex-shrink-0">
-                                        <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                            <span className="text-indigo-600 font-medium text-lg">
+                                        <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10">
+                                            <span className="text-white font-semibold text-xl">
                                                 {alias.aliasEmail.charAt(0).toUpperCase()}
                                             </span>
                                         </div>
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <p className="text-sm font-semibold text-gray-900 truncate">
+                                        <p className="text-base font-bold text-white truncate">
                                             {alias.aliasEmail}
                                         </p>
-                                        <p className="text-sm text-gray-500 truncate">
-                                            Owner: {alias.owner?.[0]?.name || alias.owner?.[0]?.email || 'Unknown'}
+                                        <p className="text-sm text-[hsl(var(--muted-foreground))] truncate">
+                                            Owner: <span className="text-white/70">{alias.owner?.[0]?.name || alias.owner?.[0]?.email || 'Unknown'}</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             
                             {/* Status & Stats */}
-                            <div className="flex items-center gap-4 text-sm text-gray-600">
-                                <div className="flex items-center gap-2">
-                                    <span className={`inline-block w-2.5 h-2.5 rounded-full ${alias.isActive !== false ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                                    <span>{alias.isActive !== false ? 'Active' : 'Inactive'}</span>
+                            <div className="flex items-center gap-5 text-sm">
+                                <div className="flex flex-col items-center justify-center">
+                                    <span className="text-xs text-[hsl(var(--muted-foreground))] mb-1">Status</span>
+                                    <div className="flex items-center gap-1.5">
+                                        <span className={`inline-block w-2.5 h-2.5 rounded-full ${alias.isActive !== false ? 'bg-green-400' : 'bg-red-400'}`}></span>
+                                        <span className={`font-medium ${alias.isActive !== false ? 'text-green-400' : 'text-red-400'}`}>{alias.isActive !== false ? 'Active' : 'Inactive'}</span>
+                                    </div>
+                                </div>
+                                <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
+                                <div className="text-center">
+                                    <p className="font-bold text-white">{alias.emailsSent || 0}</p>
+                                    <p className="text-xs text-[hsl(var(--muted-foreground))]">Sent</p>
                                 </div>
                                 <div className="text-center">
-                                    <p className="font-medium">{alias.emailsSent || 0}</p>
-                                    <p className="text-xs text-gray-400">Sent</p>
-                                </div>
-                                <div className="text-center">
-                                    <p className="font-medium">{alias.emailsReceived || 0}</p>
-                                    <p className="text-xs text-gray-400">Received</p>
+                                    <p className="font-bold text-white">{alias.emailsReceived || 0}</p>
+                                    <p className="text-xs text-[hsl(var(--muted-foreground))]">Received</p>
                                 </div>
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2 pt-2 md:pt-0 w-full md:w-auto justify-end border-t border-white/5 md:border-t-0 mt-4 md:mt-0">
                                 {isOwner && (
                                     <button
                                         onClick={() => onToggleStatus(alias._id, alias.isActive !== false)}
                                         disabled={toggleLoading[alias._id]}
-                                        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${alias.isActive !== false ? 'bg-blue-600' : 'bg-gray-200'} ${toggleLoading[alias._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-background ${alias.isActive !== false ? 'bg-white' : 'bg-white/20'} ${toggleLoading[alias._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         title={`Click to ${alias.isActive !== false ? 'deactivate' : 'activate'}`}
                                     >
-                                        <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${alias.isActive !== false ? 'translate-x-5' : 'translate-x-0'}`} />
+                                        <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out ${alias.isActive !== false ? 'translate-x-5 bg-black' : 'translate-x-0 bg-white'}`} />
                                     </button>
                                 )}
-                                <Link href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-gray-500 hover:bg-gray-200 rounded-md" title="View Inbox">
-                                    📬
+                                <Link href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="View Inbox">
+                                    <Inbox className="w-5 h-5" />
                                 </Link>
-                                <Link href={`/dashboard/send?alias=${alias.aliasEmail}`} className="p-2 text-gray-500 hover:bg-gray-200 rounded-md" title="Send Email">
-                                    ✉️
+                                <Link href={`/dashboard/send?alias=${alias.aliasEmail}`} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Send Email">
+                                    <Send className="w-5 h-5" />
                                 </Link>
                                 {isOwner && (
-                                    <button onClick={() => onDelete(alias._id)} className="p-2 text-gray-500 hover:bg-red-100 hover:text-red-600 rounded-md" title="Delete Alias">
-                                    🗑️
+                                    <button onClick={() => onDelete(alias._id)} className="p-2 text-[hsl(var(--muted-foreground))] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors" title="Delete Alias">
+                                        <Trash2 className="w-5 h-5" />
                                     </button>
                                 )}
                             </div>
                         </div>
 
                         {/* Collaborators & Activity Section */}
-                        <div className="mt-4 pl-14">
+                        <div className="mt-5 pt-5 border-t border-white/5 md:pl-[64px]">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Collaborators List & Add Form */}
                                 <div>
-                                    <h4 className="font-medium text-sm text-gray-800 mb-2">Collaborators</h4>
+                                    <h4 className="font-bold text-sm text-white mb-3 flex items-center gap-2">
+                                        <Users className="w-4 h-4 text-[hsl(var(--muted-foreground))]" /> Collaborators
+                                    </h4>
                                     <div className="space-y-2">
                                         {alias.collaborators?.map((c) => (
-                                            <div key={c.userId} className="flex items-center justify-between text-sm p-2 bg-gray-50 rounded-md">
-                                                <span className="text-gray-700">
-                                                    {c.userDetails?.name || c.userDetails?.email || 'Unknown User'} ({c.role})
+                                            <div key={c.userId} className="flex items-center justify-between text-sm p-3 bg-white/5 border border-white/5 rounded-lg">
+                                                <span className="text-white/80">
+                                                    {c.userDetails?.name || c.userDetails?.email || 'Unknown User'} <span className="text-[hsl(var(--muted-foreground))] ml-1">({c.role})</span>
                                                 </span>
                                                 {isOwner && (
-                                                    <button onClick={() => onRemoveCollaborator(alias._id, c.userId)} className="text-red-500 hover:text-red-700 text-xs font-semibold">
+                                                    <button onClick={() => onRemoveCollaborator(alias._id, c.userId)} className="text-red-400 hover:text-red-300 text-xs font-semibold px-2 py-1 rounded hover:bg-red-500/10 transition-colors">
                                                         Remove
                                                     </button>
                                                 )}
                                             </div>
                                         ))}
                                         {alias.collaborators?.length === 0 && (
-                                            <p className="text-gray-500 text-sm py-2">No collaborators yet.</p>
+                                            <p className="text-[hsl(var(--muted-foreground))] text-sm py-2">No collaborators yet.</p>
                                         )}
                                     </div>
 
                                     {isOwner && (
                                         <div className="mt-3">
-                                            <div className="flex space-x-2">
+                                            <div className="flex gap-2">
                                                 <input
                                                     type="email"
                                                     placeholder="Add user by email"
                                                     value={managingAliasId === alias._id ? addEmail : ''}
                                                     onChange={(e) => { setManagingAliasId(alias._id); setAddEmail(e.target.value); }}
-                                                    className="flex-1 px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+                                                    className="flex-1 input-field h-9 text-sm"
                                                 />
                                                 <button
                                                     onClick={() => onAddCollaborator(alias._id, addEmail, addRole)}
-                                                    className="px-3 py-1.5 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 disabled:bg-gray-300"
+                                                    className="btn-primary h-9 px-4 py-0 text-sm whitespace-nowrap"
                                                     disabled={!addEmail || managingAliasId !== alias._id}
                                                 >
                                                     Add
@@ -246,16 +260,18 @@ export default function AliasesOverview({
                                 
                                 {/* Recent Activity */}
                                 <div>
-                                    <h4 className="font-medium text-sm text-gray-800 mb-2">Recent Activity</h4>
-                                    <div className="space-y-1 text-xs text-gray-600">
+                                    <h4 className="font-bold text-sm text-white mb-3 flex items-center gap-2">
+                                        <Activity className="w-4 h-4 text-[hsl(var(--muted-foreground))]" /> Recent Activity
+                                    </h4>
+                                    <div className="space-y-2 text-sm text-[hsl(var(--muted-foreground))]">
                                         {activities.filter(act => act.aliasId?.toString() === alias._id?.toString()).slice(0, 3).map((act) => (
-                                            <p key={act._id} className="truncate p-2 bg-gray-50 rounded-md">
-                                            {getActivityText(act)}
-                                            <span className="text-gray-400 ml-2">({new Date(act.createdAt).toLocaleDateString()})</span>
-                                            </p>
+                                            <div key={act._id} className="p-3 bg-white/5 border border-white/5 rounded-lg flex flex-col gap-1">
+                                                <p className="truncate text-white/80">{getActivityText(act)}</p>
+                                                <span className="text-xs text-[hsl(var(--muted-foreground))]">{new Date(act.createdAt).toLocaleDateString()}</span>
+                                            </div>
                                         ))}
                                         {activities.filter(act => act.aliasId?.toString() === alias._id?.toString()).length === 0 && (
-                                            <p className="text-gray-500 text-sm py-2">No activity recorded.</p>
+                                            <p className="text-[hsl(var(--muted-foreground))] text-sm py-2">No activity recorded.</p>
                                         )}
                                     </div>
                                 </div>

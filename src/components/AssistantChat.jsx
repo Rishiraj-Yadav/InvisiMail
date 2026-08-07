@@ -126,7 +126,7 @@ export default function AssistantChat() {
                 <button
                     onClick={handleSend}
                     disabled={loading}
-                    className="p-2 rounded-full text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 transition-all"
+                    className="p-2 rounded-full text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 transition-all"
                 >
                     <SendIcon />
                 </button>
@@ -139,7 +139,7 @@ export default function AssistantChat() {
             {isOpen && <ChatWindow />}
             <button
                 onClick={() => setIsOpen(prev => !prev)}
-                className="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-blue-700 transition-transform hover:scale-110 z-[9999]"
+                className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:shadow-indigo-500/20 transition-all z-[9999]"
             >
                 {isOpen ? (
                     <span className="text-3xl font-bold">&times;</span>
