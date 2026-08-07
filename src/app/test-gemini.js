@@ -1,7 +1,7 @@
 // src/app/test-gemini.js
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const apiKey = process.env.GOOGLE_API_KEY || 'AIzaSyAxxxxxfIOWhV9pVS6lejP_ascfJ8yQWi4'; // Use env variable or hardcoded for testing
+const apiKey = process.env.GOOGLE_API_KEY ; // Use env variable or hardcoded for testing
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
