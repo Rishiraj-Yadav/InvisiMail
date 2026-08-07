@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import Spline from '@splinetool/react-spline';
+import { motion } from 'framer-motion';
+import { Mail, Lock, ArrowRight, Shield, Zap, Inbox, Loader2 } from 'lucide-react';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -19,127 +20,134 @@ export default function SignIn() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  setMessage('');
-  setLoading(true);
+    e.preventDefault();
+    setError('');
+    setMessage('');
+    setLoading(true);
 
-  console.log('Starting sign-in process...');
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-  try {
-    // Add timeout to prevent infinite loading
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+        signal: controller.signal,
+        credentials: 'include',
+      });
 
-    const response = await fetch('/api/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-      signal: controller.signal,
-      credentials: 'include', // Ensure cookies are included
-    });
+      clearTimeout(timeoutId);
 
-    clearTimeout(timeoutId);
-
-    console.log('Response status:', response.status);
-    console.log('Response OK:', response.ok);
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Sign-in successful:', data);  // This will log the full response, including user.role
-      
-      // Conditional redirect based on role (defaults to /dashboard if role missing)
-      const redirectPath = data.user?.role === 'admin' ? '/admin' : '/dashboard';
-      console.log('Redirecting to:', redirectPath);  // Add this for debugging
-      
-      // CRITICAL FIX: Use window.location.href for full reload + cookie sync
-      window.location.href = redirectPath;  // <-- CHANGED: Use redirectPath instead of hardcoded '/dashboard'
-    } else {
-      const data = await response.json();
-      console.error('Sign-in failed:', data);
-      setError(data.error || 'Sign in failed. Please check your credentials.');
+      if (response.ok) {
+        const data = await response.json();
+        const redirectPath = data.user?.role === 'admin' ? '/admin' : '/dashboard';
+        window.location.href = redirectPath;
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Sign in failed. Please check your credentials.');
+      }
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        setError('Request timed out. Please try again.');
+      } else {
+        setError('A network error occurred. Please try again later.');
+      }
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error('Sign-in error:', err);
-    
-    if (err.name === 'AbortError') {
-      setError('Request timed out. Please try again.');
-    } else {
-      setError('A network error occurred. Please try again later.');
-    }
-  } finally {
-    setLoading(false);
-  }
-};
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } }
+  };
 
   return (
-    <main className="relative w-screen h-screen">
-      {/* Spline Background */}
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <Spline scene="https://prod.spline.design/SQtHQFbNWGs6Fkrf/scene.splinecode" />
-      </div>
+    <main className="min-h-screen bg-[#09090B] flex items-center justify-center relative overflow-hidden selection:bg-[#6366F1]/50 selection:text-white p-6">
+      {/* Background decorations matching LandingPage */}
+      <div className="absolute top-[20%] left-[20%] w-[40%] h-[40%] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08)_0%,transparent_70%)]" />
+      <div className="absolute bottom-[20%] right-[20%] w-[30%] h-[30%] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.05)_0%,transparent_70%)]" />
 
-      {/* Sign-In Card Overlay */}
-      <div className="relative w-full h-full flex items-center justify-center z-10 p-4">
-        <div className="w-full max-w-sm p-8 bg-black/40 backdrop-blur-md border border-white/10 rounded-lg">
-          <h2 className="text-3xl font-bold text-center text-white mb-6">Welcome Back</h2>
+      <motion.div 
+        initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+        className="w-full max-w-[420px] relative z-10"
+      >
+        <motion.div variants={fadeUp} className="flex justify-center mb-8">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366F1] to-[#4F46E5] flex items-center justify-center text-white shadow-lg shadow-[#6366F1]/20 group-hover:scale-105 transition-transform">
+              <Mail className="w-6 h-6" />
+            </div>
+          </Link>
+        </motion.div>
 
+        <motion.div variants={fadeUp} className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Welcome back</h1>
+          <p className="text-[#A1A1AA]">Sign in to your account to continue.</p>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="bg-[#111113]/80 backdrop-blur-xl border border-[#27272A] p-8 rounded-3xl shadow-2xl">
           {message && (
-            <div className="mb-4 p-3 text-sm text-green-300 bg-green-900/50 border border-green-500/50 rounded">
+            <div className="alert-success mb-6 p-3 rounded-xl text-sm">
               {message}
             </div>
           )}
           {error && (
-            <div className="mb-4 p-3 text-sm text-red-300 bg-red-900/50 border border-red-500/50 rounded">
+            <div className="alert-error mb-6 p-3 rounded-xl text-sm">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-2.5 bg-black/20 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:opacity-50"
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-2.5 bg-black/20 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Signing In...' : 'Sign In'}
-            </button>
-          </form>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Email address</label>
+              <input
+                id="email" type="email" name="email"
+                placeholder="you@example.com"
+                value={formData.email} onChange={handleChange}
+                required disabled={loading}
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                autoComplete="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Password</label>
+              <input
+                id="password" type="password" name="password"
+                placeholder="••••••••"
+                value={formData.password} onChange={handleChange}
+                required disabled={loading}
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                autoComplete="current-password"
+              />
+            </div>
 
-          <p className="text-center text-sm text-gray-400 mt-6">
-            Don't have an account?{' '}
-            <Link href="/register" className="text-purple-400 hover:underline">
-              Register
-            </Link>
-          </p>
-        </div>
-      </div>
+            <div className="pt-2">
+              <button
+                type="submit" disabled={loading}
+                className="w-full h-12 bg-white text-[#09090B] hover:bg-gray-100 font-bold rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+              >
+                {loading ? (
+                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Signing in...</>
+                ) : (
+                  <>Sign In <ArrowRight className="w-4 h-4 ml-2" /></>
+                )}
+              </button>
+            </div>
+          </form>
+        </motion.div>
+
+        <motion.p variants={fadeUp} className="text-center text-sm text-[#A1A1AA] mt-8">
+          Don't have an account?{' '}
+          <Link href="/register" className="text-white hover:text-[#6366F1] font-semibold transition-colors">
+            Create one
+          </Link>
+        </motion.p>
+      </motion.div>
     </main>
   );
 }

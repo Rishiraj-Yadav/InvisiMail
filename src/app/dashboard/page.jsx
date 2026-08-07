@@ -1,26 +1,17 @@
-// src/app/dashboard/page.jsx - WITH ASSISTANT CHAT
+// src/app/dashboard/page.jsx
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import {
-  FiMail,
-  FiInbox,
-  FiSend,
-  FiActivity,
-  FiBarChart2,
-  FiShield,
-  FiCheckCircle,
-  FiAlertTriangle,
-  FiX,
-  FiUser,
-  FiZap,
-  FiSun,
-  FiMoon
-} from 'react-icons/fi';
+  Mail, Inbox, Send, Activity, BarChart2,
+  Shield, CheckCircle, AlertTriangle, X,
+  User, Zap, Menu, Loader, Star, Clock, MoreVertical
+} from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import AssistantChat from '@/components/AssistantChatPhase2';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell } from 'recharts';
-import AssistantChatPhase2 from '@/components/AssistantChatPhase2';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, CartesianGrid } from 'recharts';
+import { useTheme } from 'next-themes';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -33,19 +24,9 @@ export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [pollingAttempts, setPollingAttempts] = useState(0);
   const [useWebhook, setUseWebhook] = useState(true);
-  const [theme, setTheme] = useState('dark');
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const router = useRouter();
-
-  // --- Effect for initializing theme ---
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -53,14 +34,9 @@ export default function Dashboard() {
       setSuccess('Payment successful! Verifying your Pro plan upgrade...');
       setRefreshing(true);
       window.history.replaceState({}, document.title, window.location.pathname);
-      
       pollForPlanUpdate();
-      
       setTimeout(() => {
-        if (user?.plan !== 'pro') {
-          console.log('[Fallback] Switching to direct API verification');
-          verifyPaymentDirectly();
-        }
+        if (user?.plan !== 'pro') verifyPaymentDirectly();
       }, 15000);
     } else {
       fetchUserData();
@@ -72,39 +48,28 @@ export default function Dashboard() {
 
   const verifyPaymentDirectly = async () => {
     try {
-      console.log('[Fallback] Attempting direct payment verification');
-      setSuccess('Using alternative verification method...');
-      
       const response = await fetch('/api/upgrade/verify-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
-      
       if (response.ok) {
         const data = await response.json();
-        
         if (data.success && data.user?.plan === 'pro') {
-          console.log('[Fallback] ✅ Successfully verified via API');
           setUser(data.user);
-          setSuccess('🎉 Successfully upgraded to Pro! Welcome to the Pro plan.');
+          setSuccess('🎉 Successfully upgraded to Pro!');
           setRefreshing(false);
           setUseWebhook(false);
           fetchAliases();
           fetchInboxStats();
           return true;
+        } else if (pollingAttempts < 20) {
+          setPollingAttempts(prev => prev + 1);
+          setTimeout(verifyPaymentDirectly, 5000);
         } else {
-          console.log('[Fallback] Payment not yet captured:', data.message);
-          
-          if (pollingAttempts < 20) {
-            setPollingAttempts(prev => prev + 1);
-            setTimeout(verifyPaymentDirectly, 5000);
-          } else {
-            setError('Unable to verify payment. Please contact support with your order details.');
-            setRefreshing(false);
-          }
+          setError('Unable to verify payment. Please contact support.');
+          setRefreshing(false);
         }
       }
-      
       return false;
     } catch (error) {
       console.error('[Fallback] Error:', error);
@@ -114,76 +79,46 @@ export default function Dashboard() {
 
   const pollForPlanUpdate = async (maxAttempts = 10, attemptCount = 0) => {
     if (!useWebhook) return;
-    
     setPollingAttempts(attemptCount + 1);
-    
     try {
-      console.log(`[Polling] Attempt ${attemptCount + 1}/${maxAttempts}`);
-      
       const timestamp = Date.now();
-      const response = await fetch(`/api/user?t=${timestamp}`, { 
+      const response = await fetch(`/api/user?t=${timestamp}`, {
         cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache'
-        }
+        headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
       });
-      
       if (response.ok) {
         const userData = await response.json();
-        console.log(`[Polling] User data:`, { plan: userData.plan, email: userData.email });
-        
         setUser(userData);
-        
         if (userData.plan === 'pro') {
           setSuccess('🎉 Successfully upgraded to Pro!');
           setRefreshing(false);
           fetchAliases();
           fetchInboxStats();
-          console.log('[Polling] ✅ Success');
           return;
         }
       }
-      
       if (attemptCount < maxAttempts) {
-        setTimeout(() => {
-          pollForPlanUpdate(maxAttempts, attemptCount + 1);
-        }, 3000);
-      } else {
-        console.log('[Polling] Max attempts reached, switching to fallback');
+        setTimeout(() => pollForPlanUpdate(maxAttempts, attemptCount + 1), 3000);
       }
-      
     } catch (error) {
-      console.error('[Polling] Error:', error);
-      
       if (attemptCount < maxAttempts) {
-        setTimeout(() => {
-          pollForPlanUpdate(maxAttempts, attemptCount + 1);
-        }, 3000);
+        setTimeout(() => pollForPlanUpdate(maxAttempts, attemptCount + 1), 3000);
       }
     }
   };
 
   const fetchUserData = async () => {
     try {
-      const timestamp = Date.now();
-      const response = await fetch(`/api/user?t=${timestamp}`, {
+      const response = await fetch(`/api/user?t=${Date.now()}`, {
         cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache'
-        }
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
       });
-      
       if (response.ok) {
-        const userData = await response.json();
-        console.log('[Fetch] User data:', { plan: userData.plan });
-        setUser(userData);
+        setUser(await response.json());
       } else {
         router.push('/signin');
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
       setError('Failed to load user data.');
     } finally {
       setLoading(false);
@@ -193,157 +128,80 @@ export default function Dashboard() {
   const fetchAliases = async () => {
     try {
       const response = await fetch('/api/aliases');
-      if (response.ok) {
-        const aliasData = await response.json();
-        setAliases(aliasData);
-      }
-    } catch (error) {
-      console.error('Error fetching aliases:', error);
-    }
+      if (response.ok) setAliases(await response.json());
+    } catch (error) { console.error('Error fetching aliases:', error); }
   };
 
   const fetchInboxStats = async () => {
     try {
       const response = await fetch('/api/inbox/stats');
-      if (response.ok) {
-        const stats = await response.json();
-        setInboxStats(stats);
-      }
-    } catch (error) {
-      console.error('Error fetching inbox stats:', error);
-    }
+      if (response.ok) setInboxStats(await response.json());
+    } catch (error) { console.error('Error fetching inbox stats:', error); }
   };
 
   const fetchActivities = async () => {
     try {
       const response = await fetch('/api/activities');
-      if (response.ok) {
-        const activityData = await response.json();
-        setActivities(activityData);
-      }
-    } catch (error) {
-      console.error('Error fetching activities:', error);
-    }
+      if (response.ok) setActivities(await response.json());
+    } catch (error) { console.error('Error fetching activities:', error); }
   };
 
   const totalSent = activities.filter(a => a.type === 'sent').length;
 
-  const loadRazorpayScript = () => {
-    return new Promise((resolve) => {
-      if (window.Razorpay) {
-        resolve(true);
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
+  const loadRazorpayScript = () => new Promise((resolve) => {
+    if (window.Razorpay) { resolve(true); return; }
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
 
   const handleUpgrade = async () => {
     try {
       setError('');
       const scriptLoaded = await loadRazorpayScript();
-      if (!scriptLoaded) {
-        setError('Failed to load payment system. Please try again.');
-        return;
-      }
-
-      const response = await fetch('/api/upgrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      
+      if (!scriptLoaded) { setError('Failed to load payment system.'); return; }
+      const response = await fetch('/api/upgrade', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       if (response.ok) {
         const { order, user: userInfo } = await response.json();
-        
         const options = {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: order.amount,
-          currency: order.currency,
-          name: 'Email Alias Pro',
-          description: 'Upgrade to Pro Plan',
-          order_id: order.id,
-          handler: function (response) {
-            console.log('Payment successful:', response);
-            window.location.href = '/dashboard?upgraded=true';
-          },
-          prefill: {
-            email: userInfo?.email || user?.email,
-            name: userInfo?.name || user?.name
-          },
-          theme: { color: '#3B82F6' },
-          modal: {
-            ondismiss: function () {
-              setError('Payment cancelled.');
-            }
-          }
+          amount: order.amount, currency: order.currency,
+          name: 'InvisiMail Pro', description: 'Upgrade to Pro Plan', order_id: order.id,
+          handler: function (response) { window.location.href = '/dashboard?upgraded=true'; },
+          prefill: { email: userInfo?.email || user?.email, name: userInfo?.name || user?.name },
+          theme: { color: '#7c3aed' },
+          modal: { ondismiss: function () { setError('Payment cancelled.'); } }
         };
-        
         const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (response) {
-          setError(`Payment failed: ${response.error.description}`);
-        });
+        rzp.on('payment.failed', function (response) { setError(`Payment failed: ${response.error.description}`); });
         rzp.open();
       } else {
         const data = await response.json();
         setError(data.error || 'Failed to create payment order');
       }
-    } catch (error) {
-      console.error('Upgrade error:', error);
-      setError('Failed to initiate upgrade process');
-    }
+    } catch (error) { setError('Failed to initiate upgrade process'); }
   };
 
-  const handleManualRefresh = () => {
-    setError('');
-    setSuccess('Checking your payment status...');
-    verifyPaymentDirectly();
-  };
-  
-  // --- Theme Toggle Handler ---
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
+  const handleManualRefresh = () => { setError(''); setSuccess('Checking payment status...'); verifyPaymentDirectly(); };
 
+  // Loading state
   if (loading || refreshing) {
     return (
-      <div className="min-h-screen bg-gray-100 dark:bg-[#0F172A] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center p-8">
-          <div className="relative w-24 h-24 mx-auto mb-8">
-            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-500 animate-spin-glow"></div>
-            <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-cyan-500 animate-spin-glow" style={{animationDuration: '1s'}}></div>
-          </div>
-          
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+          <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-6" />
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             {refreshing ? 'Verifying Your Upgrade' : 'Loading Dashboard'}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            {refreshing ? 'This just takes a moment...' : 'Preparing your secure workspace.'}
+          <p className="text-sm text-muted-foreground">
+            {refreshing ? 'This just takes a moment...' : 'Preparing your workspace.'}
           </p>
-
           {refreshing && (
-            <div className="animate-fade-in-up" style={{animationDelay: '0.5s'}}>
-              <p className="text-sm text-gray-500 dark:text-gray-500 mb-4">
-                {useWebhook ? 'Checking with payment gateway...' : 'Using direct verification...'}
-              </p>
-              <button
-                onClick={handleManualRefresh}
-                className="btn-glass primary"
-              >
-                <FiZap className="inline -mt-1 mr-2" />
-                Verify Manually
-              </button>
-            </div>
+            <button onClick={handleManualRefresh} className="btn-secondary mt-6 text-sm cursor-pointer">
+              <Loader className="mr-2" /> Verify Manually
+            </button>
           )}
         </div>
       </div>
@@ -352,300 +210,242 @@ export default function Dashboard() {
 
   const isPro = user?.plan === 'pro';
 
-  // --- Dynamic styles for charts ---
-  const axisStrokeColor = theme === 'dark' ? '#6B7280' : '#9CA3AF';
-  const tooltipContentStyle = (theme, borderColor = '#3B82F6') => ({
-    backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.8)' : 'rgba(255, 255, 255, 0.9)',
-    borderColor: theme === 'dark' ? borderColor : '#E5E7EB',
-    borderRadius: '8px',
-    backdropFilter: 'blur(10px)',
-  });
-  const tooltipItemStyle = (theme) => ({
-    color: theme === 'dark' ? '#E5E7EB' : '#1F2937',
-  });
-  const tooltipLabelStyle = (theme) => ({
-    color: theme === 'dark' ? '#9CA3AF' : '#6B7280',
-  });
-  
   const trafficData = [
-    { name: 'Mon', emails: 10 },
-    { name: 'Tue', emails: 18 },
-    { name: 'Wed', emails: 14 },
-    { name: 'Thu', emails: 22 },
-    { name: 'Fri', emails: 16 },
-    { name: 'Sat', emails: 24 },
-    { name: 'Sun', emails: 20 },
+    { name: 'Mon', emails: 10 }, { name: 'Tue', emails: 18 }, { name: 'Wed', emails: 14 },
+    { name: 'Thu', emails: 22 }, { name: 'Fri', emails: 16 }, { name: 'Sat', emails: 24 }, { name: 'Sun', emails: 20 },
   ];
 
   const spamData = [
     { name: 'Legitimate', value: Math.max(0, (inboxStats.totalEmails || 0) - (inboxStats.spamCount || 0)) },
     { name: 'Spam', value: inboxStats.spamCount || 0 },
   ];
-  
   const hasEmailData = spamData.some(item => item.value > 0);
   const displaySpamData = hasEmailData ? spamData : [{ name: 'No Data', value: 1 }];
-  const spamColors = ['#3B82F6', '#EF4444'];
-  
+  const pieColors = ['#6366F1', resolvedTheme === 'dark' ? '#3F3F46' : '#E4E4E7'];
+
   const getActivityIcon = (type) => {
     switch (type) {
-      case 'sent': return <FiSend className="text-blue-400" />;
-      case 'received': return <FiInbox className="text-green-400" />;
-      case 'blocked': return <FiShield className="text-red-400" />;
-      default: return <FiActivity className="text-gray-400" />;
+      case 'sent': return <Send className="text-primary w-4 h-4" />;
+      case 'received': return <Inbox className="text-green-600 dark:text-green-400 w-4 h-4" />;
+      case 'blocked': return <Shield className="text-red-600 dark:text-red-400 w-4 h-4" />;
+      default: return <Mail className="text-muted-foreground w-4 h-4" />;
     }
   };
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
+  const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.06 } } };
+  const item = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
+
+  const customTooltip = {
+    contentStyle: {
+      background: 'hsl(var(--popover))',
+      border: '1px solid hsl(var(--border))',
+      borderRadius: '12px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+    },
+    itemStyle: { color: 'hsl(var(--foreground))' },
+    labelStyle: { color: 'hsl(var(--muted-foreground))' },
+  };
+
   return (
-    <div className="flex h-full bg-gray-100 dark:bg-[#0F172A] text-gray-800 dark:text-gray-300">
-      <Sidebar user={user} onUpgrade={handleUpgrade} theme={theme} />
-      
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-y-auto p-6 md:p-10 space-y-8 main-content-scroll scroll-smooth">
-          
+    <div className="flex h-full bg-background text-foreground relative overflow-hidden">
+      {/* Clean Dashboard Background (No Ambient Glows) */}
+      <div className="absolute top-0 left-[20%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none opacity-20" />
+
+      <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
+
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+        <motion.main
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="flex-1 overflow-y-auto p-5 md:p-8 space-y-8"
+        >
           {/* Toast Notifications */}
-          <div className="fixed top-6 right-6 z-50 w-full max-w-sm space-y-3">
+          <div className="fixed top-5 right-5 z-50 w-full max-w-sm space-y-3">
             {error && (
-              <div className="glass-panel p-4 flex items-start gap-3 border-red-500/50 shadow-lg shadow-red-500/10 animate-toast-in" style={{animationFillMode: 'forwards'}}>
-                <FiAlertTriangle className="text-red-400 text-2xl flex-shrink-0 mt-1" />
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-900 dark:text-white">Error</p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{error}</p>
+              <div className="flex gap-4 alert-error p-4 rounded-xl items-start slide-up">
+              <div className="p-1 bg-red-500/10 rounded-lg">
+                <AlertTriangle className="text-red-400 text-lg flex-shrink-0" />
+              </div>
+              <div className="flex-1">
+                  <p className="font-medium text-sm">{error}</p>
                   {error.includes('Unable to verify') && (
-                    <button
-                      onClick={handleManualRefresh}
-                      className="text-xs font-medium text-red-500 dark:text-red-300 hover:text-red-700 dark:hover:text-white mt-2"
-                    >
+                    <button onClick={handleManualRefresh} className="text-xs text-red-400 hover:text-white mt-1 cursor-pointer">
                       Click to Verify Manually
                     </button>
                   )}
                 </div>
-                <button onClick={() => setError('')} className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                  <FiX />
-                </button>
+                <button onClick={() => setError('')} className="text-red-400/60 hover:text-red-400 cursor-pointer"><X className="w-5 h-5" /></button>
               </div>
             )}
             {success && (
-              <div className="glass-panel p-4 flex items-start gap-3 border-green-500/50 shadow-lg shadow-green-500/10 animate-toast-in" style={{animationFillMode: 'forwards'}}>
-                <FiCheckCircle className="text-green-400 text-2xl flex-shrink-0 mt-1" />
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-900 dark:text-white">Success</p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{success}</p>
-                </div>
-                <button onClick={() => setSuccess('')} className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                  <FiX />
-                </button>
+              <div className="flex gap-4 alert-success p-4 rounded-xl items-start slide-up">
+              <div className="p-1 bg-green-500/10 rounded-lg">
+                <CheckCircle className="text-green-400 text-lg flex-shrink-0" />
+              </div>
+                <p className="flex-1 font-medium text-sm">{success}</p>
+                <button onClick={() => setSuccess('')} className="text-green-400/60 hover:text-green-400 cursor-pointer"><X className="w-5 h-5" /></button>
               </div>
             )}
           </div>
-          
+
           {/* Header */}
-          <div className="glass-panel p-6 md:p-8 animate-fade-in-up">
+          <motion.div variants={item} className="mb-6">
             <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
-              <div>
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                  Welcome back, <span className="animated-gradient-text">{user?.name || 'User'}</span>!
-                </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
-                  Here's your secure dashboard overview.
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-start gap-4">
                 <button
-                  onClick={toggleTheme}
-                  className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700/50 transition-colors"
-                  title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                  onClick={() => setIsMobileOpen(true)}
+                  className="md:hidden mt-0.5 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
                 >
-                  {theme === 'light' ? <FiMoon className="w-5 h-5" /> : <FiSun className="w-5 h-5" />}
+                  <Menu className="w-5 h-5" />
                 </button>
-
-                <div 
-                  className={`
-                    px-4 py-2 rounded-full text-sm font-medium border flex items-center gap-2
-                    transition-all duration-300
-                    ${isPro 
-                      ? 'bg-blue-500/20 text-blue-500 dark:text-blue-300 border-blue-500/30 shadow-electric-glow' 
-                      : 'bg-gray-200 text-gray-600 border-gray-300 dark:bg-gray-700/30 dark:text-gray-400 dark:border-gray-600/50'
-                    }
-                  `}
-                >
-                  {isPro ? <FiZap className={isPro ? "text-blue-500 dark:text-blue-300" : "text-gray-600 dark:text-gray-400"} /> : <FiUser className={isPro ? "text-blue-500 dark:text-blue-300" : "text-gray-600 dark:text-gray-400"} />}
-                  {isPro ? 'Pro Plan' : 'Free Plan'}
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-2 tracking-tight">
+                    {getGreeting()}, <span className="text-foreground">{user?.name?.split(' ')[0] || 'User'}</span>
+                  </h1>
+                  <p className="text-sm text-muted-foreground flex items-center gap-2">
+                    <Clock className="w-4 h-4" /> Here's what's happening with your aliases today.
+                  </p>
                 </div>
               </div>
+              <div className={`px-4 py-2 rounded-lg border text-xs font-semibold flex items-center gap-2 ${
+                isPro 
+                  ? 'bg-primary/10 border-primary/20 text-primary' 
+                  : 'bg-transparent border-border text-muted-foreground'
+              }`}>
+                <Star className={`w-3.5 h-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`} />
+                {isPro ? 'Pro Active' : 'Free Plan'}
+              </div>
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <div 
-              className="glass-panel p-6 group transition-all duration-300 ease-out hover:scale-[1.03] dark:hover:shadow-electric-glow animate-fade-in-up" 
-              style={{animationDelay: '0.1s'}}
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="text-base font-medium text-gray-600 dark:text-gray-400">Total Aliases</h3>
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                  <FiMail className="w-5 h-5" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { label: 'Total Aliases', value: aliases.length, sub: isPro ? 'Unlimited' : `${aliases.filter(a => !a.isCollaborative).length} / 5 personal`, icon: Mail, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-black/5 dark:bg-white/5 border-border', href: '/dashboard/aliases' },
+              { label: 'Unread Emails', value: inboxStats.unreadCount, sub: 'View Inbox →', icon: Inbox, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-black/5 dark:bg-white/5 border-border', href: '/dashboard/inbox' },
+              { label: 'Emails Sent', value: totalSent, sub: 'Compose New →', icon: Send, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-black/5 dark:bg-white/5 border-border', href: '/dashboard/send' },
+            ].map((stat) => (
+              <motion.a key={stat.label} href={stat.href} variants={item} className="surface-interactive p-5 rounded-2xl block group">
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+                  <div className={`p-2.5 rounded-xl border ${stat.bg} ${stat.color} ${stat.glow}`}>
+                    <stat.icon className="w-4 h-4" />
+                  </div>
                 </div>
-              </div>
-              <p className="text-4xl font-bold text-gray-900 dark:text-white mt-4">{aliases.length}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
-                {isPro ? "Unlimited Aliases" : `${aliases.filter(a => !a.isCollaborative).length} / 5 personal`}
-              </p>
-            </div>
-            
-            <div 
-              className="glass-panel p-6 group transition-all duration-300 ease-out hover:scale-[1.03] dark:hover:shadow-electric-glow animate-fade-in-up" 
-              style={{animationDelay: '0.2s'}}
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="text-base font-medium text-gray-600 dark:text-gray-400">Unread Emails</h3>
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                  <FiInbox className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-4xl font-bold text-gray-900 dark:text-white mt-4">{inboxStats.unreadCount}</p>
-              <a href="/dashboard/inbox" className="text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors mt-1 group-hover:underline">
-                View Inbox →
-              </a>
-            </div>
-
-            <div 
-              className="glass-panel p-6 group transition-all duration-300 ease-out hover:scale-[1.03] dark:hover:shadow-electric-glow animate-fade-in-up" 
-              style={{animationDelay: '0.3s'}}
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="text-base font-medium text-gray-600 dark:text-gray-400">Emails Sent</h3>
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                  <FiSend className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-4xl font-bold text-gray-900 dark:text-white mt-4">{totalSent}</p>
-              <a href="/dashboard/send" className="text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors mt-1 group-hover:underline">
-                Compose New →
-              </a>
-            </div>
+                <p className="text-3xl font-semibold text-foreground mb-1.5">{stat.value}</p>
+                <p className="text-xs text-muted-foreground font-medium">{stat.sub}</p>
+              </motion.a>
+            ))}
           </div>
-          
+
           {/* Charts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            <div className="glass-panel p-6 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Email Traffic Trends</h3>
-              <div className="h-72">
-                {trafficData && trafficData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={trafficData} margin={{ top: 5, right: 10, left: -30, bottom: 5 }}>
-                      <defs>
-                        <linearGradient id="colorTraffic" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.6}/>
-                          <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
-                        </linearGradient>
-                      </defs>
-                      <XAxis dataKey="name" stroke={axisStrokeColor} fontSize={12} tickLine={false} axisLine={false} />
-                      <YAxis stroke={axisStrokeColor} fontSize={12} tickLine={false} axisLine={false} />
-                      <Tooltip 
-                        contentStyle={tooltipContentStyle(theme)} 
-                        itemStyle={tooltipItemStyle(theme)}
-                        labelStyle={tooltipLabelStyle(theme)}
-                      />
-                      <Area type="monotone" dataKey="emails" stroke="#3B82F6" strokeWidth={2} fill="url(#colorTraffic)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                ) : (
-                  <div className="flex items-center justify-center h-full">
-                    <p className="text-gray-500 dark:text-gray-500">No traffic data available</p>
+            <motion.div variants={item} className="surface-card p-5 rounded-2xl relative overflow-hidden group">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-semibold text-foreground">Email Traffic</h3>
+                <button className="text-muted-foreground hover:text-foreground transition-colors"><MoreVertical className="w-4 h-4" /></button>
+              </div>
+              <div className="h-48">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={trafficData} margin={{ top: 5, right: 10, left: -25, bottom: 5 }}>
+                    <defs>
+                      <linearGradient id="colorTraffic" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#6366F1" stopOpacity={0.5} />
+                        <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} className="dark:stroke-[#27272A]" />
+                    <XAxis dataKey="name" stroke="#9ca3af" fontSize={11} tickLine={false} axisLine={false} dy={10} className="dark:stroke-[#52525B]" />
+                    <YAxis stroke="#9ca3af" fontSize={11} tickLine={false} axisLine={false} dx={-10} className="dark:stroke-[#52525B]" />
+                    <Tooltip {...customTooltip} cursor={{ stroke: '#6366F1', strokeWidth: 1, strokeDasharray: '4 4' }} />
+                    <Area type="monotone" dataKey="emails" stroke="#6366F1" strokeWidth={3} fill="url(#colorTraffic)" activeDot={{ r: 6, fill: '#6366F1', stroke: '#09090B', strokeWidth: 2 }} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
+
+            <motion.div variants={item} className="surface-card p-5 rounded-2xl relative overflow-hidden group">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-semibold text-foreground">Spam vs. Legitimate</h3>
+                <button className="text-muted-foreground hover:text-foreground transition-colors"><MoreVertical className="w-4 h-4" /></button>
+              </div>
+              <div className="h-48 relative">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie data={displaySpamData} cx="50%" cy="50%" innerRadius={65} outerRadius={90} paddingAngle={hasEmailData ? 5 : 0} dataKey="value" stroke="none">
+                      {displaySpamData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={hasEmailData ? pieColors[index % pieColors.length] : 'rgba(255, 255, 255, 0.03)'} />
+                      ))}
+                    </Pie>
+                    {hasEmailData && <Tooltip {...customTooltip} />}
+                  </PieChart>
+                </ResponsiveContainer>
+                
+                {/* Center Labels */}
+                {!hasEmailData && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <span className="text-muted-foreground text-xs font-semibold">Awaiting Data</span>
+                  </div>
+                )}
+                {hasEmailData && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <span className="text-foreground text-2xl font-bold tracking-tight">{inboxStats?.totalEmails || 0}</span>
+                    <span className="text-muted-foreground text-[10px] uppercase tracking-wider font-semibold mt-0.5">Total</span>
                   </div>
                 )}
               </div>
-            </div>
-            
-            <div className="glass-panel p-6 animate-fade-in-up" style={{animationDelay: '0.5s'}}>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Spam vs. Legitimate</h3>
-              <div className="h-72">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={displaySpamData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      fill="#8884d8"
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {displaySpamData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={hasEmailData ? spamColors[index % spamColors.length] : axisStrokeColor} stroke={hasEmailData ? spamColors[index % spamColors.length] : axisStrokeColor} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      contentStyle={tooltipContentStyle(theme, (theme === 'dark' ? '#9CA3AF' : '#D1D5DB'))}
-                      itemStyle={tooltipItemStyle(theme)}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
+            </motion.div>
+          </div>
+
+          {/* Recent Activity Timeline */}
+          <motion.div variants={item} className="surface-card p-5 rounded-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-bold text-foreground">Activity Feed</h3>
+              <div className="flex gap-4">
+                <a href="/dashboard/aliases" className="text-sm text-primary hover:text-foreground font-medium transition-colors cursor-pointer">All aliases</a>
+                <a href="/dashboard/inbox" className="text-sm text-primary hover:text-foreground font-medium transition-colors cursor-pointer">Inbox</a>
               </div>
             </div>
-          </div>
-          
-          {/* Recent Activity */}
-          <div className="glass-panel p-6 animate-fade-in-up" style={{animationDelay: '0.6s'}}>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
-            <div className="space-y-6 max-h-96 overflow-y-auto main-content-scroll pr-2">
-              
+
+            <div className="space-y-8 max-h-[500px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-black/10 dark:scrollbar-thumb-white/10 scrollbar-track-transparent">
+              {/* Recent Aliases */}
               {aliases && aliases.length > 0 && (
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <FiMail className="w-4 h-4 text-green-400" />
-                    <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200">Recently Created Aliases</h4>
-                  </div>
-                  <div className="space-y-2">
+                <div className="relative pl-6 border-l border-border">
+                  <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-border" />
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">New Aliases</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {aliases
                       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                      .slice(0, 3)
+                      .slice(0, 4)
                       .map((alias) => (
-                        <div key={alias._id} className="flex items-center justify-between p-3 bg-gray-200/60 dark:bg-gray-700/30 rounded-lg hover:bg-gray-300/60 dark:hover:bg-gray-600/30 transition-colors">
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                              alias.isCollaborative ? 'bg-purple-500/20' : 'bg-blue-500/20'
+                        <div key={alias._id} className="flex items-center justify-between p-4 rounded-2xl bg-black/[0.02] dark:bg-white/[0.02] border border-border hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all hover:-translate-y-1 group">
+                          <div className="flex items-center gap-4 min-w-0">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 border ${
+                              alias.isCollaborative ? 'bg-primary/10 text-primary border-primary/20' : 'bg-blue-500/10 text-blue-500 dark:text-blue-400 border-blue-500/20'
                             }`}>
-                              <span className={`text-sm font-medium ${
-                                alias.isCollaborative ? 'text-purple-500 dark:text-purple-400' : 'text-blue-500 dark:text-blue-400'
-                              }`}>
-                                {alias.aliasEmail.charAt(0).toUpperCase()}
-                              </span>
+                              {alias.aliasEmail.charAt(0).toUpperCase()}
                             </div>
-                            <div className="min-w-0 flex-1">
-                              <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-                                {alias.aliasEmail}
-                              </p>
-                              <div className="flex items-center gap-2">
-                                <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <div className="min-w-0">
+                              <p className="text-sm font-bold text-foreground truncate">{alias.aliasEmail}</p>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <p className="text-xs text-muted-foreground">
                                   {new Date(alias.createdAt).toLocaleDateString()}
                                 </p>
-                                {alias.isCollaborative && (
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-500/20 text-purple-500 dark:text-purple-300">
-                                    Team
-                                  </span>
-                                )}
+                                {alias.isCollaborative && <span className="badge text-[10px] py-0 px-1.5 bg-primary/20 text-primary border-primary/20">Team</span>}
                               </div>
                             </div>
                           </div>
-                          <div className="flex items-center space-x-1">
-                            <a 
-                              href={`/dashboard/inbox?alias=${alias.aliasEmail}`}
-                              className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-300/50 dark:hover:bg-gray-600 rounded-md transition-colors"
-                              title="View Inbox"
-                            >
-                              <FiInbox className="w-4 h-4" />
-                            </a>
-                            <a 
-                              href={`/dashboard/send?alias=${alias.aliasEmail}`}
-                              className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-500/10 dark:hover:bg-blue-500/20 rounded-md transition-colors"
-                              title="Send Email"
-                            >
-                              <FiSend className="w-4 h-4" />
+                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <a href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-muted-foreground hover:text-foreground rounded-xl hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer transition-colors" title="View Inbox">
+                              <Inbox className="w-4 h-4" />
                             </a>
                           </div>
                         </div>
@@ -654,286 +454,70 @@ export default function Dashboard() {
                 </div>
               )}
 
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-3">Email Activities</h4>
+              {/* Email Activities */}
+              <div className="relative pl-6 border-l border-border">
+                <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-border" />
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">Email Logs</p>
                 {activities.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {activities.slice(0, 5).map((activity, index) => {
-                      const activityText = activity.description || 
+                      const activityText = activity.description ||
                         (activity.type === 'sent' ? `Email sent to ${activity.data?.to || 'recipient'}` :
                          activity.type === 'received' ? `Email received from ${activity.data?.from || 'sender'}` :
                          activity.type === 'blocked' ? `Email blocked from ${activity.data?.from || 'sender'}` :
                          'Activity logged');
-                      
                       const activityTime = activity.timestamp || activity.createdAt;
-                      const aliasEmail = activity.aliasId ? 
+                      const aliasEmail = activity.aliasId ?
                         aliases.find(a => a._id === activity.aliasId || a.id === activity.aliasId)?.aliasEmail || 'Unknown' :
                         activity.data?.aliasEmail || '';
 
                       return (
-                        <div key={activity._id || activity.id || index} className="flex items-center gap-4 p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-                          <div className="p-3 bg-gray-200/60 dark:bg-gray-700/50 rounded-full border border-gray-300/50 dark:border-gray-600/30">
+                        <div key={activity._id || activity.id || index} className="flex items-start gap-4 p-4 rounded-2xl bg-black/[0.02] dark:bg-white/[0.02] border border-border hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all hover:translate-x-1 group">
+                          <div className="p-2 rounded-lg border flex-shrink-0 bg-black/5 dark:bg-white/5 border-border">
                             {getActivityIcon(activity.type)}
                           </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{activityText}</p>
-                            <p className="text-xs text-gray-500 dark:text-gray-500">
-                              {activityTime ? new Date(activityTime).toLocaleString() : 'Recent'}
-                              {aliasEmail && ` | Alias: ${aliasEmail}`}
-                            </p>
+                          <div className="min-w-0 flex-1 pt-1">
+                            <p className="text-sm font-medium text-foreground">{activityText}</p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <p className="text-xs font-medium text-muted-foreground">
+                                {activityTime ? new Date(activityTime).toLocaleString([], {hour: '2-digit', minute:'2-digit', month:'short', day:'numeric'}) : 'Recent'}
+                              </p>
+                              {aliasEmail && (
+                                <>
+                                  <span className="w-1 h-1 rounded-full bg-black/20 dark:bg-white/20" />
+                                  <span className="text-xs text-primary/80">{aliasEmail}</span>
+                                </>
+                              )}
+                            </div>
                           </div>
                         </div>
                       );
                     })}
                   </div>
                 ) : (
-                  <p className="text-sm text-gray-500 dark:text-gray-500 text-center py-4">No recent email activities.</p>
+                  <div className="p-8 text-center rounded-2xl border border-border border-dashed">
+                    <Mail className="w-8 h-8 text-muted-foreground/50 mx-auto mb-3" />
+                    <p className="text-sm text-muted-foreground">No recent email activities.</p>
+                  </div>
                 )}
               </div>
-
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center justify-between text-sm">
-                  <a 
-                    href="/dashboard/aliases" 
-                    className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 font-medium transition-colors"
-                  >
-                    View all aliases →
-                  </a>
-                  <a 
-                    href="/dashboard/inbox" 
-                    className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 font-medium transition-colors"
-                  >
-                    Go to inbox →
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Footer */}
-          <footer 
-            className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400 animate-fade-in-up" 
-            style={{animationDelay: '0.7s'}}
-          >
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p>&copy; {new Date().getFullYear()} Email Alias. All rights reserved.</p>
+          <motion.footer variants={item} className="pt-6 border-t border-border text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+              <p>&copy; {new Date().getFullYear()} InvisiMail. All rights reserved.</p>
               <div className="flex items-center gap-6">
-                <a href="/privacy" className="hover:text-gray-800 dark:hover:text-gray-200 transition-colors">Privacy Policy</a>
-                <a href="/terms" className="hover:text-gray-800 dark:hover:text-gray-200 transition-colors">Terms of Service</a>
+                <a href="/privacy" className="hover:text-foreground transition-colors">Privacy</a>
+                <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>
               </div>
             </div>
-          </footer>
-
-        </main>
+          </motion.footer>
+        </motion.main>
       </div>
 
-      {/* Assistant Chat Component */}
-      <AssistantChatPhase2 />
-
-      <style jsx global>{`
-        /* Default Light Theme */
-        html {
-          height: 100%;
-        }
-        body {
-          height: 100%;
-          background-color: #F3F4F6;
-          color: #1F2937;
-          overscroll-behavior: none;
-          transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Dark Theme Overrides */
-        .dark body {
-          background-color: #0F172A;
-          color: #d1d5db;
-        }
-
-        /* Animated Gradient Background (Dark Mode Only) */
-        .dark body::before {
-          content: '';
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -50;
-          background: linear-gradient(
-            -45deg,
-            #0f172a,
-            #0f172a,
-            #132447,
-            #1e1b4b
-          );
-          background-size: 400% 400%;
-          animation: gradient-pan 20s ease infinite;
-          opacity: 0.8;
-        }
-
-        /* Keyframe Animations */
-        @keyframes gradient-pan {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes gradient-text {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        @keyframes fade-in-up {
-          0% { opacity: 0; transform: translateY(20px) scale(0.98); }
-          100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-        @keyframes toast-in {
-          0% { opacity: 0; transform: translateX(100%); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        .animate-toast-in {
-           animation: toast-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.4; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.1); }
-        }
-        .animate-pulse-glow {
-          animation: pulse-glow 4s infinite ease-in-out;
-        }
-        @keyframes spin-glow {
-          0% {
-            transform: rotate(0deg);
-            box-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F6;
-          }
-          50% {
-            box-shadow: 0 0 20px #06B6D4, 0 0 40px #06B6D4;
-          }
-          100% {
-            transform: rotate(360deg);
-            box-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F6;
-          }
-        }
-        .animate-spin-glow {
-          animation: spin-glow 1.5s linear infinite;
-        }
-
-        /* Custom Component Classes */
-        .glass-panel {
-          background-color: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-          border-radius: 1rem;
-          box-shadow: 
-            0 8px 32px 0 rgba(0, 0, 0, 0.1),
-            inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
-          transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .dark .glass-panel {
-          background-color: rgba(28, 37, 58, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 
-            0 8px 32px 0 rgba(0, 0, 0, 0.37),
-            inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
-        }
-
-        .animated-gradient-text {
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-          background-image: linear-gradient(
-            90deg,
-            #a5b4fc,
-            #3b82f6,
-            #06b6d4,
-            #a5b4fc
-          );
-          background-size: 200% auto;
-          animation: gradient-text 4s linear infinite;
-        }
-        
-        .main-content-scroll::-webkit-scrollbar {
-          width: 0.5rem;
-        }
-        .main-content-scroll::-webkit-scrollbar-track {
-          background-color: rgba(15, 23, 42, 0.0);
-        }
-        .dark .main-content-scroll::-webkit-scrollbar-track {
-          background-color: rgba(15, 23, 42, 0.5);
-        }
-        .main-content-scroll::-webkit-scrollbar-thumb {
-          background-color: rgba(59, 130, 246, 0.5);
-          border-radius: 9999px;
-          border: 2px solid transparent;
-          background-clip: content-box;
-        }
-        .main-content-scroll::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(59, 130, 246, 0.8);
-        }
-
-        .btn-glass {
-          padding: 0.5rem 1.25rem;
-          border-radius: 0.5rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: #1F2937;
-          background-color: rgba(255, 255, 255, 0.5);
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.7);
-          transition: all 0.3s;
-        }
-        .dark .btn-glass {
-          color: white;
-          background-color: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
-        }
-        
-        .btn-glass:hover {
-          background-color: rgba(255, 255, 255, 0.7);
-          border-color: rgba(0, 0, 0, 0.15);
-          transform: scale(1.03);
-        }
-        .dark .btn-glass:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-glass.primary {
-           background-color: rgba(59, 130, 246, 0.2);
-           border-color: rgba(59, 130, 246, 0.4);
-           color: #1e40af;
-        }
-        .dark .btn-glass.primary {
-           background-color: rgba(59, 130, 246, 0.3);
-           border-color: rgba(59, 130, 246, 0.5);
-           color: #bfdbfe;
-        }
-        
-        .btn-glass.primary:hover {
-           background-color: rgba(59, 130, 246, 0.3);
-           border-color: rgba(59, 130, 246, 0.5);
-        }
-        .dark .btn-glass.primary:hover {
-           background-color: rgba(59, 130, 246, 0.4);
-           border-color: rgba(59, 130, 246, 0.6);
-           box-shadow: 0 0 20px 0 rgba(59, 130, 246, 0.4);
-        }
-
-        .dark .shadow-electric-glow {
-          box-shadow: 0 0 20px 0 rgba(59, 130, 246, 0.4);
-        }
-        .dark .hover\\:shadow-electric-glow:hover {
-          box-shadow: 0 0 20px 0 rgba(59, 130, 246, 0.4);
-        }
-
-        .recharts-tooltip-wrapper {
-          z-index: 50 !important;
-        }
-      `}</style>
+      <AssistantChat />
     </div>
   );
 }

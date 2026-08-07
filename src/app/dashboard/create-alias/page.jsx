@@ -3,9 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Menu } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import CreateAliasForm from '@/components/CreateAliasForm';
-import AssistantChatPhase2 from '@/components/AssistantChatPhase2';
+import AssistantChat from '@/components/AssistantChatPhase2';
 
 export default function CreateAliasPage() {
   const [user, setUser] = useState(null);
@@ -19,6 +20,7 @@ export default function CreateAliasPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function CreateAliasPage() {
         if (userData.plan === 'pro') {
           fetchVerifiedDomains();
           if (polling) {
-            setSuccess('Successfully upgraded to Pro! You can now use custom domains and unlimited aliases.');
+            setSuccess('Successfully upgraded to Pro!');
             setPolling(false);
           }
         }
@@ -61,18 +63,12 @@ export default function CreateAliasPage() {
     const maxAttempts = 10;
     const interval = 2000;
     let attempt = 0;
-
     while (attempt < maxAttempts) {
       await fetchUserData();
-      if (user?.plan === 'pro') {
-        setPolling(false);
-        setLoading(false);
-        break;
-      }
+      if (user?.plan === 'pro') { setPolling(false); setLoading(false); break; }
       attempt++;
       await new Promise(resolve => setTimeout(resolve, interval));
     }
-
     if (attempt >= maxAttempts) {
       setError('Failed to confirm Pro plan upgrade. Please try refreshing or contact support.');
       setPolling(false);
@@ -83,13 +79,8 @@ export default function CreateAliasPage() {
   const fetchAliases = async () => {
     try {
       const response = await fetch('/api/aliases', { cache: 'no-store' });
-      if (response.ok) {
-        const aliasData = await response.json();
-        setAliases(aliasData);
-      }
-    } catch (error) {
-      console.error('Error fetching aliases:', error);
-    }
+      if (response.ok) setAliases(await response.json());
+    } catch (error) { console.error('Error fetching aliases:', error); }
   };
 
   const fetchVerifiedDomains = async () => {
@@ -97,12 +88,9 @@ export default function CreateAliasPage() {
       const response = await fetch('/api/domains', { cache: 'no-store' });
       if (response.ok) {
         const domainData = await response.json();
-        const verified = domainData.filter(d => d.isVerified && d.mailgunStatus === 'active');
-        setVerifiedDomains(verified);
+        setVerifiedDomains(domainData.filter(d => d.isVerified && d.mailgunStatus === 'active'));
       }
-    } catch (error) {
-      console.error('Error fetching verified domains:', error);
-    }
+    } catch (error) { console.error('Error fetching verified domains:', error); }
   };
 
   const handleCreateAlias = async (e, domain) => {
@@ -110,7 +98,6 @@ export default function CreateAliasPage() {
     setSubmitting(true);
     setError('');
     setSuccess('');
-
     try {
       const response = await fetch('/api/aliases', {
         method: 'POST',
@@ -121,18 +108,14 @@ export default function CreateAliasPage() {
           domain: domain || process.env.NEXT_PUBLIC_MAILGUN_DOMAIN
         })
       });
-
       const data = await response.json();
-
       if (response.ok) {
         setSuccess('Alias created successfully!');
         setNewAlias('');
         setIsCollaborative(false);
         setSelectedDomain('');
         await fetchAliases();
-        setTimeout(() => {
-          router.push('/dashboard/aliases');
-        }, 2000);
+        setTimeout(() => { router.push('/dashboard/aliases'); }, 2000);
       } else {
         setError(data.error || 'Failed to create alias');
       }
@@ -143,85 +126,53 @@ export default function CreateAliasPage() {
     }
   };
 
-  const loadRazorpayScript = () => {
-    return new Promise((resolve) => {
-      if (window.Razorpay) {
-        resolve(true);
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
+  const loadRazorpayScript = () => new Promise((resolve) => {
+    if (window.Razorpay) { resolve(true); return; }
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
 
   const handleUpgrade = async () => {
     try {
       setError('');
       const scriptLoaded = await loadRazorpayScript();
-      if (!scriptLoaded) {
-        setError('Failed to load payment system. Please try again.');
-        return;
-      }
-
-      const response = await fetch('/api/upgrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      
+      if (!scriptLoaded) { setError('Failed to load payment system.'); return; }
+      const response = await fetch('/api/upgrade', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       if (response.ok) {
         const { order } = await response.json();
-        
         const options = {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: order.amount,
-          currency: order.currency,
-          name: 'Email Alias Pro',
-          description: 'Upgrade to Pro Plan',
-          order_id: order.id,
+          amount: order.amount, currency: order.currency,
+          name: 'InvisiMail Pro', description: 'Upgrade to Pro Plan', order_id: order.id,
           handler: function (response) {
-            setPolling(true);
-            setLoading(true);
-            pollUserStatus();
+            setPolling(true); setLoading(true); pollUserStatus();
             window.location.href = '/dashboard?upgraded=true';
           },
-          prefill: {
-            email: user?.email,
-            name: user?.name
-          },
-          theme: {
-            color: '#3B82F6'
-          },
-          modal: {
-            ondismiss: function () {
-              setError('Payment cancelled. You can try again anytime.');
-            }
-          }
+          prefill: { email: user?.email, name: user?.name },
+          theme: { color: '#7c3aed' },
+          modal: { ondismiss: function () { setError('Payment cancelled.'); } }
         };
-        
         const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (response) {
-          setError(`Payment failed: ${response.error.description}`);
-        });
+        rzp.on('payment.failed', function (response) { setError(`Payment failed: ${response.error.description}`); });
         rzp.open();
       } else {
         const data = await response.json();
         setError(data.error || 'Failed to create payment order');
       }
     } catch (error) {
-      console.error('Upgrade error:', error);
       setError('Failed to initiate upgrade process');
     }
   };
 
   if (loading || polling) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">{polling ? 'Verifying your Pro plan...' : 'Loading...'}</p>
+          <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-sm text-[hsl(var(--muted-foreground))]">{polling ? 'Verifying your Pro plan...' : 'Loading...'}</p>
         </div>
       </div>
     );
@@ -232,35 +183,33 @@ export default function CreateAliasPage() {
   const canCreateMore = isPro || personalAliases.length < 5;
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
-      <Sidebar user={user} onUpgrade={handleUpgrade} />
-      
+    <div className="flex h-screen bg-[#09090B] overflow-hidden">
+      <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
+
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">Create New Alias</h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Create a new email alias to receive emails at a custom address.
-            </p>
+        <header className="surface-elevated rounded-none border-x-0 border-t-0 px-5 md:px-8 py-5">
+          <div className="flex items-center gap-4">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+              <Menu className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-white">Create New Alias</h1>
+              <p className="text-sm text-[hsl(var(--muted-foreground))] mt-0.5">
+                Create a new email alias to receive emails at a custom address.
+              </p>
+            </div>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-6">
-          {error && (
-            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
-              {success}
-            </div>
-          )}
+        <main className="flex-1 overflow-y-auto p-5 md:p-8">
+          <div className="max-w-2xl mx-auto w-full mt-4 md:mt-8">
+            {error && (
+              <div className="mb-5 alert-error p-3 rounded-xl text-sm">{error}</div>
+            )}
+            {success && (
+              <div className="mb-5 alert-success p-3 rounded-xl text-sm">{success}</div>
+            )}
 
-          {/* ADD ASSISTANT CHAT HERE */}
-          <AssistantChatPhase2 />
-
-          <div className="max-w-2xl">
             <CreateAliasForm
               isPro={isPro}
               personalAliasesCount={personalAliases.length}
@@ -278,6 +227,7 @@ export default function CreateAliasPage() {
           </div>
         </main>
       </div>
+      <AssistantChat />
     </div>
   );
 }
