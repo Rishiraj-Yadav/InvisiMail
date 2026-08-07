@@ -1,6 +1,6 @@
 // src/app/dashboard/send/page.jsx
 import { Suspense } from 'react';
-import SendEmail from './sendEmail'; // ✅ Remove .js extension
+import SendEmail from './sendEmail';
 
 export default function SendEmailPage() {
   return (
@@ -12,10 +12,10 @@ export default function SendEmailPage() {
 
 function Loading() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-        <p className="text-gray-600">Loading...</p>
+        <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading...</p>
       </div>
     </div>
   );

@@ -7,6 +7,13 @@ const nextConfig = {
 
   // (Optional but recommended)
   reactStrictMode: true,
+
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
+  },
 };
 
 export default lingoCompiler.next({
