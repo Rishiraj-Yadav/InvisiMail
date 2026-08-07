@@ -84,33 +84,38 @@ export default function AssistantChat() {
     };
 
     const ChatWindow = () => (
-        <div className="fixed bottom-24 right-6 w-96 bg-white shadow-2xl rounded-2xl flex flex-col overflow-hidden border border-gray-200/80 z-[9999]">
-            <div className="bg-blue-600 text-white px-5 py-3 flex justify-between items-center font-semibold shadow-md">
-                <span>Email Assistant 🤖</span>
-                <button onClick={() => setIsOpen(false)} className="text-2xl leading-none text-blue-200 hover:text-white transition-colors">&times;</button>
+        <div className="fixed bottom-24 right-4 md:right-6 w-[350px] md:w-[400px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[calc(100vh-8rem)] bg-[#09090B] shadow-2xl shadow-indigo-500/10 rounded-2xl flex flex-col overflow-hidden border border-white/10 z-[9999]">
+            <div className="bg-white/[0.02] border-b border-white/10 text-white px-5 py-4 flex justify-between items-center font-bold">
+                <div className="flex items-center gap-2">
+                    <span className="text-lg">🤖</span>
+                    <span>Email Assistant</span>
+                </div>
+                <button onClick={() => setIsOpen(false)} className="text-2xl leading-none text-[hsl(var(--muted-foreground))] hover:text-white transition-colors">&times;</button>
             </div>
 
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 h-96 bg-gray-50">
+            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-black/20 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                 {messages.map((msg) => (
                     <div
                         key={msg.id}
-                        className={`p-3 rounded-xl max-w-[85%] text-sm ${msg.sender === "user"
-                            ? "ml-auto bg-blue-500 text-white rounded-br-none"
-                            : "mr-auto bg-gray-200 text-gray-800 rounded-bl-none"
+                        className={`p-3 rounded-2xl max-w-[85%] text-sm shadow-sm ${msg.sender === "user"
+                            ? "ml-auto bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-br-sm"
+                            : "mr-auto bg-white/5 border border-white/10 text-white rounded-bl-sm"
                         }`}
                     >
                         {msg.text}
                     </div>
                 ))}
                 {loading && (
-                    <div className="mr-auto bg-gray-200 text-gray-800 p-3 rounded-xl max-w-[50%] rounded-bl-none animate-pulse">
-                        Typing...
+                    <div className="mr-auto bg-white/5 border border-white/10 text-white/70 p-3 rounded-2xl max-w-[50%] rounded-bl-sm animate-pulse flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="flex items-center p-2 border-t bg-white">
+            <div className="flex items-center p-3 border-t border-white/10 bg-white/[0.02]">
                 <input
                     ref={inputRef}
                     type="text"
@@ -120,7 +125,7 @@ export default function AssistantChat() {
                         if (e.key === "Enter") handleSend();
                     }}
                     placeholder="Ask your assistant..."
-                    className="flex-1 px-3 py-2 text-sm outline-none bg-transparent disabled:opacity-50"
+                    className="flex-1 px-4 py-2 text-sm outline-none bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all mr-2 disabled:opacity-50"
                     disabled={loading}
                 />
                 <button
