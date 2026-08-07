@@ -49,7 +49,7 @@ function ChatBubble({ sender, text }) {
           px-4 py-3 rounded-2xl shadow-sm max-w-[85%] break-words text-sm
           ${sender === "user"
             ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-br-sm"
-            : "bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-foreground rounded-bl-sm"
+            : "bg-white/5 border border-white/10 text-white rounded-bl-sm"
           }
         `}
         style={{ wordBreak: "break-word" }}
@@ -69,8 +69,8 @@ function ActionButton({ action, onClick, disabled }) {
       className={`
         flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm border transition-all
         ${disabled
-          ? "bg-gray-50 dark:bg-white/5 text-gray-400 dark:text-white/40 border-gray-100 dark:border-white/5 opacity-60 cursor-not-allowed"
-          : "bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-foreground border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 hover:shadow-sm active:scale-95"
+          ? "bg-white/5 text-white/40 border-white/5 opacity-60 cursor-not-allowed"
+          : "bg-white/5 hover:bg-white/10 text-white border-white/10 hover:border-white/20 hover:shadow-sm active:scale-95"
         }
       `}
       disabled={disabled}
@@ -87,11 +87,11 @@ function ActionButton({ action, onClick, disabled }) {
 function TypingIndicator() {
   return (
     <div className="flex justify-start mb-3">
-      <div className="flex items-center px-4 py-3 rounded-2xl rounded-bl-sm bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm max-w-[50%]">
+      <div className="flex items-center px-4 py-3 rounded-2xl rounded-bl-sm bg-white/5 border border-white/10 shadow-sm max-w-[50%]">
         <div className="flex space-x-1">
-          <span className="w-2 h-2 bg-gray-400 dark:bg-white/50 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></span>
-          <span className="w-2 h-2 bg-gray-400 dark:bg-white/50 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></span>
-          <span className="w-2 h-2 bg-gray-400 dark:bg-white/50 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></span>
+          <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></span>
+          <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></span>
+          <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></span>
         </div>
       </div>
     </div>
@@ -114,21 +114,21 @@ function ChatWindow({
   inputRef
 }) {
   return (
-    <div className="fixed bottom-24 right-4 md:right-6 w-[350px] md:w-[420px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-8rem)] bg-white dark:bg-[#09090B] shadow-2xl shadow-indigo-500/10 rounded-3xl flex flex-col overflow-hidden border border-gray-200 dark:border-white/10 z-[9999]">
+    <div className="fixed bottom-24 right-4 md:right-6 w-[350px] md:w-[420px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-8rem)] bg-[#09090B] shadow-2xl shadow-indigo-500/10 rounded-3xl flex flex-col overflow-hidden border border-white/10 z-[9999]">
       {/* Header */}
-      <div className="bg-gray-50 dark:bg-white/[0.02] border-b border-gray-200 dark:border-white/10 text-foreground px-6 py-4 flex justify-between items-center shadow-sm dark:shadow-lg flex-shrink-0">
+      <div className="bg-white/[0.02] border-b border-white/10 text-white px-6 py-4 flex justify-between items-center shadow-lg flex-shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gray-200 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+          <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
             <ChatIcon />
           </div>
           <div>
             <span className="font-semibold text-lg">Email Assistant</span>
-            <p className="text-xs text-muted-foreground mt-0.5">AI-Powered Helper</p>
+            <p className="text-xs text-[hsl(var(--muted-foreground))] mt-0.5">AI-Powered Helper</p>
           </div>
         </div>
         <button 
           onClick={closeFn} 
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-muted-foreground hover:text-foreground" 
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors text-[hsl(var(--muted-foreground))] hover:text-white" 
           aria-label="Close chat"
         >
           <span className="text-2xl leading-none">&times;</span>
@@ -136,8 +136,8 @@ function ChatWindow({
       </div>
 
       {/* Quick Actions */}
-      <div className="px-4 py-4 bg-transparent border-b border-gray-200 dark:border-white/10 flex-shrink-0">
-        <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Quick Actions</p>
+      <div className="px-4 py-4 bg-transparent border-b border-white/10 flex-shrink-0">
+        <p className="text-xs font-semibold text-[hsl(var(--muted-foreground))] mb-3 uppercase tracking-wide">Quick Actions</p>
         <div className="flex gap-2 flex-wrap">
           {ACTIONS.map(action =>
             <ActionButton
@@ -152,16 +152,16 @@ function ChatWindow({
 
       {/* Messages - Scrollable */}
       <div 
-        className="flex-1 px-4 py-4 overflow-y-auto bg-gray-50/50 dark:bg-black/20 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-white/10 scrollbar-track-transparent"
+        className="flex-1 px-4 py-4 overflow-y-auto bg-black/20 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
         style={{ minHeight: 0 }}
       >
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center px-6">
-            <div className="w-16 h-16 bg-gray-200 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-full flex items-center justify-center mb-4 text-foreground">
+            <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-4 text-white">
               <ChatIcon />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">How can I help you?</h3>
-            <p className="text-sm text-muted-foreground">Ask me anything about your emails or use quick actions above!</p>
+            <h3 className="text-lg font-semibold text-white mb-2">How can I help you?</h3>
+            <p className="text-sm text-[hsl(var(--muted-foreground))]">Ask me anything about your emails or use quick actions above!</p>
           </div>
         )}
         {messages.map(msg => (
@@ -172,8 +172,8 @@ function ChatWindow({
       </div>
 
       {/* Input Area - FIXED */}
-      <div className="px-4 py-4 border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/[0.02] flex-shrink-0">
-        <div className="flex items-center gap-2 bg-white dark:bg-white/5 rounded-2xl p-2 border border-gray-200 dark:border-white/10 focus-within:border-indigo-500/50 focus-within:ring-1 focus-within:ring-indigo-500/50 transition-all shadow-sm dark:shadow-none">
+      <div className="px-4 py-4 border-t border-white/10 bg-white/[0.02] flex-shrink-0">
+        <div className="flex items-center gap-2 bg-white/5 rounded-2xl p-2 border border-white/10 focus-within:border-indigo-500/50 focus-within:ring-1 focus-within:ring-indigo-500/50 transition-all">
           <input
             ref={inputRef}
             type="text"
@@ -186,14 +186,14 @@ function ChatWindow({
               }
             }}
             placeholder="Type your message..."
-            className="flex-1 px-3 py-2 text-sm outline-none bg-transparent text-foreground placeholder:text-gray-400 dark:placeholder:text-white/40 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-3 py-2 text-sm outline-none bg-transparent text-white placeholder:text-white/40 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={loading || actionsDisabled}
             autoComplete="off"
           />
           <button
             onClick={handleSend}
             disabled={loading || actionsDisabled || !input.trim()}
-            className="p-2.5 rounded-xl text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:from-gray-200 disabled:to-gray-200 dark:disabled:from-white/10 dark:disabled:to-white/10 disabled:text-gray-400 dark:disabled:text-white/40 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow active:scale-95"
+            className="p-2.5 rounded-xl text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:from-white/10 disabled:to-white/10 disabled:text-white/40 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow active:scale-95"
             aria-label="Send"
             type="button"
           >
