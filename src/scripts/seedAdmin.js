@@ -1,8 +1,9 @@
 // scripts/seedAdmin.js
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
-// require('dotenv').config({ path: '.env.local' });
-MONGODB_URI= "mongodb+srv://rishirajcodes23297020_db_user:littlemoreemail@cluster0.0zrimsu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// require('dotenv').config({ path: '.env.local' })
+MONGODB_URI= process.env.MONGODB_URI
+
 async function seedAdmin() {
   const client = new MongoClient(MONGODB_URI)
   
