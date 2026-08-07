@@ -20,21 +20,8 @@ export default function CreateAliasForm({
   const defaultDomain = process.env.NEXT_PUBLIC_MAILGUN_DOMAIN || 'yourdomain.com';
 
   return (
-    <div className="surface-card rounded-xl border border-white/5 shadow-xl">
+    <div className="surface-card rounded-2xl border border-white/5 shadow-xl">
       <div className="px-6 py-5 border-b border-white/5">
-        <div className="flex items-center gap-4">
-          <div className="p-3 bg-white/5 rounded-xl border border-white/10">
-            <Plus className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-white">Create New Email Alias</h3>
-            <p className="text-sm text-[hsl(var(--muted-foreground))] mt-1">
-              Generate a custom email address that forwards to your inbox.
-            </p>
-          </div>
-        </div>
-        
-        {/* Plan Status */}
         <div className="mt-5 p-4 surface-interactive rounded-xl border border-white/5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -42,7 +29,7 @@ export default function CreateAliasForm({
               <span className="text-sm font-semibold text-white">Current Plan Status</span>
             </div>
             <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
-              isPro ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-white/5 text-[hsl(var(--muted-foreground))] border-white/10'
+              isPro ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' : 'bg-white/5 text-[hsl(var(--muted-foreground))] border-white/10'
             }`}>
               {isPro && <Star className="w-3.5 h-3.5 fill-current" />}
               {isPro ? 'Pro Plan' : 'Free Plan'}
@@ -84,12 +71,12 @@ export default function CreateAliasForm({
             <label htmlFor="alias-input" className="block text-sm font-semibold text-white mb-2">
               Alias Name <span className="text-red-400">*</span>
             </label>
-            <div className="flex rounded-lg shadow-sm">
+            <div className="flex items-center w-full h-12 bg-white/[0.04] border border-white/10 rounded-xl focus-within:border-[#6366F1] focus-within:ring-2 focus-within:ring-[#6366F1]/20 transition-all overflow-hidden">
               <input
                 id="alias-input"
                 type="text"
                 placeholder="e.g., support, contact, info"
-                className={`flex-1 input-field rounded-r-none focus:ring-offset-0 ${
+                className={`flex-1 h-full px-4 bg-transparent text-sm font-medium text-white placeholder-white/40 focus:outline-none ${
                   !canCreateMore ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 value={newAlias}
@@ -99,7 +86,7 @@ export default function CreateAliasForm({
                 pattern="[a-zA-Z0-9._-]+"
                 title="Only letters, numbers, dots, hyphens and underscores allowed"
               />
-              <span className="inline-flex items-center px-4 py-3 text-[hsl(var(--muted-foreground))] bg-white/5 border border-l-0 border-white/10 rounded-r-lg text-sm font-medium">
+              <span className="inline-flex items-center px-4 h-full text-[hsl(var(--muted-foreground))] bg-white/5 border-l border-white/10 text-sm font-medium">
                 @{selectedDomain || defaultDomain}
               </span>
             </div>
@@ -136,7 +123,7 @@ export default function CreateAliasForm({
           )}
 
           {isPro && (
-            <div className="p-4 bg-yellow-500/5 border border-yellow-500/20 rounded-xl">
+            <div className="p-4 bg-indigo-500/5 border border-indigo-500/20 rounded-xl">
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
@@ -145,15 +132,15 @@ export default function CreateAliasForm({
                     checked={isCollaborative}
                     onChange={(e) => setIsCollaborative(e.target.checked)}
                     disabled={submitting}
-                    className="w-4 h-4 rounded border-white/20 bg-background accent-yellow-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-white/20 bg-background accent-indigo-500 cursor-pointer"
                   />
                 </div>
                 <div className="ml-3">
-                  <label htmlFor="collaborative-checkbox" className="text-sm font-bold text-yellow-500 flex items-center gap-2 cursor-pointer">
+                  <label htmlFor="collaborative-checkbox" className="text-sm font-bold text-indigo-400 flex items-center gap-2 cursor-pointer">
                     <Star className="w-4 h-4" />
                     Make this a collaborative alias
                   </label>
-                  <p className="text-xs text-yellow-500/70 mt-1">
+                  <p className="text-xs text-indigo-400/70 mt-1">
                     Allow team members to send and receive emails from this alias. You can add collaborators after creation.
                   </p>
                 </div>
@@ -173,10 +160,10 @@ export default function CreateAliasForm({
             <button
               type="submit"
               disabled={!canCreateMore || !newAlias.trim() || submitting}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
                 canCreateMore && newAlias.trim() && !submitting
-                  ? 'bg-white text-black hover:bg-white/90'
-                  : 'bg-white/10 text-white/30 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] text-white hover:from-[#4F46E5] hover:to-[#7C3AED] shadow-lg shadow-indigo-500/25 cursor-pointer'
+                  : 'bg-white/5 text-white/30 border border-white/10 cursor-not-allowed'
               }`}
             >
               {submitting ? (
