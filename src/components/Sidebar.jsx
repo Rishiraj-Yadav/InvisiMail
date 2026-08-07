@@ -30,6 +30,7 @@ export default function Sidebar({ user, onUpgrade, isMobileOpen, setIsMobileOpen
     { name: 'Compose', href: '/dashboard/send', icon: Send, active: pathname === '/dashboard/send' },
     { name: 'Inbox', href: '/dashboard/inbox', icon: Inbox, active: pathname.startsWith('/dashboard/inbox') },
     { name: 'All Aliases', href: '/dashboard/aliases', icon: FileText, active: pathname === '/dashboard/aliases' },
+    { name: 'Create Alias', href: '/dashboard/create-alias', icon: Plus, active: pathname === '/dashboard/create-alias' },
   ];
 
   const isPro = user?.plan === 'pro';

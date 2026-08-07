@@ -202,14 +202,14 @@ export default function CreateAliasPage() {
         </header>
 
         <main className="flex-1 overflow-y-auto p-5 md:p-8">
-          {error && (
-            <div className="mb-5 alert-error p-3 rounded-xl text-sm">{error}</div>
-          )}
-          {success && (
-            <div className="mb-5 alert-success p-3 rounded-xl text-sm">{success}</div>
-          )}
+          <div className="max-w-2xl mx-auto w-full mt-4 md:mt-8">
+            {error && (
+              <div className="mb-5 alert-error p-3 rounded-xl text-sm">{error}</div>
+            )}
+            {success && (
+              <div className="mb-5 alert-success p-3 rounded-xl text-sm">{success}</div>
+            )}
 
-          <div className="max-w-2xl">
             <CreateAliasForm
               isPro={isPro}
               personalAliasesCount={personalAliases.length}
