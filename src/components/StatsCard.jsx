@@ -15,25 +15,25 @@ export default function StatsCard({
 }) {
   const themeClasses = {
     blue: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-gray-100 dark:bg-white/5',
+      iconBg: 'bg-gray-200 dark:bg-white/10',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-gray-200 dark:border-white/5'
     },
     green: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-gray-100 dark:bg-white/5',
+      iconBg: 'bg-gray-200 dark:bg-white/10',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-gray-200 dark:border-white/5'
     },
     purple: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-gray-100 dark:bg-white/5',
+      iconBg: 'bg-gray-200 dark:bg-white/10',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-gray-200 dark:border-white/5'
     }
   };
 
@@ -50,12 +50,12 @@ export default function StatsCard({
               </div>
             </div>
             <div>
-              <p className="text-sm font-bold text-[hsl(var(--muted-foreground))] mb-1">{title}</p>
+              <p className="text-sm font-bold text-muted-foreground mb-1">{title}</p>
               <p className={`text-3xl font-bold ${currentTheme.statColor} mb-1`}>
                 {stat}
               </p>
               {subtitle && (
-                <p className="text-xs text-[hsl(var(--muted-foreground))]">{subtitle}</p>
+                <p className="text-xs text-muted-foreground">{subtitle}</p>
               )}
             </div>
           </div>
