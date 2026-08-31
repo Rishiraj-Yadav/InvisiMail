@@ -83,7 +83,7 @@ export default function CreateAliasForm({
                 onChange={(e) => setNewAlias(e.target.value)}
                 disabled={!canCreateMore || submitting}
                 required
-                pattern="[a-zA-Z0-9._-]+"
+                pattern="[a-zA-Z0-9._\-]+"
                 title="Only letters, numbers, dots, hyphens and underscores allowed"
               />
               <span className="inline-flex items-center px-4 h-full text-[hsl(var(--muted-foreground))] bg-white/5 border-l border-white/10 text-sm font-medium">

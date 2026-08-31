@@ -320,9 +320,17 @@ export async function POST(request) {
       reverseAlias: from // Return the original alias instead of reverse alias
     });
   } catch (error) {
-    console.error('Send email error:', error);
+    console.error('Send email error:', {
+      name: error.name,
+      message: error.message,
+      status: error.status || error.statusCode,
+      details: error.details || error.response?.body
+    });
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      {
+        error: 'Failed to send email',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
       { status: 500 }
     );
   }
