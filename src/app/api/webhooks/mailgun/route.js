@@ -343,11 +343,11 @@ export async function POST(request) {
       for (const userEmail of recipients) {
         try {
           await mg.messages.create(process.env.MAILGUN_DOMAIN, {
-            from: `${sender} <${reverseAddress}>`,
+            from: buildForwardFromHeader(sender, aliasData.aliasEmail),
             to: userEmail,
             subject,
             text: `Original sender: ${sender}\n\n${bodyPlain || ''}`,
-            html: bodyHtml || `<pre style="white-space: pre-wrap;">${escapeHtml(bodyPlain || '')}</pre>`,
+            html: buildForwardHtml(sender, bodyPlain, bodyHtml),
             'h:Reply-To': reverseAddress,
             ...(messageId ? { 'h:In-Reply-To': messageId } : {}),
             attachment: attachments
@@ -431,6 +431,59 @@ async function createReverseAlias(db, aliasId, recipientEmail, userId, originalA
     console.error('Error creating reverse alias:', error);
     throw error;
   }
+}
+
+// Build a stable, authorized visible sender while keeping the reverse alias private in Reply-To.
+function buildForwardFromHeader(sender, aliasEmail) {
+  const safeAlias = String(aliasEmail || '').trim().toLowerCase();
+  const parsedSender = parseSender(sender);
+
+  if (!safeAlias) {
+    return parsedSender.address || '';
+  }
+
+  const displayName = parsedSender.name
+    ? `${parsedSender.name} via InvisiMail`
+    : parsedSender.address
+      ? `Original sender: ${parsedSender.address}`
+      : 'InvisiMail';
+
+  return `${encodeHeaderDisplayName(displayName)} <${safeAlias}>`;
+}
+
+function buildForwardHtml(sender, bodyPlain, bodyHtml) {
+  const originalBody = bodyHtml || `<pre style="white-space: pre-wrap;">${escapeHtml(bodyPlain || '')}</pre>`;
+  return `<div style="font-family: Arial, sans-serif; line-height: 1.5;">
+    <p><strong>Original sender:</strong> ${escapeHtml(sender)}</p>
+    <hr style="border: 0; border-top: 1px solid #ddd;" />
+    ${originalBody}
+  </div>`;
+}
+
+function parseSender(sender) {
+  const value = String(sender || '').trim();
+  const match = value.match(/^(.*?)\s*<([^<>\r\n]+)>\s*$/);
+  const address = (match ? match[2] : value).trim();
+  const name = match ? match[1].trim().replace(/^[\"']|[\"']$/g, '') : '';
+
+  if (!/^[^\s@<>]+@[^\s@<>]+$/.test(address)) {
+    return { address: '', name: '' };
+  }
+
+  return {
+    address,
+    name: name.replace(/[\r\n\0]/g, '').replace(/[<>]/g, '').trim()
+  };
+}
+
+function encodeHeaderDisplayName(value) {
+  const cleaned = String(value || '')
+    .replace(/[\r\n\0]/g, '')
+    .replace(/[<>]/g, '')
+    .replace(/[\"']/g, '')
+    .trim();
+
+  return `\"${cleaned}\"`;
 }
 
 // Generate unique reverse ID
