@@ -4,6 +4,7 @@ import clientPromise from '../../../../lib/mongodb';
 import { mg } from '../../../../lib/mailgun';
 import { ObjectId } from 'mongodb';
 import crypto from 'crypto';
+import { buildQuarantineReviewNotification, escapeHtml } from '../../../../lib/emailTemplates';
 
 export async function POST(request) {
   try {
@@ -285,7 +286,9 @@ export async function POST(request) {
     };
 
     // Classify spam
-    const spamResult = await classifySpam(bodyPlain, subject, sender);
+    const spamResult = spamSettings.enabled === false
+      ? { isSpam: false, confidence: 0, reason: 'Spam filtering disabled for this alias', score: 0, threshold: null }
+      : await classifySpam(bodyPlain, subject, sender, spamSettings.sensitivity);
     console.log(`Email classified as: ${spamResult.isSpam ? 'SPAM' : 'CLEAN'} (Score: ${spamResult.score}, Reason: ${spamResult.reason})`);
 
     const spamAction = spamResult.isSpam ? spamSettings.action : 'none';
@@ -306,8 +309,11 @@ export async function POST(request) {
       isRead: false,
       isSpam: spamResult.isSpam,
       spamConfidence: spamResult.confidence,
+      spamScore: spamResult.score,
+      spamThreshold: spamResult.threshold,
       spamAction,
       spamReason: spamResult.reason,
+      quarantineStatus: spamAction === 'quarantine' ? 'quarantined' : null,
       attachments: attachments.map(a => ({ filename: a.filename, contentType: a.contentType, size: a.data.length }))
     });
 
@@ -340,7 +346,7 @@ export async function POST(request) {
             html: spamAction === 'tag' ? `
               <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
                 <h3 style="color: #dc2626; margin: 0 0 8px 0;">⚠️ Potential Spam Detected</h3>
-                <p style="margin: 0; color: #7f1d1d;">Reason: ${spamResult.reason}</p>
+                <p style="margin: 0; color: #7f1d1d;">Reason: ${escapeHtml(spamResult.reason)}</p>
               </div>
               ${bodyHtml}
             ` : bodyHtml,
@@ -370,20 +376,31 @@ export async function POST(request) {
             from: `Spam Filter <noreply@${process.env.MAILGUN_DOMAIN}>`,
             to: ownerEmail,
             subject: `Spam Email Blocked for ${aliasData.aliasEmail}`,
-            text: `A potential spam email was blocked for your alias ${aliasData.aliasEmail}.\n\nFrom: ${sender}\nSubject: ${subject}\nReason: ${spamResult.reason}\n\nYou can view quarantined emails in your dashboard spam folder.`,
-            html: `
-              <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                <h3 style="color: #dc2626; margin: 0 0 8px 0;">🚫 Spam Email Blocked</h3>
-                <p style="margin: 0; color: #7f1d1d;">A potential spam email was blocked for your alias <strong>${aliasData.aliasEmail}</strong>.</p>
-              </div>
-              <div style="background: #f9fafb; padding: 12px; border-radius: 6px;">
-                <p><strong>From:</strong> ${sender}</p>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Reason:</strong> ${spamResult.reason}</p>
-              </div>
-              <p style="margin-top: 16px; color: #6b7280;">You can view and manage spam in your dashboard.</p>
-            `
+            ...buildQuarantineReviewNotification({
+              emailId: result.insertedId.toString(),
+              aliasEmail: aliasData.aliasEmail,
+              sender,
+              subject,
+              bodyPlain,
+              spamReason: spamResult.reason,
+              receivedAt: new Date(),
+              attachments: attachments.map(({ filename, contentType, data }) => ({
+                filename,
+                contentType,
+                size: data.length,
+              })),
+            }),
+            'o:tracking': 'no'
           });
+
+          await db.collection('inbox').updateOne(
+            { _id: result.insertedId },
+            {
+              $set: {
+                quarantineNotificationSentAt: new Date(),
+              },
+            }
+          );
         } catch (notificationError) {
           console.error('Notification error:', notificationError.message);
         }
@@ -458,56 +475,53 @@ function generateReverseId() {
 }
 
 // Improved spam classification
-async function classifySpam(bodyPlain, subject, sender) {
+function classifySpam(bodyPlain, subject, sender, sensitivity = 'medium') {
   const fullText = `${subject || ''} ${bodyPlain || ''}`.toLowerCase();
-  
   const spamIndicators = {
     highRisk: ['free money', 'win cash', 'urgent action', 'act now', 'limited time offer', 'click here now', 'congratulations you won', 'inheritance money', 'viagra', 'cialis', 'pharmacy', 'nigeria', 'prince', 'inheritance', 'lottery', 'casino', 'pills', 'enlarge', 'bitcoin investment'],
-    mediumRisk: ['free','free free','spam', 'winner', 'prize', 'cash', 'money', 'urgent', 'click here', 'limited time', 'offer expires', 'guaranteed', 'investment opportunity', 'make money fast', 'work from home', 'credit card', 'verify account', 'update information', 'suspended account', 'password reset', 'security alert', 'bank transfer', 'wire money'],
-    lowRisk: ['free','free free','deal', 'discount', 'save', 'buy now', 'order now', 'special offer', 'unsubscribe', 'marketing', 'newsletter', 'promotion']
+    mediumRisk: ['free free', 'spam', 'winner', 'prize', 'cash', 'money', 'urgent', 'click here', 'limited time', 'offer expires', 'guaranteed', 'investment opportunity', 'make money fast', 'work from home', 'credit card', 'verify account', 'update information', 'suspended account', 'password reset', 'security alert', 'bank transfer', 'wire money'],
+    lowRisk: ['free', 'deal', 'discount', 'save', 'buy now', 'order now', 'special offer', 'unsubscribe', 'marketing', 'newsletter', 'promotion']
   };
-  
+
+  const thresholds = { low: 5, medium: 4, high: 2 };
+  const threshold = thresholds[sensitivity] || thresholds.medium;
   let spamScore = 0;
-  let reasons = [];
-  
+  const reasons = [];
+  const words = fullText.split(/[^a-z0-9]+/i).filter(Boolean);
+  const containsKeyword = (keyword) => {
+    const keywordWords = keyword.toLowerCase().split(/\\s+/);
+    return keywordWords.every((word, index) => words.includes(word))
+      && words.join(' ').includes(keywordWords.join(' '));
+  };
+
   spamIndicators.highRisk.forEach(keyword => {
-    if (fullText.includes(keyword)) {
+    if (containsKeyword(keyword)) {
       spamScore += 3;
       reasons.push(`High-risk keyword: "${keyword}"`);
     }
   });
-  
   spamIndicators.mediumRisk.forEach(keyword => {
-    if (fullText.includes(keyword)) {
+    if (containsKeyword(keyword)) {
       spamScore += 2;
       reasons.push(`Medium-risk keyword: "${keyword}"`);
     }
   });
-  
   spamIndicators.lowRisk.forEach(keyword => {
-    if (fullText.includes(keyword)) {
-      spamScore +=1;
+    if (containsKeyword(keyword)) {
+      spamScore += 1;
       reasons.push(`Low-risk keyword: "${keyword}"`);
     }
   });
-  
-  // Additional heuristics
+
   if (subject && subject.toUpperCase() === subject && subject.length > 10) {
     spamScore += 1;
     reasons.push('All-caps subject line');
   }
-  
   if ((bodyPlain || '').split('!').length > 5) {
     spamScore += 1;
     reasons.push('Excessive exclamation marks');
   }
-  
-  if (sender && (sender.includes('noreply') || sender.includes('no-reply'))) {
-    spamScore += 1;
-    reasons.push('No-reply sender');
-  }
 
-  // URL count
   const urlCount = (fullText.match(/https?:\/\/[^\s]+/g) || []).length;
   if (urlCount > 3) {
     spamScore += 2;
@@ -517,26 +531,22 @@ async function classifySpam(bodyPlain, subject, sender) {
     reasons.push(`Multiple URLs (${urlCount})`);
   }
 
-  // Caps ratio
   const capsRatio = fullText.split('').filter(c => c === c.toUpperCase() && c !== c.toLowerCase()).length / (fullText.length || 1);
   if (capsRatio > 0.3) {
     spamScore += 1.5;
     reasons.push('Excessive capital letters');
   }
-
-  // Money symbols
   if (fullText.includes('$') || fullText.includes('€') || fullText.includes('£')) {
     spamScore += 0.5;
     reasons.push('Money symbols');
   }
-  
-  const isSpam = spamScore >= 2;
-  const confidence = Math.min(spamScore / 10, 1);
-  
+
+  const isSpam = spamScore >= threshold;
   return {
     isSpam,
-    confidence,
+    confidence: Math.min(spamScore / Math.max(threshold * 2, 1), 1),
     reason: isSpam ? reasons.join(', ') : 'No spam indicators detected',
-    score: spamScore
+    score: spamScore,
+    threshold,
   };
 }

@@ -183,6 +183,12 @@ export async function POST(request) {
       isActive: true,
       emailsSent: 0,
       emailsReceived: 0,
+      spamSettings: {
+        enabled: true,
+        sensitivity: 'medium',
+        action: 'quarantine',
+        notifications: true,
+      },
       createdAt: new Date(),
       updatedAt: new Date()
     };
