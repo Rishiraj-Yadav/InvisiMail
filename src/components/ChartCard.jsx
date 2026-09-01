@@ -19,12 +19,12 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
         />
         <div className="text-sm space-y-2">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-3 h-3 rounded-full bg-white" />
-            <span className="text-white/80 font-bold">Legitimate ({legitPct}%)</span>
+            <span className="inline-block w-3 h-3 rounded-full bg-card" />
+            <span className="text-foreground/80 font-bold">Legitimate ({legitPct}%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-block w-3 h-3 rounded-full bg-white/20" />
-            <span className="text-white/80 font-bold">Spam ({spamPct}%)</span>
+            <span className="inline-block w-3 h-3 rounded-full bg-muted" />
+            <span className="text-foreground/80 font-bold">Spam ({spamPct}%)</span>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
 
   // --- Traffic Chart Logic ---
   const renderTrafficChart = () => {
-    const maxValue = Math.max(...data);
+    const maxValue = Math.max(...data, 1);
     
     return (
       <div className="h-40 flex items-end gap-2 mt-4">
@@ -43,7 +43,7 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
             <div key={idx} className="flex-1 flex flex-col items-center">
               <div
                 style={{ height: `${height}%` }}
-                className="w-full bg-white/20 rounded-t transition-colors hover:bg-white"
+                className="w-full bg-muted rounded-t transition-colors hover:bg-card"
                 title={`${value} emails`}
               />
             </div>
@@ -54,8 +54,8 @@ export default function ChartCard({ title, type, data = [], inboxStats = {} }) {
   };
 
   return (
-    <div className="surface-card bg-white/5 rounded-xl border border-white/5 p-6">
-      <h3 className="text-lg font-bold text-white mb-4">{title}</h3>
+    <div className="surface-card bg-muted rounded-xl border border-border p-6">
+      <h3 className="text-lg font-bold text-foreground mb-4">{title}</h3>
       
       {/* Conditionally render the correct chart based on the 'type' prop */}
       {type === 'traffic' && renderTrafficChart()}

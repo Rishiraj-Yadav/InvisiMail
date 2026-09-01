@@ -175,7 +175,7 @@ export default function AllAliasesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
           <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading aliases...</p>
@@ -187,7 +187,7 @@ export default function AllAliasesPage() {
   const isPro = user?.plan === 'pro';
 
   return (
-    <div className="flex h-screen bg-[#09090B] text-white overflow-hidden relative">
+    <div className="flex h-screen bg-background text-foreground overflow-hidden relative">
       {/* Ambient Gradients */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -195,15 +195,15 @@ export default function AllAliasesPage() {
       <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
 
       <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-        <header className="relative px-5 md:px-8 py-6 bg-white/[0.02] border-b border-white/5 backdrop-blur-md overflow-hidden">
+        <header className="relative px-5 md:px-8 py-6 bg-card/50 border-b border-border backdrop-blur-md overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
           <div className="flex items-center gap-4 relative z-10">
-            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[#A1A1AA] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer">
               <Menu className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">All Email Aliases</h1>
-              <p className="text-sm text-[#A1A1AA] mt-1">
+              <h1 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">All Email Aliases</h1>
+              <p className="text-sm text-muted-foreground mt-1">
                 Manage all your email aliases — personal and collaborative.
               </p>
             </div>

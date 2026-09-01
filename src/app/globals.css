@@ -10,42 +10,68 @@
    ============================================= */
 
 @layer base {
-  :root,
+  :root {
+    color-scheme: light;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 239 84% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 244 76% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 40%;
+    --accent: 239 84% 59%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 86%;
+    --input: 214 32% 82%;
+    --ring: 239 84% 59%;
+    --radius: 1.5rem;
+    --success: 142 71% 32%;
+    --warning: 32 90% 38%;
+    --info: 217 82% 45%;
+    --surface-subtle: 210 40% 97%;
+    --surface-hover: 210 40% 94%;
+    --surface-inverse: 222 47% 11%;
+    --border-subtle: 214 32% 91%;
+    --scrollbar: 215 16% 70%;
+  }
+
   .dark {
-    /* Core Palette — matches LandingPage.jsx */
-    --background: 240 10% 4%;       /* #09090B */
-    --foreground: 0 0% 98%;         /* #FAFAFA */
-    --card: 240 6% 7%;              /* #111113 */
+    color-scheme: dark;
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 6% 7%;
     --card-foreground: 0 0% 98%;
     --popover: 240 6% 7%;
     --popover-foreground: 0 0% 98%;
-
-    /* Accent — Indigo (from LandingPage) */
-    --primary: 239 84% 67%;         /* #6366F1 */
+    --primary: 239 84% 67%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 244 76% 60%;       /* #4F46E5 */
+    --secondary: 244 76% 60%;
     --secondary-foreground: 240 10% 4%;
-
-    /* Surfaces */
     --muted: 240 4% 12%;
-    --muted-foreground: 240 5% 65%; /* #A1A1AA */
+    --muted-foreground: 240 5% 65%;
     --accent: 239 84% 67%;
     --accent-foreground: 240 10% 4%;
-
-    /* Feedback */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-
-    /* Borders & Input */
-    --border: 240 4% 16%;           /* #27272A */
+    --border: 240 4% 16%;
     --input: 240 4% 12%;
     --ring: 239 84% 67%;
-    --radius: 1.5rem;               /* rounded-3xl default for modern look */
-
-    /* Semantic Tokens */
+    --radius: 1.5rem;
     --success: 142 71% 45%;
     --warning: 38 92% 50%;
     --info: 217 91% 60%;
+    --surface-subtle: 240 6% 6%;
+    --surface-hover: 240 4% 12%;
+    --surface-inverse: 0 0% 98%;
+    --border-subtle: 240 4% 11%;
+    --scrollbar: 240 5% 35%;
   }
 }
 
@@ -79,11 +105,16 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
+    background: hsl(var(--scrollbar));
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: hsl(var(--muted-foreground));
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+    color: hsl(var(--foreground));
   }
 }
 
@@ -96,49 +127,45 @@
 
   /* Level 1: Static content cards — charts, info panels, sidebar */
   .surface-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border-subtle));
     border-radius: 1rem;
   }
 
-  /* Level 2: Elevated containers — headers, modals, dropdowns */
   .surface-elevated {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: hsl(var(--card) / 0.92);
+    border: 1px solid hsl(var(--border));
     border-radius: 1rem;
     backdrop-filter: blur(8px);
   }
 
-  /* Level 3: Interactive cards — stats, alias cards (hover lifts) */
   .surface-interactive {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border-subtle));
     border-radius: 1rem;
     transition: all 0.2s ease;
     cursor: pointer;
   }
   .surface-interactive:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: hsl(var(--surface-hover));
+    border-color: hsl(var(--border));
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px hsl(var(--foreground) / 0.12);
   }
 
-  /* Keep glass-panel for backward compat (landing/auth overlays) */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: hsl(var(--card) / 0.86);
+    border: 1px solid hsl(var(--border));
     border-radius: 1.5rem;
     backdrop-filter: blur(16px);
     transition: all 0.3s ease;
   }
 
-  /* Glass nav for landing page header */
   .glass-nav {
-    background: rgba(9, 9, 15, 0.85);
+    background: hsl(var(--background) / 0.88);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 20px hsl(var(--foreground) / 0.08);
   }
 
   /* =====================
@@ -147,7 +174,7 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+    background-image: linear-gradient(135deg, hsl(var(--foreground)) 0%, #a78bfa 100%);
   }
 
   .text-muted {
@@ -164,7 +191,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-[#4F46E5] h-11 py-2.5 px-5 rounded-full font-semibold;
+    @apply bg-primary text-primary-foreground hover:bg-[#4F46E5] h-11 py-2.5 px-5 rounded-full font-semibold;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,102,241,0.3);
   }
   .btn-primary:hover {
@@ -174,13 +201,13 @@
 
   .btn-secondary {
     @apply h-11 py-2.5 px-5 rounded-xl font-semibold;
-    background: rgba(255,255,255,0.06);
+    background: hsl(var(--muted));
     color: hsl(var(--foreground));
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid hsl(var(--border));
   }
   .btn-secondary:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.16);
+    background: hsl(var(--surface-hover));
+    border-color: hsl(var(--border));
   }
 
   .btn-destructive {
@@ -192,7 +219,7 @@
     color: hsl(var(--muted-foreground));
   }
   .btn-ghost:hover {
-    background: rgba(255,255,255,0.05);
+    background: hsl(var(--surface-hover));
     color: hsl(var(--foreground));
   }
 
@@ -202,8 +229,8 @@
 
   .input-field {
     @apply w-full h-12 px-4 rounded-xl text-sm font-medium transition-all;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: hsl(var(--surface-subtle));
+    border: 1px solid hsl(var(--input));
     color: hsl(var(--foreground));
   }
   .input-field::placeholder {
@@ -212,8 +239,8 @@
   .input-field:focus {
     outline: none;
     border-color: hsl(var(--primary));
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.15);
+    background: hsl(var(--card));
   }
   .input-field:disabled {
     opacity: 0.5;
@@ -223,8 +250,8 @@
   /* Legacy compat */
   .input {
     @apply flex h-10 w-full rounded-lg border px-3 py-2 text-sm;
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: hsl(var(--surface-subtle));
+    border-color: hsl(var(--input));
     color: hsl(var(--foreground));
   }
   .input:focus {
@@ -239,8 +266,8 @@
 
   .card {
     @apply rounded-xl;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border-subtle));
     color: hsl(var(--card-foreground));
   }
 
@@ -252,19 +279,19 @@
     @apply relative w-full rounded-xl border p-4 text-sm;
   }
   .alert-error {
-    background: rgba(239, 68, 68, 0.08);
-    border-color: rgba(239, 68, 68, 0.2);
-    color: #fca5a5;
+    background: hsl(var(--destructive) / 0.1);
+    border-color: hsl(var(--destructive) / 0.35);
+    color: hsl(var(--destructive));
   }
   .alert-success {
-    background: rgba(34, 197, 94, 0.08);
-    border-color: rgba(34, 197, 94, 0.2);
-    color: #86efac;
+    background: hsl(var(--success) / 0.1);
+    border-color: hsl(var(--success) / 0.35);
+    color: hsl(var(--success));
   }
   .alert-warning {
-    background: rgba(245, 158, 11, 0.08);
-    border-color: rgba(245, 158, 11, 0.2);
-    color: #fcd34d;
+    background: hsl(var(--warning) / 0.12);
+    border-color: hsl(var(--warning) / 0.35);
+    color: hsl(var(--warning));
   }
 
   /* =====================
@@ -285,9 +312,9 @@
   }
 
   .badge-neutral {
-    background: rgba(255, 255, 255, 0.06);
+    background: hsl(var(--muted));
     color: hsl(var(--muted-foreground));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid hsl(var(--border));
   }
 
   /* =====================
@@ -318,12 +345,12 @@
   }
 
   .liquid-glass {
-    background: rgba(0, 0, 0, 0.4);
+    background: hsl(var(--surface-inverse) / 0.18);
     background-blend-mode: luminosity;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 1px hsl(var(--foreground) / 0.1);
     position: relative;
     overflow: hidden;
   }

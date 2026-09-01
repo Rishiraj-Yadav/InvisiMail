@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import { Mail, Shield, Zap, Inbox, Layers, LayoutDashboard, Globe, Check, ChevronDown, Lock, Activity, Sparkles, MessageSquare, ArrowRight, X, Star, Server, Key, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import ThemeToggle from './ThemeToggle';
 import TextRotator from './TextRotator';
 
 const SplineScene = dynamic(() => import('./3d/SplineScene'), { 
@@ -77,7 +78,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA] font-sans selection:bg-[#6366F1]/50 selection:text-white relative">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-[#6366F1]/50 selection:text-foreground relative">
       
       {/* No Ambient Gradients for a cleaner look */}
       
@@ -90,7 +91,7 @@ export default function LandingPage() {
         initial="hidden"
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-4 inset-x-2 md:inset-x-4 max-w-5xl mx-auto z-50 border border-white/5 bg-[#09090B]/60 backdrop-blur-xl rounded-full"
+        className="fixed top-4 inset-x-2 md:inset-x-4 max-w-5xl mx-auto z-50 border border-border bg-background/60 backdrop-blur-xl rounded-full"
       >
         <div className="px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-12">
@@ -107,12 +108,13 @@ export default function LandingPage() {
                   </defs>
                 </svg>
               </div>
-              <span className="text-xl font-semibold tracking-tight text-white">InvisiMail</span>
+              <span className="text-xl font-semibold tracking-tight text-foreground">InvisiMail</span>
             </Link>
             
             <nav className="hidden md:flex items-center gap-8">
+              <ThemeToggle compact />
               {['Features', 'How It Works', 'FAQ'].map((item) => (
-                <Link key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors">
+                <Link key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                   {item}
                 </Link>
               ))}
@@ -120,7 +122,7 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/signin" className="hidden sm:block text-sm font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors px-4 py-2">
+            <Link href="/signin" className="hidden sm:block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-2">
               Log In
             </Link>
             <Link href="/register" className="bg-[#FAFAFA] text-[#09090B] px-6 py-2.5 rounded-full text-sm font-semibold hover:scale-102 transition-transform active:scale-95">
@@ -135,7 +137,7 @@ export default function LandingPage() {
         onMouseMove={handleMouseMove}
         className="relative min-h-[100svh] flex items-center pt-20 overflow-hidden"
       >
-        <div className="absolute inset-0 z-0 bg-[#09090B]" />
+        <div className="absolute inset-0 z-0 bg-background" />
         
         {/* Spotlight Effect */}
         <div 
@@ -159,14 +161,14 @@ export default function LandingPage() {
             
             <motion.div 
               initial="hidden" animate="visible" variants={fadeUp}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted backdrop-blur-md mb-8"
             >
-              <span className="text-xs font-medium text-[#A1A1AA]">Privacy-First Email Aliasing</span>
+              <span className="text-xs font-medium text-muted-foreground">Privacy-First Email Aliasing</span>
             </motion.div>
 
             <motion.h1 
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-6xl lg:text-7xl font-semibold leading-[1.1] tracking-tighter mb-8 text-white"
+              className="text-6xl lg:text-7xl font-semibold leading-[1.1] tracking-tighter mb-8 text-foreground"
             >
               One inbox.<br/>
               <TextRotator 
@@ -177,7 +179,7 @@ export default function LandingPage() {
 
             <motion.p 
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-lg text-[#A1A1AA] max-w-2xl leading-8 mb-10 font-medium"
+              className="text-lg text-muted-foreground max-w-2xl leading-8 mb-10 font-medium"
             >
               Create a unique email alias for every signup. Your personal inbox stays private.
             </motion.p>
@@ -187,7 +189,7 @@ export default function LandingPage() {
               className="flex flex-col w-full max-w-md gap-4 pointer-events-auto mb-12"
             >
               <form onSubmit={handleDemoGenerate} className="relative flex items-center w-full group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#A1A1AA]">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground">
                   <Globe className="w-5 h-5 group-focus-within:text-[#6366F1] transition-colors" />
                 </div>
                 <input 
@@ -195,12 +197,12 @@ export default function LandingPage() {
                   value={demoInput}
                   onChange={(e) => setDemoInput(e.target.value)}
                   placeholder="e.g. netflix, amazon..." 
-                  className="w-full bg-[#111113]/80 border border-[#27272A] focus:border-[#6366F1]/50 text-white rounded-full py-4 pl-12 pr-32 outline-none transition-all shadow-inner backdrop-blur-md placeholder:text-[#3F3F46]"
+                  className="w-full bg-card/80 border border-border focus:border-[#6366F1]/50 text-foreground rounded-full py-4 pl-12 pr-32 outline-none transition-all shadow-inner backdrop-blur-md placeholder:text-[#3F3F46]"
                 />
                 <button 
                   type="submit" 
                   disabled={demoStatus === 'generating'}
-                  className="absolute right-2 top-2 bottom-2 bg-white text-black font-medium px-6 rounded-full transition-all hover:bg-neutral-200 active:scale-95 flex items-center justify-center text-sm disabled:opacity-80"
+                  className="absolute right-2 top-2 bottom-2 bg-primary text-primary-foreground font-medium px-6 rounded-full transition-all hover:bg-primary/90 active:scale-95 flex items-center justify-center text-sm disabled:opacity-80"
                 >
                   {demoStatus === 'generating' ? <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" /> : 'Generate'}
                 </button>
@@ -213,14 +215,14 @@ export default function LandingPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex items-center gap-3 p-4 rounded-2xl bg-[#6366F1]/10 border border-[#6366F1]/30 backdrop-blur-md mt-2"
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#6366F1] flex items-center justify-center flex-shrink-0 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                    <div className="w-8 h-8 rounded-full bg-[#6366F1] flex items-center justify-center flex-shrink-0 text-foreground shadow-[0_0_15px_rgba(99,102,241,0.5)]">
                       <Check className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-xs text-[#A1A1AA] font-medium mb-1">Your secure alias:</div>
-                      <div className="text-sm text-white font-mono">{demoAlias}</div>
+                      <div className="text-xs text-muted-foreground font-medium mb-1">Your secure alias:</div>
+                      <div className="text-sm text-foreground font-mono">{demoAlias}</div>
                     </div>
-                    <Link href="/register" className="text-xs font-semibold text-[#FAFAFA] bg-[#6366F1] px-4 py-2 rounded-full hover:bg-[#4F46E5] transition-colors shadow-[0_0_15px_rgba(99,102,241,0.4)]">
+                    <Link href="/register" className="text-xs font-semibold text-foreground bg-[#6366F1] px-4 py-2 rounded-full hover:bg-[#4F46E5] transition-colors shadow-[0_0_15px_rgba(99,102,241,0.4)]">
                       Claim it
                     </Link>
                   </motion.div>
@@ -229,7 +231,7 @@ export default function LandingPage() {
 
               {demoStatus === 'idle' && (
                 <div className="flex gap-4 items-center mt-2">
-                  <Link href="/register" className="bg-white text-black font-medium px-8 py-3.5 rounded-full transition-all hover:bg-neutral-200 active:scale-95 flex items-center gap-2 text-sm group/btn">
+                  <Link href="/register" className="bg-primary text-primary-foreground font-medium px-8 py-3.5 rounded-full transition-all hover:bg-primary/90 active:scale-95 flex items-center gap-2 text-sm group/btn">
                     Start protecting <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -243,10 +245,10 @@ export default function LandingPage() {
       </main>
 
       {/* 3. Social Proof Bar */}
-      <section className="border-b border-white/5 bg-[#09090B] relative z-20">
+      <section className="border-b border-border bg-background relative z-20">
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2 text-sm text-[#A1A1AA]">
-             <span>Securing over <strong className="text-white font-medium">10,000+</strong> inboxes daily.</span>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+             <span>Securing over <strong className="text-foreground font-medium">10,000+</strong> inboxes daily.</span>
           </div>
         </div>
       </section>
@@ -264,7 +266,7 @@ export default function LandingPage() {
           </motion.h2>
           <motion.p 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-            className="text-xl text-[#A1A1AA] leading-8"
+            className="text-xl text-muted-foreground leading-8"
           >
             Every signup increases your digital footprint.
           </motion.p>
@@ -272,7 +274,7 @@ export default function LandingPage() {
       </section>
 
       {/* 5. Solution Section */}
-      <section className="py-40 bg-[#111113] border-y border-[#27272A]">
+      <section className="py-40 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="max-w-2xl mx-auto">
             <motion.h2 
@@ -283,7 +285,7 @@ export default function LandingPage() {
             </motion.h2>
             <motion.p 
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-              className="text-xl text-[#A1A1AA] leading-8 mb-16"
+              className="text-xl text-muted-foreground leading-8 mb-16"
             >
               Create a dedicated address for every account. Disable it whenever you need.
             </motion.p>
@@ -293,41 +295,41 @@ export default function LandingPage() {
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
             className="max-w-md mx-auto mt-16"
           >
-            <div className="bg-[#09090B] border border-white/5 rounded-2xl p-6">
+            <div className="bg-background border border-border rounded-2xl p-6">
               <div className="space-y-4">
                 
                 {/* Active Alias */}
-                <div className="flex items-center justify-between transition-colors hover:bg-[#111113] p-2 -mx-2 rounded-xl">
+                <div className="flex items-center justify-between transition-colors hover:bg-card p-2 -mx-2 rounded-xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#111113] border border-white/5 flex items-center justify-center">
-                      <span className="text-white text-sm font-medium">N</span>
+                    <div className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center">
+                      <span className="text-foreground text-sm font-medium">N</span>
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-medium text-white tracking-wide">netflix@invisimail.com</div>
-                      <div className="text-xs text-[#A1A1AA] flex items-center gap-1.5 mt-1">
+                      <div className="text-sm font-medium text-foreground tracking-wide">netflix@invisimail.com</div>
+                      <div className="text-xs text-muted-foreground flex items-center gap-1.5 mt-1">
                         <Mail className="w-3 h-3" /> Forwarding active
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs text-[#A1A1AA]">Active</div>
+                  <div className="text-xs text-muted-foreground">Active</div>
                 </div>
 
-                <div className="h-px w-full bg-white/5" />
+                <div className="h-px w-full bg-muted" />
 
                 {/* Blocked Alias */}
-                <div className="flex items-center justify-between opacity-60 transition-colors hover:bg-[#111113] p-2 -mx-2 rounded-xl">
+                <div className="flex items-center justify-between opacity-60 transition-colors hover:bg-card p-2 -mx-2 rounded-xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#111113] border border-white/5 flex items-center justify-center">
-                      <span className="text-[#A1A1AA] text-sm font-medium">?</span>
+                    <div className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm font-medium">?</span>
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-medium text-[#A1A1AA] tracking-wide line-through decoration-white/20">shady-site@invisimail.com</div>
-                      <div className="text-xs text-[#A1A1AA] flex items-center gap-1.5 mt-1">
+                      <div className="text-sm font-medium text-muted-foreground tracking-wide line-through decoration-white/20">shady-site@invisimail.com</div>
+                      <div className="text-xs text-muted-foreground flex items-center gap-1.5 mt-1">
                         <Shield className="w-3 h-3" /> Blocked
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs text-[#A1A1AA]">Blocked</div>
+                  <div className="text-xs text-muted-foreground">Blocked</div>
                 </div>
 
               </div>
@@ -352,60 +354,60 @@ export default function LandingPage() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]"
         >
           {/* Card 1: Large Feature */}
-          <motion.div variants={fadeUp} className="md:col-span-2 md:row-span-2 bg-[#09090B] border border-white/5 rounded-3xl p-8 relative group hover:bg-[#111113] transition-colors duration-500">
+          <motion.div variants={fadeUp} className="md:col-span-2 md:row-span-2 bg-background border border-border rounded-3xl p-8 relative group hover:bg-card transition-colors duration-500">
             <div className="relative z-10 h-full flex flex-col justify-between">
-              <div className="w-12 h-12 flex items-center justify-center text-[#A1A1AA] mb-6 group-hover:text-white transition-colors duration-500">
+              <div className="w-12 h-12 flex items-center justify-center text-muted-foreground mb-6 group-hover:text-foreground transition-colors duration-500">
                 <Layers className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-2xl font-medium tracking-tight text-white mb-3">Unlimited Aliases</h3>
-                <p className="text-[#A1A1AA] text-base max-w-md">Generate a unique, burner email for every single service you use. If one gets compromised, just delete it. Your real inbox stays pure.</p>
+                <h3 className="text-2xl font-medium tracking-tight text-foreground mb-3">Unlimited Aliases</h3>
+                <p className="text-muted-foreground text-base max-w-md">Generate a unique, burner email for every single service you use. If one gets compromised, just delete it. Your real inbox stays pure.</p>
               </div>
             </div>
           </motion.div>
 
           {/* Card 2 */}
-          <motion.div variants={fadeUp} className="bg-[#09090B] border border-white/5 rounded-3xl p-8 relative group hover:bg-[#111113] transition-colors duration-500">
+          <motion.div variants={fadeUp} className="bg-background border border-border rounded-3xl p-8 relative group hover:bg-card transition-colors duration-500">
             <div className="relative z-10 flex flex-col justify-between h-full">
-               <Shield className="w-6 h-6 text-[#A1A1AA] group-hover:text-white transition-colors duration-300" />
+               <Shield className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
                <div>
-                 <h3 className="text-lg font-medium text-white mb-2">Private by Default</h3>
-                 <p className="text-sm text-[#A1A1AA]">Zero-knowledge architecture. We don't read, store, or sell your emails.</p>
+                 <h3 className="text-lg font-medium text-foreground mb-2">Private by Default</h3>
+                 <p className="text-sm text-muted-foreground">Zero-knowledge architecture. We don't read, store, or sell your emails.</p>
                </div>
             </div>
           </motion.div>
 
           {/* Card 3 */}
-          <motion.div variants={fadeUp} className="bg-[#09090B] border border-white/5 rounded-3xl p-8 relative group hover:bg-[#111113] transition-colors duration-500">
+          <motion.div variants={fadeUp} className="bg-background border border-border rounded-3xl p-8 relative group hover:bg-card transition-colors duration-500">
              <div className="relative z-10 flex flex-col justify-between h-full">
-               <Zap className="w-6 h-6 text-[#A1A1AA] group-hover:text-white transition-colors duration-300" />
+               <Zap className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
                <div>
-                 <h3 className="text-lg font-medium text-white mb-2">Instant Forwarding</h3>
-                 <p className="text-sm text-[#A1A1AA]">Mails are routed in milliseconds. No delays, no missing verifications.</p>
+                 <h3 className="text-lg font-medium text-foreground mb-2">Instant Forwarding</h3>
+                 <p className="text-sm text-muted-foreground">Mails are routed in milliseconds. No delays, no missing verifications.</p>
                </div>
             </div>
           </motion.div>
 
           {/* Card 4 */}
-          <motion.div variants={fadeUp} className="bg-[#09090B] border border-white/5 rounded-3xl p-8 relative group hover:bg-[#111113] transition-colors duration-500">
+          <motion.div variants={fadeUp} className="bg-background border border-border rounded-3xl p-8 relative group hover:bg-card transition-colors duration-500">
              <div className="relative z-10 flex flex-col justify-between h-full">
-               <EyeOff className="w-6 h-6 text-[#A1A1AA] group-hover:text-white transition-colors duration-300" />
+               <EyeOff className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
                <div>
-                 <h3 className="text-lg font-medium text-white mb-2">Stop Trackers</h3>
-                 <p className="text-sm text-[#A1A1AA]">Automatically strip hidden spy pixels before they reach your inbox.</p>
+                 <h3 className="text-lg font-medium text-foreground mb-2">Stop Trackers</h3>
+                 <p className="text-sm text-muted-foreground">Automatically strip hidden spy pixels before they reach your inbox.</p>
                </div>
             </div>
           </motion.div>
 
           {/* Card 5: Wide Feature */}
-          <motion.div variants={fadeUp} className="md:col-span-2 bg-[#09090B] border border-white/5 rounded-3xl p-8 relative group hover:bg-[#111113] transition-colors duration-500">
+          <motion.div variants={fadeUp} className="md:col-span-2 bg-background border border-border rounded-3xl p-8 relative group hover:bg-card transition-colors duration-500">
              <div className="relative z-10 flex items-center justify-between h-full">
                <div className="max-w-xs">
-                 <h3 className="text-lg font-medium text-white mb-2">Custom Domains</h3>
-                 <p className="text-sm text-[#A1A1AA]">Bring your own domain for ultimate professionalism and control.</p>
+                 <h3 className="text-lg font-medium text-foreground mb-2">Custom Domains</h3>
+                 <p className="text-sm text-muted-foreground">Bring your own domain for ultimate professionalism and control.</p>
                </div>
-               <div className="w-16 h-16 rounded-full border border-white/5 bg-[#111113] flex items-center justify-center group-hover:border-white/20 transition-all duration-500">
-                 <Server className="w-6 h-6 text-[#A1A1AA] group-hover:text-white" />
+               <div className="w-16 h-16 rounded-full border border-border bg-card flex items-center justify-center group-hover:border-border transition-all duration-500">
+                 <Server className="w-6 h-6 text-muted-foreground group-hover:text-foreground" />
                </div>
             </div>
           </motion.div>
@@ -414,34 +416,34 @@ export default function LandingPage() {
       </section>
 
       {/* 6. Security Focus */}
-      <section className="py-40 bg-[#09090B] border-y border-white/5">
+      <section className="py-40 bg-background border-y border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Security Left */}
             <div className="w-full lg:w-[50%] flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8 self-start">
-                <span className="text-xs font-medium text-[#A1A1AA]">Zero Knowledge Architecture</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted backdrop-blur-md mb-8 self-start">
+                <span className="text-xs font-medium text-muted-foreground">Zero Knowledge Architecture</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 leading-tight">Privacy.<br/>By design.</h2>
-              <p className="text-lg text-[#A1A1AA] leading-relaxed max-w-md">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
                 Every alias is isolated. Your personal email remains private. We don't read, store, or analyze your communications. 
               </p>
             </div>
             
             {/* Security Right - Clean Visual */}
-            <div className="w-full lg:w-[50%] bg-[#111113] border border-white/5 rounded-3xl p-12 flex flex-col justify-center relative overflow-hidden min-h-[400px]">
+            <div className="w-full lg:w-[50%] bg-card border border-border rounded-3xl p-12 flex flex-col justify-center relative overflow-hidden min-h-[400px]">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02),transparent_50%)]" />
               <div className="relative z-10 w-full max-w-sm mx-auto">
-                <div className="bg-[#09090B] border border-white/5 rounded-2xl p-4 shadow-xl mb-4 transform -rotate-2">
+                <div className="bg-background border border-border rounded-2xl p-4 shadow-xl mb-4 transform -rotate-2">
                   <div className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-white" />
-                    <div className="text-sm font-medium text-white">Encryption active</div>
+                    <Shield className="w-5 h-5 text-foreground" />
+                    <div className="text-sm font-medium text-foreground">Encryption active</div>
                   </div>
                 </div>
-                <div className="bg-[#09090B] border border-white/5 rounded-2xl p-4 shadow-xl ml-8 transform rotate-1">
+                <div className="bg-background border border-border rounded-2xl p-4 shadow-xl ml-8 transform rotate-1">
                   <div className="flex items-center gap-3">
-                    <EyeOff className="w-5 h-5 text-white" />
-                    <div className="text-sm font-medium text-white">Trackers blocked</div>
+                    <EyeOff className="w-5 h-5 text-foreground" />
+                    <div className="text-sm font-medium text-foreground">Trackers blocked</div>
                   </div>
                 </div>
               </div>
@@ -451,12 +453,12 @@ export default function LandingPage() {
       </section>
 
       {/* 7. How It Works */}
-      <section id="how-it-works" className="py-40 bg-[#111113] border-y border-[#27272A] overflow-hidden">
+      <section id="how-it-works" className="py-40 bg-card border-y border-border overflow-hidden">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-32">
             <motion.h2 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4"
             >
               How it works
             </motion.h2>
@@ -467,28 +469,28 @@ export default function LandingPage() {
             className="relative"
           >
             {/* The main track line */}
-            <div className="absolute top-6 left-0 w-full h-[1px] bg-white/5 hidden md:block" />
+            <div className="absolute top-6 left-0 w-full h-[1px] bg-muted hidden md:block" />
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-16 md:gap-6 relative z-10">
               {[
-                { title: "Generate", desc: "Create a unique alias in one click.", icon: <Sparkles className="w-5 h-5 text-[#A1A1AA] group-hover:text-white transition-colors" /> },
-                { title: "Use", desc: "Give it to any service or newsletter.", icon: <Globe className="w-5 h-5 text-[#A1A1AA] group-hover:text-white transition-colors" /> },
-                { title: "Receive", desc: "Emails forward safely to your inbox.", icon: <Inbox className="w-5 h-5 text-[#A1A1AA] group-hover:text-white transition-colors" /> },
-                { title: "Control", desc: "Pause or delete the alias anytime.", icon: <Lock className="w-5 h-5 text-[#A1A1AA] group-hover:text-white transition-colors" /> }
+                { title: "Generate", desc: "Create a unique alias in one click.", icon: <Sparkles className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" /> },
+                { title: "Use", desc: "Give it to any service or newsletter.", icon: <Globe className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" /> },
+                { title: "Receive", desc: "Emails forward safely to your inbox.", icon: <Inbox className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" /> },
+                { title: "Control", desc: "Pause or delete the alias anytime.", icon: <Lock className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" /> }
               ].map((step, i) => (
                 <div key={i} className="group flex flex-col items-center text-center cursor-default">
                   {/* Node */}
-                  <div className="w-12 h-12 rounded-xl bg-[#09090B] border border-white/5 flex items-center justify-center mb-8 relative transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center mb-8 relative transition-all duration-300">
                      {step.icon}
                      
                      {/* Mobile connector line */}
-                     {i !== 3 && <div className="absolute top-[3.5rem] left-1/2 -translate-x-1/2 w-[1px] h-16 bg-white/5 md:hidden" />}
+                     {i !== 3 && <div className="absolute top-[3.5rem] left-1/2 -translate-x-1/2 w-[1px] h-16 bg-muted md:hidden" />}
                   </div>
 
                   {/* Content */}
-                  <span className="text-xs font-medium text-[#A1A1AA] mb-3 block">0{i+1}</span>
-                  <h3 className="text-lg font-medium text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-[#A1A1AA] max-w-[200px]">{step.desc}</p>
+                  <span className="text-xs font-medium text-muted-foreground mb-3 block">0{i+1}</span>
+                  <h3 className="text-lg font-medium text-foreground mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground max-w-[200px]">{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -507,7 +509,7 @@ export default function LandingPage() {
           </motion.h2>
           <motion.p 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="text-xl text-[#A1A1AA] leading-8"
+            className="text-xl text-muted-foreground leading-8"
           >
             Manage aliases, forwarding, and activity from a single dashboard.
           </motion.p>
@@ -518,67 +520,67 @@ export default function LandingPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full bg-[#09090B] border border-white/10 rounded-2xl overflow-hidden flex flex-col h-[650px] relative z-10"
+          className="w-full bg-background border border-border rounded-2xl overflow-hidden flex flex-col h-[650px] relative z-10"
         >
           {/* Clean Window Header */}
-          <div className="h-12 border-b border-white/5 bg-[#09090B] flex items-center justify-center shrink-0">
-            <div className="text-xs font-medium text-[#A1A1AA]">app.invisimail.com</div>
+          <div className="h-12 border-b border-border bg-background flex items-center justify-center shrink-0">
+            <div className="text-xs font-medium text-muted-foreground">app.invisimail.com</div>
           </div>
 
           <div className="flex flex-1 overflow-hidden">
             {/* Sidebar */}
-            <div className="w-64 border-r border-white/5 p-6 hidden md:flex flex-col gap-8 bg-[#09090B]">
+            <div className="w-64 border-r border-border p-6 hidden md:flex flex-col gap-8 bg-background">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-black" />
+                <div className="w-8 h-8 rounded-lg bg-card flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="font-semibold text-lg text-white">InvisiMail</span>
+                <span className="font-semibold text-lg text-foreground">InvisiMail</span>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="px-4 py-2.5 bg-white/10 rounded-lg text-sm font-medium text-white border border-white/5">Aliases</div>
-                <div className="px-4 py-2.5 text-[#A1A1AA] hover:text-white rounded-lg text-sm font-medium transition-colors">Inbox</div>
-                <div className="px-4 py-2.5 text-[#A1A1AA] hover:text-white rounded-lg text-sm font-medium transition-colors">Analytics</div>
-                <div className="px-4 py-2.5 text-[#A1A1AA] hover:text-white rounded-lg text-sm font-medium transition-colors">Settings</div>
+                <div className="px-4 py-2.5 bg-muted rounded-lg text-sm font-medium text-foreground border border-border">Aliases</div>
+                <div className="px-4 py-2.5 text-muted-foreground hover:text-foreground rounded-lg text-sm font-medium transition-colors">Inbox</div>
+                <div className="px-4 py-2.5 text-muted-foreground hover:text-foreground rounded-lg text-sm font-medium transition-colors">Analytics</div>
+                <div className="px-4 py-2.5 text-muted-foreground hover:text-foreground rounded-lg text-sm font-medium transition-colors">Settings</div>
               </div>
             </div>
             
             {/* Main Content Area */}
-            <div className="flex-1 p-8 flex flex-col gap-8 bg-[#09090B]">
+            <div className="flex-1 p-8 flex flex-col gap-8 bg-background">
               <div className="flex justify-between items-center">
-                <h3 className="text-xl font-medium text-white">My Aliases</h3>
-                <button className="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-neutral-200 transition-all">New Alias</button>
+                <h3 className="text-xl font-medium text-foreground">My Aliases</h3>
+                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-all">New Alias</button>
               </div>
 
               {/* Analytics Cards */}
               <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#111113] border border-white/5 p-5 rounded-xl">
-                    <div className="text-[#A1A1AA] text-sm mb-2 flex items-center gap-2"><Layers className="w-4 h-4" /> Total Forwarded</div>
-                    <div className="text-2xl font-semibold text-white">1,204</div>
+                  <div className="bg-card border border-border p-5 rounded-xl">
+                    <div className="text-muted-foreground text-sm mb-2 flex items-center gap-2"><Layers className="w-4 h-4" /> Total Forwarded</div>
+                    <div className="text-2xl font-semibold text-foreground">1,204</div>
                   </div>
-                  <div className="bg-[#111113] border border-white/5 p-5 rounded-xl relative overflow-hidden">
-                    <div className="text-[#A1A1AA] text-sm mb-2 flex items-center gap-2"><Shield className="w-4 h-4 text-[#A1A1AA]" /> Spam Blocked</div>
-                    <div className="text-2xl font-semibold text-white">342</div>
+                  <div className="bg-card border border-border p-5 rounded-xl relative overflow-hidden">
+                    <div className="text-muted-foreground text-sm mb-2 flex items-center gap-2"><Shield className="w-4 h-4 text-muted-foreground" /> Spam Blocked</div>
+                    <div className="text-2xl font-semibold text-foreground">342</div>
                   </div>
               </div>
 
               {/* Alias List */}
-              <div className="flex-1 bg-[#111113] border border-white/5 rounded-xl overflow-hidden flex flex-col">
+              <div className="flex-1 bg-card border border-border rounded-xl overflow-hidden flex flex-col">
                 {[
                   { name: 'netflix-subs', domain: 'invisimail.com', status: 'Active' },
                   { name: 'github-dev', domain: 'invisimail.com', status: 'Active' },
                   { name: 'random-blog', domain: 'invisimail.com', status: 'Paused' }
                 ].map((item, idx) => (
-                  <div key={idx} className="p-4 border-b border-white/5 flex justify-between items-center hover:bg-[#18181B] transition-colors cursor-pointer">
+                  <div key={idx} className="p-4 border-b border-border flex justify-between items-center hover:bg-muted transition-colors cursor-pointer">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#18181B] border border-white/5 flex items-center justify-center">
-                        <Mail className="w-4 h-4 text-[#A1A1AA]" />
+                      <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center">
+                        <Mail className="w-4 h-4 text-muted-foreground" />
                       </div>
                       <div>
-                        <div className="font-medium text-sm text-white">{item.name}@{item.domain}</div>
-                        <div className="text-xs text-[#A1A1AA]">Forwarding</div>
+                        <div className="font-medium text-sm text-foreground">{item.name}@{item.domain}</div>
+                        <div className="text-xs text-muted-foreground">Forwarding</div>
                       </div>
                     </div>
-                    <div className="text-sm text-[#A1A1AA]">
+                    <div className="text-sm text-muted-foreground">
                       {item.status}
                     </div>
                   </div>
@@ -597,12 +599,12 @@ export default function LandingPage() {
           {FAQS.map((faq, idx) => (
             <div 
               key={idx} 
-              className={`bg-[#09090B] border ${openFaq === idx ? 'border-white/20' : 'border-white/5'} rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/10 cursor-pointer`}
+              className={`bg-background border ${openFaq === idx ? 'border-border' : 'border-border'} rounded-2xl overflow-hidden transition-all duration-300 hover:border-border cursor-pointer`}
               onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
             >
               <div className="px-6 py-5 flex justify-between items-center">
                 <h3 className="text-base font-medium">{faq.q}</h3>
-                <ChevronDown className={`w-5 h-5 text-[#A1A1AA] transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-white' : ''}`} />
+                <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-foreground' : ''}`} />
               </div>
               <AnimatePresence>
                 {openFaq === idx && (
@@ -613,7 +615,7 @@ export default function LandingPage() {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="px-8 pb-6"
                   >
-                    <p className="text-[#A1A1AA] leading-8 text-base">{faq.a}</p>
+                    <p className="text-muted-foreground leading-8 text-base">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -626,25 +628,25 @@ export default function LandingPage() {
       <section className="py-40 max-w-5xl mx-auto px-6 text-center">
         <motion.h2 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-          className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-[#FAFAFA] leading-tight"
+          className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-foreground leading-tight"
         >
           Ready for<br/>private email?
         </motion.h2>
         <motion.p 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-          className="text-xl text-[#A1A1AA] leading-8 mb-12 max-w-2xl mx-auto"
+          className="text-xl text-muted-foreground leading-8 mb-12 max-w-2xl mx-auto"
         >
           Create your first alias in seconds.
         </motion.p>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <Link href="/register" className="inline-block bg-white text-black font-medium px-10 py-4 rounded-full transition-all hover:bg-neutral-200 active:scale-95 text-lg">
+          <Link href="/register" className="inline-block bg-primary text-primary-foreground font-medium px-10 py-4 rounded-full transition-all hover:bg-primary/90 active:scale-95 text-lg">
             Get Started
           </Link>
         </motion.div>
       </section>
 
       {/* 12. Footer */}
-      <footer className="border-t border-[#27272A] bg-[#09090B] pt-24 pb-12">
+      <footer className="border-t border-border bg-background pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
             <div className="md:col-span-2">
@@ -663,46 +665,46 @@ export default function LandingPage() {
                 </div>
                 <span className="font-bold text-xl">InvisiMail</span>
               </div>
-              <p className="text-[#A1A1AA] leading-relaxed max-w-sm mb-6">
+              <p className="text-muted-foreground leading-relaxed max-w-sm mb-6">
                 The privacy-first email aliasing service with built-in AI intelligence. Reclaim your inbox.
               </p>
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full border border-[#27272A] flex items-center justify-center hover:border-[#6366F1] text-[#A1A1AA] hover:text-white cursor-pointer transition-colors text-sm font-bold">X</div>
-                <div className="w-10 h-10 rounded-full border border-[#27272A] flex items-center justify-center hover:border-[#6366F1] text-[#A1A1AA] hover:text-white cursor-pointer transition-colors text-sm font-bold">Gh</div>
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-[#6366F1] text-muted-foreground hover:text-foreground cursor-pointer transition-colors text-sm font-bold">X</div>
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-[#6366F1] text-muted-foreground hover:text-foreground cursor-pointer transition-colors text-sm font-bold">Gh</div>
               </div>
             </div>
             
             <div>
-              <h4 className="font-bold text-white mb-6">Product</h4>
-              <ul className="flex flex-col gap-4 text-[#A1A1AA]">
-                <li><a href="#how-it-works" className="hover:text-white transition-colors">How it works</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+              <h4 className="font-bold text-foreground mb-6">Product</h4>
+              <ul className="flex flex-col gap-4 text-muted-foreground">
+                <li><a href="#how-it-works" className="hover:text-foreground transition-colors">How it works</a></li>
+                <li><a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Changelog</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-6">Company</h4>
-              <ul className="flex flex-col gap-4 text-[#A1A1AA]">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <h4 className="font-bold text-foreground mb-6">Company</h4>
+              <ul className="flex flex-col gap-4 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-6">Legal</h4>
-              <ul className="flex flex-col gap-4 text-[#A1A1AA]">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
+              <h4 className="font-bold text-foreground mb-6">Legal</h4>
+              <ul className="flex flex-col gap-4 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Security</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-[#27272A] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#3F3F46]">
+          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#3F3F46]">
             <div>&copy; {new Date().getFullYear()} InvisiMail. All rights reserved.</div>
             <div className="flex items-center gap-2">
                <div className="w-2 h-2 rounded-full bg-[#22C55E]" />

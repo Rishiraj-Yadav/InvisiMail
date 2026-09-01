@@ -128,7 +128,7 @@ export default function DomainsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
           <p className="text-sm text-[hsl(var(--muted-foreground))]">Loading...</p>
@@ -141,25 +141,25 @@ export default function DomainsPage() {
 
   if (!isPro) {
     return (
-      <div className="flex h-screen bg-[#09090B] overflow-hidden relative">
+      <div className="flex h-screen bg-background overflow-hidden relative">
         {/* Ambient Gradients */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
 
         <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
         <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-          <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+          <header className="relative p-5 md:p-8 border-b border-border bg-card/50 backdrop-blur-md flex-shrink-0 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
             <div className="relative z-10 flex items-center gap-4">
-              <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+              <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted transition-colors cursor-pointer">
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-xl md:text-2xl font-bold text-white">Manage Custom Domains</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-foreground">Manage Custom Domains</h1>
               </div>
             </div>
           </header>
-          <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+          <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-muted-foreground/30 hover:scrollbar-thumb-muted-foreground/50">
             {error && (
               <div className="alert-error p-3 rounded-xl flex justify-between items-center text-sm mb-6 max-w-4xl">
                 <span>{error}</span>
@@ -177,7 +177,7 @@ export default function DomainsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-[#09090B] overflow-hidden relative">
+    <div className="flex h-screen bg-background overflow-hidden relative">
       {/* Ambient Gradients */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -185,14 +185,14 @@ export default function DomainsPage() {
       <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
       
       <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-        <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+        <header className="relative p-5 md:p-8 border-b border-border bg-card/50 backdrop-blur-md flex-shrink-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
           <div className="relative z-10 flex items-center gap-4">
-            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted transition-colors cursor-pointer">
               <Menu className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white">Manage Custom Domains</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-foreground">Manage Custom Domains</h1>
               <p className="text-sm text-[hsl(var(--muted-foreground))] mt-0.5">
                 Add and verify your custom domains for personalized email aliases.
               </p>
@@ -200,7 +200,7 @@ export default function DomainsPage() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scrollbar-thumb-muted-foreground/30 hover:scrollbar-thumb-muted-foreground/50">
           <div className="max-w-4xl mx-auto space-y-6 pb-20">
             {error && (
               <div className="alert-error p-3 rounded-xl flex justify-between items-center text-sm">

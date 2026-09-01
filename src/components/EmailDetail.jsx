@@ -53,7 +53,7 @@ export default function EmailDetail({ email, user, alias }) {
   const getEmailTypeColor = () => {
     if (email.isSpam) return 'bg-red-500/10 text-red-400 border border-red-500/20';
     if (email.isSentEmail) return 'bg-green-500/10 text-green-400 border border-green-500/20';
-    return 'bg-white/10 text-white border border-white/20';
+    return 'bg-muted text-foreground border border-border';
   };
 
   const handleContextMenu = (e) => {
@@ -85,7 +85,7 @@ export default function EmailDetail({ email, user, alias }) {
   return (
     <div className="flex-1 bg-background flex flex-col relative" onContextMenu={handleContextMenu}>
       {/* Header */}
-      <div className="p-6 border-b border-white/5">
+      <div className="p-6 border-b border-border">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start space-x-4">
             {/* Avatar */}
@@ -94,10 +94,10 @@ export default function EmailDetail({ email, user, alias }) {
                 ? 'bg-red-500/10 border border-red-500/20' 
                 : email.isSentEmail 
                   ? 'bg-green-500/10 border border-green-500/20' 
-                  : 'bg-white/10 border border-white/20'
+                  : 'bg-muted border border-border'
             }`}>
               <span className={`text-lg font-bold ${
-                email.isSpam ? 'text-red-400' : email.isSentEmail ? 'text-green-400' : 'text-white'
+                email.isSpam ? 'text-red-400' : email.isSentEmail ? 'text-green-400' : 'text-foreground'
               }`}>
                 {getSenderInitial(email)}
               </span>
@@ -106,7 +106,7 @@ export default function EmailDetail({ email, user, alias }) {
             {/* Email Info */}
             <div className="min-w-0 flex-1">
               <div className="flex items-center space-x-3 mb-2">
-                <h2 className="text-xl font-bold text-white">
+                <h2 className="text-xl font-bold text-foreground">
                   {getSenderName(email)}
                 </h2>
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${getEmailTypeColor()}`}>
@@ -116,19 +116,19 @@ export default function EmailDetail({ email, user, alias }) {
               
               <div className="space-y-1 text-sm text-[hsl(var(--muted-foreground))]">
                 <div>
-                  <span className="font-medium text-white/80">To:</span> {email.isSentEmail ? email.to : email.aliasEmail}
+                  <span className="font-medium text-foreground/80">To:</span> {email.isSentEmail ? email.to : email.aliasEmail}
                 </div>
                 {email.isSentEmail && (
                   <div>
-                    <span className="font-medium text-white/80">From:</span> {email.aliasEmail}
+                    <span className="font-medium text-foreground/80">From:</span> {email.aliasEmail}
                   </div>
                 )}
                 <div>
-                  <span className="font-medium text-white/80">Date:</span> {formatFullDate(email.receivedAt)}
+                  <span className="font-medium text-foreground/80">Date:</span> {formatFullDate(email.receivedAt)}
                 </div>
                 {email.attachments?.length > 0 && (
                   <div>
-                    <span className="font-medium text-white/80">Attachments:</span> {email.attachments.length} file{email.attachments.length > 1 ? 's' : ''}
+                    <span className="font-medium text-foreground/80">Attachments:</span> {email.attachments.length} file{email.attachments.length > 1 ? 's' : ''}
                   </div>
                 )}
               </div>
@@ -139,26 +139,26 @@ export default function EmailDetail({ email, user, alias }) {
           <div className="flex items-center space-x-2">
             <button
               onClick={() => router.push(`/dashboard/send?reply=${email._id}`)}
-              className="inline-flex items-center px-3 py-2 border border-white/10 shadow-sm text-sm font-bold rounded-md text-white bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20 focus:ring-offset-background transition-colors"
+              className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-bold rounded-md text-foreground bg-muted hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring/30 focus:ring-offset-background transition-colors"
             >
               Reply
             </button>
             <button
               onClick={() => router.push(`/dashboard/send?reply=${email._id}&replyAll=true`)}
-              className="inline-flex items-center px-3 py-2 border border-white/10 shadow-sm text-sm font-bold rounded-md text-white bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20 focus:ring-offset-background transition-colors"
+              className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-bold rounded-md text-foreground bg-muted hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring/30 focus:ring-offset-background transition-colors"
             >
               Reply All
             </button>
             <button
               onClick={() => router.push(`/dashboard/send?forward=${email._id}`)}
-              className="inline-flex items-center px-3 py-2 border border-white/10 shadow-sm text-sm font-bold rounded-md text-white bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20 focus:ring-offset-background transition-colors"
+              className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-bold rounded-md text-foreground bg-muted hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring/30 focus:ring-offset-background transition-colors"
             >
               Forward
             </button>
-            <button className="inline-flex items-center px-3 py-2 border border-white/10 shadow-sm text-sm font-bold rounded-md text-[hsl(var(--muted-foreground))] hover:text-red-400 bg-white/5 hover:bg-red-500/10 focus:outline-none transition-colors">
+            <button className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-bold rounded-md text-[hsl(var(--muted-foreground))] hover:text-red-400 bg-muted hover:bg-red-500/10 focus:outline-none transition-colors">
               🗑️
             </button>
-            <button className="inline-flex items-center px-3 py-2 border border-white/10 shadow-sm text-sm font-bold rounded-md text-[hsl(var(--muted-foreground))] hover:text-yellow-400 bg-white/5 hover:bg-yellow-500/10 focus:outline-none transition-colors">
+            <button className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-bold rounded-md text-[hsl(var(--muted-foreground))] hover:text-yellow-400 bg-muted hover:bg-yellow-500/10 focus:outline-none transition-colors">
               ⭐
             </button>
           </div>
@@ -186,19 +186,19 @@ export default function EmailDetail({ email, user, alias }) {
         {/* Email Content */}
         {email.bodyHtml ? (
           <div
-            className={`prose prose-invert max-w-none text-white/90 leading-relaxed ${email.isSpam ? 'opacity-75' : ''}`}
+            className={`prose max-w-none text-foreground/90 leading-relaxed ${email.isSpam ? 'opacity-75' : ''}`}
             dangerouslySetInnerHTML={{ __html: email.bodyHtml }}
           />
         ) : (
-          <div className={`whitespace-pre-wrap text-white/90 leading-relaxed font-mono text-sm bg-white/5 p-4 rounded-md border border-white/10 ${email.isSpam ? 'opacity-75' : ''}`}>
+          <div className={`whitespace-pre-wrap text-foreground/90 leading-relaxed font-mono text-sm bg-muted p-4 rounded-md border border-border ${email.isSpam ? 'opacity-75' : ''}`}>
             {email.bodyPlain || 'No email content available.'}
           </div>
         )}
 
         {/* Attachments */}
         {email.attachments?.length > 0 && (
-          <div className="mt-6 p-4 border border-white/10 rounded-md">
-            <h4 className="text-sm font-bold text-white mb-3">
+          <div className="mt-6 p-4 border border-border rounded-md">
+            <h4 className="text-sm font-bold text-foreground mb-3">
               Attachments ({email.attachments.length})
               {email.isSpam && (
                 <span className="ml-2 text-xs text-red-400 font-normal">
@@ -213,14 +213,14 @@ export default function EmailDetail({ email, user, alias }) {
                   className={`flex items-center space-x-3 p-3 rounded-lg border transition-colors ${
                     email.isSpam 
                       ? 'bg-red-500/10 border-red-500/20 opacity-75' 
-                      : 'bg-white/5 border-white/10 hover:bg-white/10'
+                      : 'bg-muted border-border hover:bg-muted'
                   }`}
                 >
                   <div className="flex-shrink-0">
                     <span className="text-xl">📎</span>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-white truncate">
+                    <p className="text-sm font-bold text-foreground truncate">
                       {attachment.filename || `Attachment ${index + 1}`}
                     </p>
                     <p className="text-xs text-[hsl(var(--muted-foreground))]">
@@ -232,7 +232,7 @@ export default function EmailDetail({ email, user, alias }) {
                     className={`flex-shrink-0 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1 ${
                       email.isSpam
                         ? 'text-red-400 cursor-not-allowed'
-                        : 'text-white bg-white/10 hover:bg-white/20 focus:ring-white/20'
+                        : 'text-foreground bg-muted hover:bg-muted focus:ring-ring/30'
                     }`}
                     onClick={() =>
                       email.isSpam 
@@ -259,7 +259,7 @@ export default function EmailDetail({ email, user, alias }) {
             onContextMenu={closeContextMenu}
           ></div>
           <div
-            className="fixed z-20 bg-background border border-white/10 rounded-lg shadow-xl py-2 min-w-[200px] context-menu"
+            className="fixed z-20 bg-background border border-border rounded-lg shadow-xl py-2 min-w-[200px] context-menu"
             style={{
               left: contextMenuPosition.x,
               top: contextMenuPosition.y,
@@ -274,7 +274,7 @@ export default function EmailDetail({ email, user, alias }) {
                   action.action();
                   closeContextMenu();
                 }}
-                className="w-full px-4 py-2 text-left text-sm text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 flex items-center space-x-3 transition-colors"
+                className="w-full px-4 py-2 text-left text-sm text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted flex items-center space-x-3 transition-colors"
               >
                 <span>{action.icon}</span>
                 <span>{action.label}</span>
@@ -282,7 +282,7 @@ export default function EmailDetail({ email, user, alias }) {
             ))}
             
             {/* Star Rating */}
-            <div className="px-4 py-2 border-t border-white/10 mt-1">
+            <div className="px-4 py-2 border-t border-border mt-1">
               <div className="flex items-center space-x-1">
                 <span className="text-sm text-[hsl(var(--muted-foreground))]">Star:</span>
                 {[1, 2, 3, 4, 5].map((rating) => (

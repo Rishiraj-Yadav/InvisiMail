@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Mail, Shield, Zap, Inbox, ArrowRight, Loader2 } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -91,7 +92,7 @@ export default function Register() {
   const strengthColor = ['', '#ef4444', '#f59e0b', '#eab308', '#22c55e', '#10b981'][strength] || '';
 
   return (
-    <main className="min-h-screen bg-[#09090B] flex items-center justify-center relative overflow-hidden selection:bg-[#6366F1]/50 selection:text-white p-6">
+    <main className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden selection:bg-[#6366F1]/50 selection:text-foreground p-6">
       {/* Background decorations matching LandingPage */}
       <div className="absolute top-[20%] left-[20%] w-[40%] h-[40%] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08)_0%,transparent_70%)]" />
       <div className="absolute bottom-[20%] right-[20%] w-[30%] h-[30%] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.05)_0%,transparent_70%)]" />
@@ -102,18 +103,22 @@ export default function Register() {
       >
         <motion.div variants={fadeUp} className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366F1] to-[#4F46E5] flex items-center justify-center text-white shadow-lg shadow-[#6366F1]/20 group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366F1] to-[#4F46E5] flex items-center justify-center text-foreground shadow-lg shadow-[#6366F1]/20 group-hover:scale-105 transition-transform">
               <Mail className="w-6 h-6" />
             </div>
           </Link>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Create your account</h1>
-          <p className="text-[#A1A1AA]">Get started with InvisiMail for free.</p>
+        <motion.div variants={fadeUp} className="flex justify-end mb-4">
+          <ThemeToggle compact />
         </motion.div>
 
-        <motion.div variants={fadeUp} className="bg-[#111113]/80 backdrop-blur-xl border border-[#27272A] p-8 rounded-3xl shadow-2xl">
+        <motion.div variants={fadeUp} className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Create your account</h1>
+          <p className="text-muted-foreground">Get started with InvisiMail for free.</p>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="bg-card/80 backdrop-blur-xl border border-border p-8 rounded-3xl shadow-2xl">
           {error && (
             <div className="alert-error mb-6 p-3 rounded-xl text-sm">
               {error}
@@ -122,37 +127,37 @@ export default function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1.5">Name</label>
               <input
                 id="name" type="text" name="name"
                 placeholder="Your name"
                 value={formData.name} onChange={handleChange}
                 required disabled={loading}
-                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-background border border-border text-foreground placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
                 autoComplete="name"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Email address</label>
+              <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1.5">Email address</label>
               <input
                 id="email" type="email" name="email"
                 placeholder="you@example.com"
                 value={formData.email} onChange={handleChange}
                 required disabled={loading}
-                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-background border border-border text-foreground placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
                 autoComplete="email"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium text-muted-foreground mb-1.5">Password</label>
               <input
                 id="password" type="password" name="password"
                 placeholder="Min 6 characters"
                 value={formData.password} onChange={handleChange}
                 required disabled={loading} minLength={6}
-                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-background border border-border text-foreground placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
                 autoComplete="new-password"
               />
               {formData.password && (
@@ -168,13 +173,13 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#A1A1AA] mb-1.5">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-muted-foreground mb-1.5">Confirm Password</label>
               <input
                 id="confirmPassword" type="password" name="confirmPassword"
                 placeholder="••••••••"
                 value={formData.confirmPassword} onChange={handleChange}
                 required disabled={loading}
-                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-[#09090B] border border-[#27272A] text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
+                className="w-full h-12 px-4 rounded-xl text-sm font-medium transition-all bg-background border border-border text-foreground placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]"
                 autoComplete="new-password"
               />
             </div>
@@ -182,7 +187,7 @@ export default function Register() {
             <div className="pt-2">
               <button
                 type="submit" disabled={loading}
-                className="w-full h-12 bg-white text-[#09090B] hover:bg-gray-100 font-bold rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
               >
                 {loading ? (
                   <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Creating account...</>
@@ -194,9 +199,9 @@ export default function Register() {
           </form>
         </motion.div>
 
-        <motion.p variants={fadeUp} className="text-center text-sm text-[#A1A1AA] mt-8">
+        <motion.p variants={fadeUp} className="text-center text-sm text-muted-foreground mt-8">
           Already have an account?{' '}
-          <Link href="/signin" className="text-white hover:text-[#6366F1] font-semibold transition-colors">
+          <Link href="/signin" className="text-foreground hover:text-[#6366F1] font-semibold transition-colors">
             Sign in
           </Link>
         </motion.p>

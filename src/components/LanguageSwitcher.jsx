@@ -59,12 +59,12 @@ export default function LanguageSwitcher() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted transition-colors border border-border"
         aria-label="Select Language"
         aria-expanded={isOpen}
       >
-        <Globe className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:inline">
+        <Globe className="w-4 h-4 text-muted-foreground" />
+        <span className="text-sm font-medium text-foreground hidden sm:inline">
           {currentLang.flag}
         </span>
       </button>
@@ -72,8 +72,8 @@ export default function LanguageSwitcher() {
       {/* Dropdown Menu */}
      {isOpen && (
   <div className="absolute left-full top-1/2 -translate-y-[80%] ml-3 w-56
-                  bg-white dark:bg-gray-800 rounded-lg shadow-lg
-                  border border-gray-200 dark:border-gray-700
+                  bg-card rounded-lg shadow-lg
+                  border border-border
                   z-50 overflow-hidden transition-all duration-200">
     <div className="py-1">
       {LANGUAGES.map((lang) => {
@@ -86,21 +86,21 @@ export default function LanguageSwitcher() {
               setIsOpen(false);
             }}
             className={`w-full text-left px-4 py-2.5 flex items-center justify-between
-              hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors
-              ${isSelected ? 'bg-blue-50 dark:bg-blue-900/20' : ''}`}
+              hover:bg-muted transition-colors
+              ${isSelected ? 'bg-primary/10' : ''}`}
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">{lang.flag}</span>
               <span className={`text-sm font-medium ${
                 isSelected
-                  ? 'text-blue-700 dark:text-blue-300'
-                  : 'text-gray-700 dark:text-gray-300'
+                  ? 'text-primary'
+                  : 'text-foreground'
               }`}>
                 {lang.name}
               </span>
             </div>
             {isSelected && (
-              <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <Check className="w-4 h-4 text-primary" />
             )}
           </button>
         );

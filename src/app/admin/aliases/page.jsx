@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FiLogOut, FiSearch } from 'react-icons/fi';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function AdminAliases() {
   const [aliases, setAliases] = useState([]);
@@ -57,22 +58,23 @@ export default function AdminAliases() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-black/40 backdrop-blur-md border-b border-purple-500/20 shadow-lg">
+      <header className="surface-elevated border-b border-purple-500/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
               href="/admin"
-              className="px-4 py-2 bg-purple-600/20 text-purple-300 rounded-lg hover:bg-purple-600/30 transition-colors border border-purple-500/30"
+              className="px-4 py-2 bg-purple-600/20 text-muted-foreground rounded-lg hover:bg-purple-600/30 transition-colors border border-purple-500/30"
             >
               ← Dashboard
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white">Alias Management</h1>
-              <p className="text-sm text-purple-300 mt-1">View all email aliases</p>
+              <h1 className="text-2xl font-bold text-foreground">Alias Management</h1>
+              <p className="text-sm text-muted-foreground mt-1">View all email aliases</p>
             </div>
           </div>
+          <ThemeToggle compact />
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 bg-red-600/20 text-red-300 rounded-lg hover:bg-red-600/30 transition-colors border border-red-500/30"
@@ -91,7 +93,7 @@ export default function AdminAliases() {
         )}
 
         {/* Search */}
-        <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 p-6 mb-6 shadow-lg">
+        <div className="surface-elevated rounded-xl border border-purple-500/20 p-6 mb-6 shadow-lg">
           <form onSubmit={handleSearch} className="flex gap-4">
             <div className="flex-1 relative">
               <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-400 w-5 h-5" />
@@ -100,12 +102,12 @@ export default function AdminAliases() {
                 placeholder="Search aliases..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-black/30 border border-purple-500/30 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-purple-300/50"
+                className="w-full pl-10 pr-4 py-2 bg-muted border border-purple-500/30 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-foreground placeholder-muted-foreground"
               />
             </div>
             <button
               type="submit"
-              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              className="px-6 py-2 bg-purple-600 text-foreground rounded-lg hover:bg-purple-700 transition-colors"
             >
               Search
             </button>
@@ -113,45 +115,45 @@ export default function AdminAliases() {
         </div>
 
         {/* Aliases Table */}
-        <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 overflow-hidden shadow-lg">
+        <div className="surface-elevated rounded-xl border border-purple-500/20 overflow-hidden shadow-lg">
           {loading ? (
             <div className="p-8 text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-4"></div>
-              <p className="text-purple-300">Loading aliases...</p>
+              <p className="text-muted-foreground">Loading aliases...</p>
             </div>
           ) : aliases.length === 0 ? (
-            <div className="p-8 text-center text-purple-300">No aliases found</div>
+            <div className="p-8 text-center text-muted-foreground">No aliases found</div>
           ) : (
             <>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-purple-500/20">
-                  <thead className="bg-purple-900/30">
+                  <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Alias</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Owner</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Type</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Activity</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Created</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Alias</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Owner</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Type</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Activity</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Created</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-purple-500/10">
                     {aliases.map((alias) => (
-                      <tr key={alias._id} className="hover:bg-purple-900/20 transition-colors">
+                      <tr key={alias._id} className="hover:bg-muted/70 transition-colors">
                         <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-white">{alias.aliasEmail}</div>
+                          <div className="text-sm font-medium text-foreground">{alias.aliasEmail}</div>
                         </td>
                         <td className="px-6 py-4">
                           <div>
-                            <div className="text-sm font-medium text-white">{alias.owner.name}</div>
-                            <div className="text-sm text-gray-400">{alias.owner.email}</div>
+                            <div className="text-sm font-medium text-foreground">{alias.owner.name}</div>
+                            <div className="text-sm text-muted-foreground">{alias.owner.email}</div>
                           </div>
                         </td>
                         <td className="px-6 py-4">
                           <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                             alias.isCollaborative 
-                              ? 'bg-purple-900/50 text-purple-300 border border-purple-500/30' 
-                              : 'bg-gray-700/50 text-gray-300 border border-gray-500/30'
+                              ? 'bg-purple-900/50 text-muted-foreground border border-purple-500/30'
+                              : 'bg-muted text-muted-foreground border border-border'
                           }`}>
                             {alias.isCollaborative ? 'Collaborative' : 'Personal'}
                           </span>
@@ -166,12 +168,12 @@ export default function AdminAliases() {
                           </span>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-xs text-gray-400">
+                          <div className="text-xs text-muted-foreground">
                             <div>Sent: {alias.emailsSent || 0}</div>
                             <div>Received: {alias.emailsReceived || 0}</div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-400">
+                        <td className="px-6 py-4 text-sm text-muted-foreground">
                           {new Date(alias.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -182,22 +184,22 @@ export default function AdminAliases() {
 
               {/* Pagination */}
               {pagination && pagination.totalPages > 1 && (
-                <div className="px-6 py-4 bg-purple-900/20 border-t border-purple-500/20 flex items-center justify-between">
-                  <div className="text-sm text-purple-300">
+                <div className="px-6 py-4 bg-muted/70 border-t border-purple-500/20 flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
                     Page {pagination.currentPage} of {pagination.totalPages}
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={currentPage === 1}
-                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-purple-300 transition-colors"
+                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-muted-foreground transition-colors"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setCurrentPage(p => p + 1)}
                       disabled={currentPage === pagination.totalPages}
-                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-purple-300 transition-colors"
+                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-muted-foreground transition-colors"
                     >
                       Next
                     </button>

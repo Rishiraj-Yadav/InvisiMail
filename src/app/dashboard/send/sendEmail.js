@@ -275,14 +275,14 @@ export default function SendEmail() {
       <Sidebar user={user} onUpgrade={handleUpgrade} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
       
       <div className="flex-1 flex flex-col overflow-hidden min-h-0 relative z-10">
-        <header className="relative p-5 md:p-8 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
-          <div className="absolute inset-0 bg-white/5 opacity-30 pointer-events-none" />
+        <header className="relative p-5 md:p-8 border-b border-border bg-card/50 backdrop-blur-md flex-shrink-0 overflow-hidden">
+          <div className="absolute inset-0 bg-muted opacity-30 pointer-events-none" />
           <div className="relative z-10 flex items-center gap-4">
-            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
+            <button onClick={() => setIsMobileOpen(true)} className="md:hidden p-2 rounded-lg text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted transition-colors cursor-pointer">
               <Menu className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white">Compose Email</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-foreground">Compose Email</h1>
               <p className="text-sm text-[hsl(var(--muted-foreground))] mt-0.5">
                 Send professional emails from your aliases with AI assistance
               </p>
@@ -290,7 +290,7 @@ export default function SendEmail() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto min-h-0 p-4 md:p-6 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+        <main className="flex-1 overflow-y-auto min-h-0 p-4 md:p-6 scrollbar-thin scrollbar-thumb-muted-foreground/30 hover:scrollbar-thumb-muted-foreground/50">
           <div className="max-w-4xl mx-auto space-y-6 pb-20">
             {/* Notifications */}
             {error && (
@@ -312,9 +312,9 @@ export default function SendEmail() {
             )}
 
             {/* Email Form */}
-            <div className="surface-card rounded-xl shadow-xl border border-white/5">
-              <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
-                <h3 className="text-lg font-bold text-white">Email Details</h3>
+            <div className="surface-card rounded-xl shadow-xl border border-border">
+              <div className="px-6 py-4 border-b border-border surface-elevated rounded-t-xl">
+                <h3 className="text-lg font-bold text-foreground">Email Details</h3>
               </div>
               
               <form onSubmit={handleSubmit} className="p-6 space-y-6">
@@ -322,8 +322,8 @@ export default function SendEmail() {
                 {/* From Alias Selection */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-white" />
+                    <label className="block text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-foreground" />
                       Send From Alias
                     </label>
                     <div className="relative">
@@ -334,9 +334,9 @@ export default function SendEmail() {
                         disabled={loading || sendableAliases.length === 0}
                         required
                       >
-                        <option value="" className="bg-[#111113] text-[#FAFAFA]">Select an alias...</option>
+                        <option value="" className="bg-card text-foreground">Select an alias...</option>
                         {sendableAliases.map((alias) => (
-                          <option key={alias._id.toString()} value={alias.aliasEmail} className="bg-[#111113] text-[#FAFAFA]">
+                          <option key={alias._id.toString()} value={alias.aliasEmail} className="bg-card text-foreground">
                             {alias.aliasEmail} {alias.isCollaborative && '(Collaborative)'}
                           </option>
                         ))}
@@ -349,7 +349,7 @@ export default function SendEmail() {
 
                   {/* Recipient */}
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">
+                    <label className="block text-sm font-semibold text-foreground mb-2">
                       To
                     </label>
                     <input
@@ -365,7 +365,7 @@ export default function SendEmail() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-semibold text-white mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Subject
                   </label>
                   <input
@@ -380,7 +380,7 @@ export default function SendEmail() {
 
                 {/* Message Body */}
                 <div>
-                  <label className="block text-sm font-semibold text-white mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Message
                   </label>
                   <textarea
@@ -399,20 +399,20 @@ export default function SendEmail() {
                 </div>
 
                 {/* AI Assistant Section */}
-                <div className="surface-interactive border border-white/10 rounded-xl p-5 relative overflow-hidden">
+                <div className="surface-interactive border border-border rounded-xl p-5 relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                    <Zap className="w-24 h-24 text-white" />
+                    <Zap className="w-24 h-24 text-foreground" />
                   </div>
                   <div className="relative z-10">
-                    <label className="block text-sm font-bold text-white mb-3 flex items-center">
-                      <Zap className="w-4 h-4 mr-2 text-white" />
+                    <label className="block text-sm font-bold text-foreground mb-3 flex items-center">
+                      <Zap className="w-4 h-4 mr-2 text-foreground" />
                       AI Assistant
                     </label>
                     
                     <div className="flex gap-2 mb-3">
                       <input
                         type="text"
-                        className="flex-1 input-field text-sm bg-background border-white/10"
+                        className="flex-1 input-field text-sm bg-background border-border"
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder="e.g., 'Write a polite follow-up for the invoice...'"
@@ -430,7 +430,7 @@ export default function SendEmail() {
                         type="button"
                         onClick={() => handleAIAssist('write')}
                         disabled={aiLoading || loading || !prompt.trim()}
-                        className="inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
                       >
                         {aiLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
                         Generate
@@ -440,7 +440,7 @@ export default function SendEmail() {
                         type="button"
                         onClick={() => handleAIAssist('enhance')}
                         disabled={aiLoading || loading || (!formData.subject.trim() && !formData.message.trim())}
-                        className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 bg-muted hover:bg-muted border border-border disabled:opacity-50 disabled:cursor-not-allowed text-foreground text-sm font-bold py-2.5 px-4 rounded-lg transition-all cursor-pointer"
                       >
                         {aiLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
                         Improve Existing
@@ -450,7 +450,7 @@ export default function SendEmail() {
                         type="button"
                         onClick={handleClearAll}
                         disabled={aiLoading || loading}
-                        className="ml-auto text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
+                        className="ml-auto text-sm text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors cursor-pointer"
                       >
                         Clear All
                       </button>
@@ -459,11 +459,11 @@ export default function SendEmail() {
                 </div>
 
                 {/* Submit Section */}
-                <div className="flex items-center justify-end pt-6 border-t border-white/5">
+                <div className="flex items-center justify-end pt-6 border-t border-border">
                   <button
                     type="submit"
                     disabled={loading || !selectedAlias || aiLoading}
-                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold py-3 px-8 rounded-xl transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-bold py-3 px-8 rounded-xl transition-all cursor-pointer"
                   >
                     {loading ? (
                       <>

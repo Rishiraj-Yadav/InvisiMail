@@ -68,7 +68,7 @@ export default function EmailList({
     return (
       <div className="flex-1 bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-[hsl(var(--muted-foreground))]">Loading emails...</p>
         </div>
       </div>
@@ -76,26 +76,26 @@ export default function EmailList({
   }
 
   return (
-    <div className="flex-1 bg-background flex flex-col border-r border-white/5">
+    <div className="flex-1 bg-background flex flex-col border-r border-border">
       {/* Header */}
-      <div className="p-4 border-b border-white/5">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-bold text-white">Inbox</h1>
+          <h1 className="text-xl font-bold text-foreground">Inbox</h1>
           <div className="flex items-center space-x-2">
-            <button className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+            <button className="p-2 text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted rounded-lg transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
             <Link
               href="/dashboard/send"
-              className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center hover:bg-white/90 transition-colors shadow-sm"
+              className="w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
             </Link>
-            <button className="p-2 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+            <button className="p-2 text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted rounded-lg transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a4 4 0 118 0v4m-4 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
               </svg>
@@ -115,7 +115,7 @@ export default function EmailList({
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="block w-full pl-10 pr-3 py-2 bg-white/5 border border-white/10 rounded-lg focus:ring-white/20 focus:border-white/20 text-white placeholder-[hsl(var(--muted-foreground))] text-sm transition-all"
+            className="block w-full pl-10 pr-3 py-2 bg-muted border border-border rounded-lg focus:ring-ring/30 focus:border-border text-foreground placeholder-[hsl(var(--muted-foreground))] text-sm transition-all"
           />
         </div>
 
@@ -127,8 +127,8 @@ export default function EmailList({
               onClick={() => setActiveFilter(filter.name)}
               className={`px-3 py-1.5 text-sm font-bold rounded-md transition-colors ${
                 activeFilter === filter.name
-                  ? 'bg-white text-black'
-                  : 'text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/5'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted'
               }`}
             >
               {filter.name}
@@ -149,14 +149,14 @@ export default function EmailList({
             </div>
           </div>
         ) : (
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-border">
             {filteredEmails.map((email) => (
               <div
                 key={email._id}
                 onClick={() => onEmailSelect(email._id)}
-                className={`p-4 hover:bg-white/5 cursor-pointer transition-all duration-200 group email-item-hover ${
-                  selectedEmailId === email._id ? 'bg-white/5 border-l-2 border-white' : 'border-l-2 border-transparent'
-                } ${!email.isRead ? 'bg-white/[0.02]' : ''}`}
+                className={`p-4 hover:bg-muted cursor-pointer transition-all duration-200 group email-item-hover ${
+                  selectedEmailId === email._id ? 'bg-muted border-l-2 border-primary' : 'border-l-2 border-transparent'
+                } ${!email.isRead ? 'bg-card/50' : ''}`}
               >
                 <div className="flex items-start space-x-3">
                   {/* Avatar */}
@@ -165,14 +165,14 @@ export default function EmailList({
                       ? 'bg-red-500/10 border border-red-500/20' 
                       : email.isSentEmail 
                         ? 'bg-green-500/10 border border-green-500/20' 
-                        : 'bg-white/10 border border-white/20'
+                        : 'bg-muted border border-border'
                   }`}>
                     <span className={`text-sm font-bold ${
                       email.isSpam 
                         ? 'text-red-400' 
                         : email.isSentEmail 
                           ? 'text-green-400' 
-                          : 'text-white'
+                          : 'text-foreground'
                     }`}>
                       {getSenderInitial(email)}
                     </span>
@@ -183,12 +183,12 @@ export default function EmailList({
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center space-x-2">
                         <p className={`text-sm ${
-                          !email.isRead ? 'text-white font-bold' : 'text-white/80 font-medium'
+                          !email.isRead ? 'text-foreground font-bold' : 'text-foreground/80 font-medium'
                         }`}>
                           {getSenderName(email)}
                         </p>
                         {!email.isRead && (
-                          <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                          <div className="w-1.5 h-1.5 bg-card rounded-full"></div>
                         )}
                       </div>
                       <span className="text-xs text-[hsl(var(--muted-foreground))]">
@@ -197,7 +197,7 @@ export default function EmailList({
                     </div>
 
                     <p className={`text-sm mb-1 ${
-                      !email.isRead ? 'font-bold text-white' : 'font-medium text-white/80'
+                      !email.isRead ? 'font-bold text-foreground' : 'font-medium text-foreground/80'
                     }`}>
                       {email.subject || '(No Subject)'}
                     </p>
@@ -219,7 +219,7 @@ export default function EmailList({
                         </span>
                       )}
                       {email.attachments?.length > 0 && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-white/10 text-white border border-white/20">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-muted text-foreground border border-border">
                           📎 {email.attachments.length}
                         </span>
                       )}
@@ -233,7 +233,7 @@ export default function EmailList({
                         e.stopPropagation();
                         onMarkAsRead(email._id, !email.isRead);
                       }}
-                      className="p-1.5 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-md transition-colors"
+                      className="p-1.5 text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted rounded-md transition-colors"
                       title={email.isRead ? 'Mark unread' : 'Mark read'}
                     >
                       {email.isRead ? '📭' : '📬'}
@@ -243,7 +243,7 @@ export default function EmailList({
                         e.stopPropagation();
                         router.push(`/dashboard/send?reply=${email._id}`);
                       }}
-                      className="p-1.5 text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-white/10 rounded-md transition-colors"
+                      className="p-1.5 text-[hsl(var(--muted-foreground))] hover:text-foreground hover:bg-muted rounded-md transition-colors"
                       title="Reply"
                     >
                       ↩️

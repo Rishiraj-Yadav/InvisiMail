@@ -27,10 +27,6 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-  }, []);
-
-  useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('upgraded') === 'true') {
       setSuccess('Payment successful! Verifying your Pro plan upgrade...');
@@ -191,13 +187,13 @@ export default function Dashboard() {
   // Loading state
   if (loading || refreshing) {
     return (
-      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center p-8">
           <div className="w-12 h-12 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-6" />
-          <h2 className="text-xl font-semibold text-white mb-2">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             {refreshing ? 'Verifying Your Upgrade' : 'Loading Dashboard'}
           </h2>
-          <p className="text-sm text-[#A1A1AA]">
+          <p className="text-sm text-muted-foreground">
             {refreshing ? 'This just takes a moment...' : 'Preparing your workspace.'}
           </p>
           {refreshing && (
@@ -230,7 +226,7 @@ export default function Dashboard() {
       case 'sent': return <Send className="text-primary w-4 h-4" />;
       case 'received': return <Inbox className="text-green-400 w-4 h-4" />;
       case 'blocked': return <Shield className="text-red-400 w-4 h-4" />;
-      default: return <Mail className="text-[#A1A1AA] w-4 h-4" />;
+      default: return <Mail className="text-muted-foreground w-4 h-4" />;
     }
   };
 
@@ -257,7 +253,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex h-full bg-[#09090B] text-white relative overflow-hidden">
+    <div className="flex h-full bg-background text-foreground relative overflow-hidden">
       {/* Clean Dashboard Background (No Ambient Glows) */}
       <div className="absolute top-0 left-[20%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none opacity-20" />
 
@@ -280,7 +276,7 @@ export default function Dashboard() {
               <div className="flex-1">
                   <p className="font-medium text-sm">{error}</p>
                   {error.includes('Unable to verify') && (
-                    <button onClick={handleManualRefresh} className="text-xs text-red-400 hover:text-white mt-1 cursor-pointer">
+                    <button onClick={handleManualRefresh} className="text-xs text-red-400 hover:text-foreground mt-1 cursor-pointer">
                       Click to Verify Manually
                     </button>
                   )}
@@ -305,25 +301,25 @@ export default function Dashboard() {
               <div className="flex items-start gap-4">
                 <button
                   onClick={() => setIsMobileOpen(true)}
-                  className="md:hidden mt-0.5 p-2 rounded-lg text-[#A1A1AA] hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+                  className="md:hidden mt-0.5 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                 >
                   <Menu className="w-5 h-5" />
                 </button>
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-semibold text-[#FAFAFA] mb-2 tracking-tight">
-                    {getGreeting()}, <span className="text-white">{user?.name?.split(' ')[0] || 'User'}</span>
+                  <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-2 tracking-tight">
+                    {getGreeting()}, <span className="text-foreground">{user?.name?.split(' ')[0] || 'User'}</span>
                   </h1>
-                  <p className="text-sm text-[#A1A1AA] flex items-center gap-2">
+                  <p className="text-sm text-muted-foreground flex items-center gap-2">
                     <Clock className="w-4 h-4" /> Here's what's happening with your aliases today.
                   </p>
                 </div>
               </div>
               <div className={`px-4 py-2 rounded-lg border text-xs font-semibold flex items-center gap-2 ${
                 isPro 
-                  ? 'bg-white/5 border-white/10 text-white' 
-                  : 'bg-transparent border-white/10 text-[#A1A1AA]'
+                  ? 'bg-muted border-border text-foreground'
+                  : 'bg-transparent border-border text-muted-foreground'
               }`}>
-                <Star className={`w-3.5 h-3.5 ${isPro ? 'text-primary' : 'text-[#A1A1AA]'}`} />
+                <Star className={`w-3.5 h-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`} />
                 {isPro ? 'Pro Active' : 'Free Plan'}
               </div>
             </div>
@@ -332,19 +328,19 @@ export default function Dashboard() {
           {/* Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { label: 'Total Aliases', value: aliases.length, sub: isPro ? 'Unlimited' : `${aliases.filter(a => !a.isCollaborative).length} / 5 personal`, icon: Mail, color: 'text-[#FAFAFA]', glow: 'shadow-none', bg: 'bg-white/5 border-white/10', href: '/dashboard/aliases' },
-              { label: 'Unread Emails', value: inboxStats.unreadCount, sub: 'View Inbox →', icon: Inbox, color: 'text-[#FAFAFA]', glow: 'shadow-none', bg: 'bg-white/5 border-white/10', href: '/dashboard/inbox' },
-              { label: 'Emails Sent', value: totalSent, sub: 'Compose New →', icon: Send, color: 'text-[#FAFAFA]', glow: 'shadow-none', bg: 'bg-white/5 border-white/10', href: '/dashboard/send' },
+              { label: 'Total Aliases', value: aliases.length, sub: isPro ? 'Unlimited' : `${aliases.filter(a => !a.isCollaborative).length} / 5 personal`, icon: Mail, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-muted border-border', href: '/dashboard/aliases' },
+              { label: 'Unread Emails', value: inboxStats.unreadCount, sub: 'View Inbox →', icon: Inbox, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-muted border-border', href: '/dashboard/inbox' },
+              { label: 'Emails Sent', value: totalSent, sub: 'Compose New →', icon: Send, color: 'text-foreground', glow: 'shadow-none', bg: 'bg-muted border-border', href: '/dashboard/send' },
             ].map((stat) => (
-              <motion.a key={stat.label} href={stat.href} variants={item} className="surface-card p-5 rounded-2xl block group hover:bg-[#111113] transition-all border border-white/5 hover:border-white/10">
+              <motion.a key={stat.label} href={stat.href} variants={item} className="surface-card p-5 rounded-2xl block group hover:bg-card transition-all border border-border hover:border-border">
                 <div className="flex justify-between items-start mb-4">
-                  <p className="text-sm font-medium text-[#A1A1AA]">{stat.label}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
                   <div className={`p-2.5 rounded-xl border ${stat.bg} ${stat.color} ${stat.glow}`}>
                     <stat.icon className="w-4 h-4" />
                   </div>
                 </div>
-                <p className="text-3xl font-semibold text-[#FAFAFA] mb-1.5">{stat.value}</p>
-                <p className="text-xs text-[#A1A1AA] font-medium">{stat.sub}</p>
+                <p className="text-3xl font-semibold text-foreground mb-1.5">{stat.value}</p>
+                <p className="text-xs text-muted-foreground font-medium">{stat.sub}</p>
               </motion.a>
             ))}
           </div>
@@ -354,8 +350,8 @@ export default function Dashboard() {
             <motion.div variants={item} className="surface-card p-5 rounded-2xl relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-white">Email Traffic</h3>
-                <button className="text-[#A1A1AA] hover:text-white transition-colors"><MoreVertical className="w-4 h-4" /></button>
+                <h3 className="text-sm font-semibold text-foreground">Email Traffic</h3>
+                <button className="text-muted-foreground hover:text-foreground transition-colors"><MoreVertical className="w-4 h-4" /></button>
               </div>
               <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
@@ -379,8 +375,8 @@ export default function Dashboard() {
             <motion.div variants={item} className="surface-card p-5 rounded-2xl relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-white">Spam vs. Legitimate</h3>
-                <button className="text-[#A1A1AA] hover:text-white transition-colors"><MoreVertical className="w-4 h-4" /></button>
+                <h3 className="text-sm font-semibold text-foreground">Spam vs. Legitimate</h3>
+                <button className="text-muted-foreground hover:text-foreground transition-colors"><MoreVertical className="w-4 h-4" /></button>
               </div>
               <div className="h-48 relative">
                 <ResponsiveContainer width="100%" height="100%">
@@ -402,7 +398,7 @@ export default function Dashboard() {
                 )}
                 {hasEmailData && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                    <span className="text-white text-2xl font-bold tracking-tight">{inboxStats?.totalEmails || 0}</span>
+                    <span className="text-foreground text-2xl font-bold tracking-tight">{inboxStats?.totalEmails || 0}</span>
                     <span className="text-[hsl(var(--muted-foreground))] text-[10px] uppercase tracking-wider font-semibold mt-0.5">Total</span>
                   </div>
                 )}
@@ -413,25 +409,25 @@ export default function Dashboard() {
           {/* Recent Activity Timeline */}
           <motion.div variants={item} className="surface-card p-5 rounded-2xl">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-white">Activity Feed</h3>
+              <h3 className="text-lg font-bold text-foreground">Activity Feed</h3>
               <div className="flex gap-4">
-                <a href="/dashboard/aliases" className="text-sm text-primary hover:text-white font-medium transition-colors cursor-pointer">All aliases</a>
-                <a href="/dashboard/inbox" className="text-sm text-primary hover:text-white font-medium transition-colors cursor-pointer">Inbox</a>
+                <a href="/dashboard/aliases" className="text-sm text-primary hover:text-foreground font-medium transition-colors cursor-pointer">All aliases</a>
+                <a href="/dashboard/inbox" className="text-sm text-primary hover:text-foreground font-medium transition-colors cursor-pointer">Inbox</a>
               </div>
             </div>
 
-            <div className="space-y-8 max-h-[500px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+            <div className="space-y-8 max-h-[500px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent">
               {/* Recent Aliases */}
               {aliases && aliases.length > 0 && (
-                <div className="relative pl-6 border-l border-white/10">
-                  <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-white/20" />
-                  <p className="text-xs font-semibold text-[#A1A1AA] uppercase tracking-widest mb-4">New Aliases</p>
+                <div className="relative pl-6 border-l border-border">
+                  <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-muted" />
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">New Aliases</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {aliases
                       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                       .slice(0, 4)
                       .map((alias) => (
-                        <div key={alias._id} className="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all hover:-translate-y-1 group">
+                        <div key={alias._id} className="flex items-center justify-between p-4 rounded-2xl bg-card/50 border border-border hover:bg-card/70 transition-all hover:-translate-y-1 group">
                           <div className="flex items-center gap-4 min-w-0">
                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 border ${
                               alias.isCollaborative ? 'bg-primary/10 text-primary border-primary/20' : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
@@ -439,9 +435,9 @@ export default function Dashboard() {
                               {alias.aliasEmail.charAt(0).toUpperCase()}
                             </div>
                             <div className="min-w-0">
-                              <p className="text-sm font-bold text-white truncate">{alias.aliasEmail}</p>
+                              <p className="text-sm font-bold text-foreground truncate">{alias.aliasEmail}</p>
                               <div className="flex items-center gap-2 mt-0.5">
-                                <p className="text-xs text-[#A1A1AA]">
+                                <p className="text-xs text-muted-foreground">
                                   {new Date(alias.createdAt).toLocaleDateString()}
                                 </p>
                                 {alias.isCollaborative && <span className="badge text-[10px] py-0 px-1.5 bg-primary/20 text-primary border-primary/20">Team</span>}
@@ -449,7 +445,7 @@ export default function Dashboard() {
                             </div>
                           </div>
                           <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <a href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-[#A1A1AA] hover:text-white rounded-xl hover:bg-white/10 cursor-pointer transition-colors" title="View Inbox">
+                            <a href={`/dashboard/inbox?alias=${alias.aliasEmail}`} className="p-2 text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted cursor-pointer transition-colors" title="View Inbox">
                               <Inbox className="w-4 h-4" />
                             </a>
                           </div>
@@ -460,9 +456,9 @@ export default function Dashboard() {
               )}
 
               {/* Email Activities */}
-              <div className="relative pl-6 border-l border-white/10">
-                <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-white/20" />
-                <p className="text-xs font-semibold text-[#A1A1AA] uppercase tracking-widest mb-4">Email Logs</p>
+              <div className="relative pl-6 border-l border-border">
+                <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-muted" />
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">Email Logs</p>
                 {activities.length > 0 ? (
                   <div className="space-y-4">
                     {activities.slice(0, 5).map((activity, index) => {
@@ -477,23 +473,23 @@ export default function Dashboard() {
                         activity.data?.aliasEmail || '';
 
                       return (
-                        <div key={activity._id || activity.id || index} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all hover:translate-x-1 group">
+                        <div key={activity._id || activity.id || index} className="flex items-start gap-4 p-4 rounded-2xl bg-card/50 border border-border hover:bg-card/70 transition-all hover:translate-x-1 group">
                           <div className={`p-2 rounded-lg border flex-shrink-0 ${
-                            activity.type === 'sent' ? 'bg-white/5 border-white/10' :
-                            activity.type === 'received' ? 'bg-white/5 border-white/10' :
-                            'bg-white/5 border-white/10'
+                            activity.type === 'sent' ? 'bg-muted border-border' :
+                            activity.type === 'received' ? 'bg-muted border-border' :
+                            'bg-muted border-border'
                           }`}>
                             {getActivityIcon(activity.type)}
                           </div>
                           <div className="min-w-0 flex-1 pt-1">
-                            <p className="text-sm font-medium text-white">{activityText}</p>
+                            <p className="text-sm font-medium text-foreground">{activityText}</p>
                             <div className="flex items-center gap-2 mt-1">
-                              <p className="text-xs font-medium text-[#A1A1AA]">
+                              <p className="text-xs font-medium text-muted-foreground">
                                 {activityTime ? new Date(activityTime).toLocaleString([], {hour: '2-digit', minute:'2-digit', month:'short', day:'numeric'}) : 'Recent'}
                               </p>
                               {aliasEmail && (
                                 <>
-                                  <span className="w-1 h-1 rounded-full bg-white/20" />
+                                  <span className="w-1 h-1 rounded-full bg-muted" />
                                   <span className="text-xs text-primary/80">{aliasEmail}</span>
                                 </>
                               )}
@@ -504,9 +500,9 @@ export default function Dashboard() {
                     })}
                   </div>
                 ) : (
-                  <div className="p-8 text-center rounded-2xl border border-white/5 border-dashed">
-                    <Mail className="w-8 h-8 text-[#A1A1AA]/50 mx-auto mb-3" />
-                    <p className="text-sm text-[#A1A1AA]">No recent email activities.</p>
+                  <div className="p-8 text-center rounded-2xl border border-border border-dashed">
+                    <Mail className="w-8 h-8 text-muted-foreground/50 mx-auto mb-3" />
+                    <p className="text-sm text-muted-foreground">No recent email activities.</p>
                   </div>
                 )}
               </div>
@@ -514,12 +510,12 @@ export default function Dashboard() {
           </motion.div>
 
           {/* Footer */}
-          <motion.footer variants={item} className="pt-6 border-t border-white/5 text-sm text-[#A1A1AA]">
+          <motion.footer variants={item} className="pt-6 border-t border-border text-sm text-muted-foreground">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
               <p>&copy; {new Date().getFullYear()} InvisiMail. All rights reserved.</p>
               <div className="flex items-center gap-6">
-                <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-                <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+                <a href="/privacy" className="hover:text-foreground transition-colors">Privacy</a>
+                <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>
               </div>
             </div>
           </motion.footer>

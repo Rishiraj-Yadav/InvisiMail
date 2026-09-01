@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FiMail, FiAlertTriangle, FiSend, FiInbox, FiLogOut } from 'react-icons/fi';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function AdminEmails() {
   const [emails, setEmails] = useState([]);
@@ -51,22 +52,23 @@ export default function AdminEmails() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-black/40 backdrop-blur-md border-b border-purple-500/20 shadow-lg">
+      <header className="surface-elevated border-b border-purple-500/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
               href="/admin"
-              className="px-4 py-2 bg-purple-600/20 text-purple-300 rounded-lg hover:bg-purple-600/30 transition-colors border border-purple-500/30"
+              className="px-4 py-2 bg-purple-600/20 text-muted-foreground rounded-lg hover:bg-purple-600/30 transition-colors border border-purple-500/30"
             >
               ← Dashboard
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white">Email Activity</h1>
-              <p className="text-sm text-purple-300 mt-1">Monitor system-wide email traffic</p>
+              <h1 className="text-2xl font-bold text-foreground">Email Activity</h1>
+              <p className="text-sm text-muted-foreground mt-1">Monitor system-wide email traffic</p>
             </div>
           </div>
+          <ThemeToggle compact />
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 bg-red-600/20 text-red-300 rounded-lg hover:bg-red-600/30 transition-colors border border-red-500/30"
@@ -85,14 +87,14 @@ export default function AdminEmails() {
         )}
 
         {/* Filters */}
-        <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 p-6 mb-6 shadow-lg">
+        <div className="surface-elevated rounded-xl border border-purple-500/20 p-6 mb-6 shadow-lg">
           <div className="flex gap-4">
             <button
               onClick={() => { setTypeFilter('all'); setCurrentPage(1); }}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 typeFilter === 'all'
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 border border-purple-500/30'
+                  ? 'bg-purple-600 text-foreground'
+                  : 'bg-purple-600/20 text-muted-foreground hover:bg-purple-600/30 border border-purple-500/30'
               }`}
             >
               <FiMail className="w-4 h-4" />
@@ -102,7 +104,7 @@ export default function AdminEmails() {
               onClick={() => { setTypeFilter('sent'); setCurrentPage(1); }}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 typeFilter === 'sent'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-blue-600 text-foreground'
                   : 'bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/30'
               }`}
             >
@@ -113,7 +115,7 @@ export default function AdminEmails() {
               onClick={() => { setTypeFilter('received'); setCurrentPage(1); }}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 typeFilter === 'received'
-                  ? 'bg-green-600 text-white'
+                  ? 'bg-green-600 text-foreground'
                   : 'bg-green-600/20 text-green-300 hover:bg-green-600/30 border border-green-500/30'
               }`}
             >
@@ -124,7 +126,7 @@ export default function AdminEmails() {
               onClick={() => { setTypeFilter('spam'); setCurrentPage(1); }}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 typeFilter === 'spam'
-                  ? 'bg-red-600 text-white'
+                  ? 'bg-red-600 text-foreground'
                   : 'bg-red-600/20 text-red-300 hover:bg-red-600/30 border border-red-500/30'
               }`}
             >
@@ -135,37 +137,37 @@ export default function AdminEmails() {
         </div>
 
         {/* Emails Table */}
-        <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 overflow-hidden shadow-lg">
+        <div className="surface-elevated rounded-xl border border-purple-500/20 overflow-hidden shadow-lg">
           {loading ? (
             <div className="p-8 text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-4"></div>
-              <p className="text-purple-300">Loading emails...</p>
+              <p className="text-muted-foreground">Loading emails...</p>
             </div>
           ) : emails.length === 0 ? (
-            <div className="p-8 text-center text-purple-300">No emails found</div>
+            <div className="p-8 text-center text-muted-foreground">No emails found</div>
           ) : (
             <>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-purple-500/20">
-                  <thead className="bg-purple-900/30">
+                  <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">From</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">To</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Subject</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Type</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-purple-300 uppercase">Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">From</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">To</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Subject</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Type</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Date</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-purple-500/10">
                     {emails.map((email) => (
-                      <tr key={email._id} className="hover:bg-purple-900/20 transition-colors">
-                        <td className="px-6 py-4 text-sm text-gray-300 truncate max-w-xs">
+                      <tr key={email._id} className="hover:bg-muted/70 transition-colors">
+                        <td className="px-6 py-4 text-sm text-muted-foreground truncate max-w-xs">
                           {email.from || 'Unknown'}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-300 truncate max-w-xs">
+                        <td className="px-6 py-4 text-sm text-muted-foreground truncate max-w-xs">
                           {email.to || email.aliasEmail}
                         </td>
-                        <td className="px-6 py-4 text-sm text-white truncate max-w-sm">
+                        <td className="px-6 py-4 text-sm text-foreground truncate max-w-sm">
                           {email.subject || '(No Subject)'}
                         </td>
                         <td className="px-6 py-4">
@@ -183,7 +185,7 @@ export default function AdminEmails() {
                             </span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-400">
+                        <td className="px-6 py-4 text-sm text-muted-foreground">
                           {new Date(email.receivedAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -194,22 +196,22 @@ export default function AdminEmails() {
 
               {/* Pagination */}
               {pagination && pagination.totalPages > 1 && (
-                <div className="px-6 py-4 bg-purple-900/20 border-t border-purple-500/20 flex items-center justify-between">
-                  <div className="text-sm text-purple-300">
+                <div className="px-6 py-4 bg-muted/70 border-t border-purple-500/20 flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
                     Page {pagination.currentPage} of {pagination.totalPages}
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={currentPage === 1}
-                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-purple-300 transition-colors"
+                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-muted-foreground transition-colors"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setCurrentPage(p => p + 1)}
                       disabled={currentPage === pagination.totalPages}
-                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-purple-300 transition-colors"
+                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-lg hover:bg-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed text-muted-foreground transition-colors"
                     >
                       Next
                     </button>

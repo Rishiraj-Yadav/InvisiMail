@@ -84,38 +84,38 @@ export default function AssistantChat() {
     };
 
     const ChatWindow = () => (
-        <div className="fixed bottom-24 right-4 md:right-6 w-[350px] md:w-[400px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[calc(100vh-8rem)] bg-[#09090B] shadow-2xl shadow-indigo-500/10 rounded-2xl flex flex-col overflow-hidden border border-white/10 z-[9999]">
-            <div className="bg-white/[0.02] border-b border-white/10 text-white px-5 py-4 flex justify-between items-center font-bold">
+        <div className="fixed bottom-24 right-4 md:right-6 w-[350px] md:w-[400px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[calc(100vh-8rem)] bg-background shadow-2xl shadow-indigo-500/10 rounded-2xl flex flex-col overflow-hidden border border-border z-[9999]">
+            <div className="bg-card/50 border-b border-border text-foreground px-5 py-4 flex justify-between items-center font-bold">
                 <div className="flex items-center gap-2">
                     <span className="text-lg">🤖</span>
                     <span>Email Assistant</span>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="text-2xl leading-none text-[hsl(var(--muted-foreground))] hover:text-white transition-colors">&times;</button>
+                <button onClick={() => setIsOpen(false)} className="text-2xl leading-none text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors">&times;</button>
             </div>
 
-            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-black/20 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-muted scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent">
                 {messages.map((msg) => (
                     <div
                         key={msg.id}
                         className={`p-3 rounded-2xl max-w-[85%] text-sm shadow-sm ${msg.sender === "user"
-                            ? "ml-auto bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-br-sm"
-                            : "mr-auto bg-white/5 border border-white/10 text-white rounded-bl-sm"
+                            ? "ml-auto bg-gradient-to-r from-indigo-500 to-purple-500 text-foreground rounded-br-sm"
+                            : "mr-auto bg-muted border border-border text-foreground rounded-bl-sm"
                         }`}
                     >
                         {msg.text}
                     </div>
                 ))}
                 {loading && (
-                    <div className="mr-auto bg-white/5 border border-white/10 text-white/70 p-3 rounded-2xl max-w-[50%] rounded-bl-sm animate-pulse flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="mr-auto bg-muted border border-border text-foreground/70 p-3 rounded-2xl max-w-[50%] rounded-bl-sm animate-pulse flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 bg-muted0 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-1.5 h-1.5 bg-muted0 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-1.5 h-1.5 bg-muted0 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="flex items-center p-3 border-t border-white/10 bg-white/[0.02]">
+            <div className="flex items-center p-3 border-t border-border bg-card/50">
                 <input
                     ref={inputRef}
                     type="text"
@@ -125,13 +125,13 @@ export default function AssistantChat() {
                         if (e.key === "Enter") handleSend();
                     }}
                     placeholder="Ask your assistant..."
-                    className="flex-1 px-4 py-2 text-sm outline-none bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all mr-2 disabled:opacity-50"
+                    className="flex-1 px-4 py-2 text-sm outline-none bg-muted border border-border rounded-full text-foreground placeholder-white/40 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all mr-2 disabled:opacity-50"
                     disabled={loading}
                 />
                 <button
                     onClick={handleSend}
                     disabled={loading}
-                    className="p-2 rounded-full text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 transition-all"
+                    className="p-2 rounded-full text-foreground bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 transition-all"
                 >
                     <SendIcon />
                 </button>
@@ -144,7 +144,7 @@ export default function AssistantChat() {
             {isOpen && <ChatWindow />}
             <button
                 onClick={() => setIsOpen(prev => !prev)}
-                className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:shadow-indigo-500/20 transition-all z-[9999]"
+                className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 text-foreground rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:shadow-indigo-500/20 transition-all z-[9999]"
             >
                 {isOpen ? (
                     <span className="text-3xl font-bold">&times;</span>

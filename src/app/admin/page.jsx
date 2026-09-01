@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiUsers, FiMail, FiAlertTriangle, FiDollarSign, FiLogOut, FiActivity } from 'react-icons/fi';
+import ThemeToggle from '@/components/ThemeToggle';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function AdminDashboard() {
@@ -45,10 +46,10 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
-          <p className="text-purple-300">Loading admin dashboard...</p>
+          <p className="text-muted-foreground">Loading admin dashboard...</p>
         </div>
       </div>
     );
@@ -56,7 +57,7 @@ export default function AdminDashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-red-900/30 border border-red-500/50 text-red-300 px-6 py-4 rounded-lg backdrop-blur-sm">
           {error}
         </div>
@@ -65,13 +66,14 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <header className="bg-black/40 backdrop-blur-md border-b border-purple-500/20 shadow-lg">
+    <div className="min-h-screen bg-background">
+      <header className="surface-elevated border-b border-purple-500/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
-            <p className="text-sm text-purple-300 mt-1">System overview and management</p>
+            <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
+            <p className="text-sm text-muted-foreground mt-1">System overview and management</p>
           </div>
+          <ThemeToggle compact />
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 bg-red-600/20 text-red-300 rounded-lg hover:bg-red-600/30 transition-colors border border-red-500/30"
@@ -145,8 +147,8 @@ export default function AdminDashboard() {
 
         {/* Email Trends Chart */}
         {stats?.emailTrends && stats.emailTrends.length > 0 && (
-          <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 p-6 mb-8 shadow-lg">
-            <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="surface-elevated rounded-xl border border-purple-500/20 p-6 mb-8 shadow-lg">
+            <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <FiActivity className="w-5 h-5 text-purple-400" />
               Email Volume (Last 7 Days)
             </h2>
@@ -190,40 +192,40 @@ export default function AdminDashboard() {
 
         {/* Top Users Table */}
         {stats?.topUsers && stats.topUsers.length > 0 && (
-          <div className="bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 p-6 shadow-lg">
-            <h2 className="text-lg font-semibold text-white mb-4">Most Active Users</h2>
+          <div className="surface-elevated rounded-xl border border-purple-500/20 p-6 shadow-lg">
+            <h2 className="text-lg font-semibold text-foreground mb-4">Most Active Users</h2>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-purple-500/20">
                 <thead>
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-purple-300 uppercase">User</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-purple-300 uppercase">Plan</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-purple-300 uppercase">Aliases</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-purple-300 uppercase">Emails Sent</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-purple-300 uppercase">Emails Received</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">User</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Plan</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Aliases</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Emails Sent</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Emails Received</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-purple-500/10">
                   {stats.topUsers.map((user, index) => (
-                    <tr key={index} className="hover:bg-purple-900/20 transition-colors">
+                    <tr key={index} className="hover:bg-muted/70 transition-colors">
                       <td className="px-4 py-3">
                         <div>
-                          <div className="text-sm font-medium text-white">{user.user.name}</div>
-                          <div className="text-sm text-gray-400">{user.user.email}</div>
+                          <div className="text-sm font-medium text-foreground">{user.user.name}</div>
+                          <div className="text-sm text-muted-foreground">{user.user.email}</div>
                         </div>
                       </td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                           user.user.plan === 'pro' 
                             ? 'bg-yellow-900/50 text-yellow-300 border border-yellow-500/30' 
-                            : 'bg-gray-700/50 text-gray-300 border border-gray-500/30'
+                            : 'bg-muted text-muted-foreground border border-border'
                         }`}>
                           {user.user.plan}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-300">{user.aliasCount}</td>
-                      <td className="px-4 py-3 text-sm text-gray-300">{user.emailsSent}</td>
-                      <td className="px-4 py-3 text-sm text-gray-300">{user.emailsReceived}</td>
+                      <td className="px-4 py-3 text-sm text-muted-foreground">{user.aliasCount}</td>
+                      <td className="px-4 py-3 text-sm text-muted-foreground">{user.emailsSent}</td>
+                      <td className="px-4 py-3 text-sm text-muted-foreground">{user.emailsReceived}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -240,7 +242,7 @@ function StatCard({ title, value, icon, subtitle, theme = 'blue' }) {
   const themeClasses = {
     blue: 'from-blue-900/50 to-blue-800/30 border-blue-500/30 text-blue-300',
     green: 'from-green-900/50 to-green-800/30 border-green-500/30 text-green-300',
-    purple: 'from-purple-900/50 to-purple-800/30 border-purple-500/30 text-purple-300',
+    purple: 'from-purple-900/50 to-purple-800/30 border-purple-500/30 text-muted-foreground',
  red: 'from-red-900/50 to-red-800/30 border-red-500/30 text-red-300', 
     yellow: 'from-yellow-900/50 to-yellow-800/30 border-yellow-500/30 text-yellow-300',
   };
@@ -249,10 +251,10 @@ function StatCard({ title, value, icon, subtitle, theme = 'blue' }) {
     <div className={`bg-gradient-to-br ${themeClasses[theme]} border rounded-xl p-6 backdrop-blur-md shadow-lg`}>
       <div className="flex items-center justify-between mb-2">
         <span className="text-2xl">{icon}</span>
-        <span className="text-3xl font-bold text-white">{value}</span>
+        <span className="text-3xl font-bold text-foreground">{value}</span>
       </div>
-      <h3 className="text-sm font-medium text-gray-300">{title}</h3>
-      {subtitle && <p className="text-xs text-gray-400 mt-1">{subtitle}</p>}
+      <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+      {subtitle && <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>}
     </div>
   );
 }
@@ -261,16 +263,16 @@ function NavCard({ title, description, href, count, countLabel, icon }) {
   return (
     <a
       href={href}
-      className="bg-black/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all cursor-pointer shadow-lg hover:shadow-purple-500/20"
+      className="surface-elevated border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all cursor-pointer shadow-lg hover:shadow-purple-500/20"
     >
       <div className="flex items-center gap-3 mb-3">
         <div className="text-purple-400 text-2xl">{icon}</div>
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
+        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
       </div>
-      <p className="text-sm text-gray-400 mb-4">{description}</p>
+      <p className="text-sm text-muted-foreground mb-4">{description}</p>
       <div className="flex items-baseline">
         <span className="text-2xl font-bold text-purple-400">{count}</span>
-        <span className="ml-2 text-sm text-gray-500">{countLabel}</span>
+        <span className="ml-2 text-sm text-muted-foreground">{countLabel}</span>
       </div>
     </a>
   );

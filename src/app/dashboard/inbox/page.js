@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Inbox, Send, AlertOctagon, Trash2, Reply, MoreVertical, RefreshCw, LogOut, ChevronLeft, ChevronRight, User } from 'lucide-react';
 import AssistantChat from '@/components/AssistantChatPhase2';
+import ThemeToggle from '@/components/ThemeToggle';
 
 // ─── SIDEBAR (Inbox-specific, dark themed) ───
 function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpanded, setIsExpanded }) {
@@ -15,8 +16,12 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
             onMouseEnter={() => setIsExpanded(true)}
             onMouseLeave={() => setIsExpanded(false)}
         >
+            <div className="p-3 border-b border-border">
+                <ThemeToggle compact={false} />
+            </div>
+
             {/* User Profile */}
-            <div className="p-4 border-b border-white/5">
+            <div className="p-4 border-b border-border">
                 <div className="flex items-center justify-center mb-3">
                     <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center text-xl font-bold text-primary">
                         {user?.name ? user.name.charAt(0).toUpperCase() : <User size={24} />}
@@ -24,7 +29,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
                 </div>
                 {isExpanded && (
                     <div className="text-center overflow-hidden">
-                        <h3 className="font-semibold text-white text-sm truncate">{user?.name || 'User'}</h3>
+                        <h3 className="font-semibold text-foreground text-sm truncate">{user?.name || 'User'}</h3>
                         <p className="text-xs text-[hsl(var(--muted-foreground))] truncate">{user?.email}</p>
                     </div>
                 )}
@@ -36,7 +41,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
                     <li>
                         <Link
                             href="/dashboard"
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[hsl(var(--muted-foreground))] hover:bg-white/5 hover:text-white transition-all cursor-pointer"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[hsl(var(--muted-foreground))] hover:bg-muted hover:text-foreground transition-all cursor-pointer"
                             title="Back to Dashboard"
                         >
                             <ChevronLeft size={20} className="flex-shrink-0" />
@@ -44,7 +49,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
                         </Link>
                     </li>
 
-                    <li className="py-2"><hr className="border-white/5" /></li>
+                    <li className="py-2"><hr className="border-border" /></li>
 
                     {[
                         { name: 'All', type: 'all', icon: Mail, count: counts.all || 0 },
@@ -61,8 +66,8 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
                                     onClick={() => setMailType(item.type)}
                                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                                         isActive
-                                            ? 'bg-primary/12 text-white'
-                                            : 'text-[hsl(var(--muted-foreground))] hover:bg-white/5 hover:text-white'
+                                            ? 'bg-primary/12 text-foreground'
+                                            : 'text-[hsl(var(--muted-foreground))] hover:bg-muted hover:text-foreground'
                                     }`}
                                     title={item.name}
                                 >
@@ -71,7 +76,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
                                         <>
                                             <span className="flex-1 text-left">{item.name}</span>
                                             <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                                                isActive ? 'bg-primary/20 text-primary' : 'bg-white/5 text-[hsl(var(--muted-foreground))]'
+                                                isActive ? 'bg-primary/20 text-primary' : 'bg-muted text-[hsl(var(--muted-foreground))]'
                                             }`}>
                                                 {item.count}
                                             </span>
@@ -85,7 +90,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
             </nav>
 
             {/* Logout */}
-            <div className="p-3 border-t border-white/5">
+            <div className="p-3 border-t border-border">
                 <button
                     onClick={onLogout}
                     className="w-full flex items-center justify-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
@@ -99,7 +104,7 @@ function InboxSidebar({ user, counts, mailType, setMailType, onLogout, isExpande
             {/* Expand/Collapse Toggle */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-[hsl(var(--card))] border border-white/10 rounded-full flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:text-white hover:border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+                className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-[hsl(var(--card))] border border-border rounded-full flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:text-foreground hover:border-border transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
             >
                 {isExpanded ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
             </button>
@@ -197,7 +202,7 @@ function EmailDetailView({ emailId, onUpdate, user }) {
         return (
             <div className="p-8 text-center">
                 <div className="text-red-400 mb-4 text-sm">Error: {error}</div>
-                <button onClick={fetchEmailData} className="text-primary hover:text-white text-sm cursor-pointer">Try Again</button>
+                <button onClick={fetchEmailData} className="text-primary hover:text-foreground text-sm cursor-pointer">Try Again</button>
             </div>
         );
     }
@@ -213,18 +218,18 @@ function EmailDetailView({ emailId, onUpdate, user }) {
     return (
         <div className="bg-background h-full flex flex-col overflow-y-auto">
             {/* Header */}
-            <div className="p-6 border-b border-white/5 surface-elevated rounded-none flex-shrink-0">
+            <div className="p-6 border-b border-border surface-elevated rounded-none flex-shrink-0">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex-1 min-w-0">
-                        <h2 className="text-xl font-bold text-white mb-2">{email.subject || '(No Subject)'}</h2>
+                        <h2 className="text-xl font-bold text-foreground mb-2">{email.subject || '(No Subject)'}</h2>
                         <div className="flex items-center gap-4 text-sm text-[hsl(var(--muted-foreground))]">
                             <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center text-primary text-xs font-semibold">
                                     {displayInfo.displayFrom.charAt(0).toUpperCase()}
                                 </div>
-                                <span className="font-medium text-white">{displayInfo.displayFrom}</span>
+                                <span className="font-medium text-foreground">{displayInfo.displayFrom}</span>
                             </div>
-                            <span className="text-white/20">·</span>
+                            <span className="text-foreground/20">·</span>
                             <span>{formatFullDate(email.receivedAt)}</span>
                         </div>
                     </div>
@@ -247,7 +252,7 @@ function EmailDetailView({ emailId, onUpdate, user }) {
                         <button onClick={deleteEmail} className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-colors cursor-pointer" title="Delete">
                             <Trash2 size={18} />
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-white/5 text-[hsl(var(--muted-foreground))] transition-colors cursor-pointer">
+                        <button className="p-2 rounded-lg hover:bg-muted text-[hsl(var(--muted-foreground))] transition-colors cursor-pointer">
                             <MoreVertical size={18} />
                         </button>
                     </div>
@@ -279,7 +284,7 @@ function EmailDetailView({ emailId, onUpdate, user }) {
 
                 {email.bodyHtml ? (
                     <div
-                        className="prose prose-invert max-w-none leading-relaxed"
+                        className="prose max-w-none leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: email.bodyHtml }}
                     />
                 ) : (
@@ -299,14 +304,14 @@ function EmailListItem({ email, isSelected, onClick, formatDate }) {
     return (
         <button
             onClick={onClick}
-            className={`w-full text-left p-4 border-b border-white/5 transition-all cursor-pointer ${
+            className={`w-full text-left p-4 border-b border-border transition-all cursor-pointer ${
                 isSelected
                     ? 'bg-primary/8 border-l-2 border-l-primary'
                     : email.isSpam
                     ? 'bg-red-500/5 hover:bg-red-500/8 border-l-2 border-l-red-500/40'
                     : isUnread
-                    ? 'bg-white/[0.02] hover:bg-white/[0.04] border-l-2 border-l-primary/50'
-                    : 'hover:bg-white/[0.03] border-l-2 border-l-transparent'
+                    ? 'bg-card/50 hover:bg-card/70 border-l-2 border-l-primary/50'
+                    : 'hover:bg-muted/70 border-l-2 border-l-transparent'
             }`}
         >
             <div className="flex items-start gap-3">
@@ -320,13 +325,13 @@ function EmailListItem({ email, isSelected, onClick, formatDate }) {
 
                 <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start mb-0.5">
-                        <p className={`truncate text-sm ${isUnread ? 'font-bold text-white' : 'font-medium text-[hsl(var(--foreground))]'}`}>
+                        <p className={`truncate text-sm ${isUnread ? 'font-bold text-foreground' : 'font-medium text-[hsl(var(--foreground))]'}`}>
                             {email.isSentEmail ? `To: ${email.to}` : email.from}
                         </p>
                         <span className="text-xs text-[hsl(var(--muted-foreground))] ml-2 flex-shrink-0">{formatDate(email.receivedAt)}</span>
                     </div>
 
-                    <p className={`truncate text-sm mb-1 ${isUnread ? 'text-white font-semibold' : 'text-[hsl(var(--muted-foreground))]'}`}>
+                    <p className={`truncate text-sm mb-1 ${isUnread ? 'text-foreground font-semibold' : 'text-[hsl(var(--muted-foreground))]'}`}>
                         {email.subject || '(No Subject)'}
                     </p>
 
@@ -351,17 +356,17 @@ function EmailListItem({ email, isSelected, onClick, formatDate }) {
 // ─── EMAIL LIST PANE ───
 function EmailListPane({ emails, loading, selectedEmailId, onSelectEmail, mailType, aliases, selectedAlias, setSelectedAlias, unreadOnly, setUnreadOnly, onRefresh, formatDate }) {
     return (
-        <div className="bg-transparent flex flex-col h-full border-r border-white/5 relative z-10">
+        <div className="bg-transparent flex flex-col h-full border-r border-border relative z-10">
             {/* Header */}
-            <header className="relative p-4 border-b border-white/5 bg-white/[0.02] backdrop-blur-md flex-shrink-0 overflow-hidden">
+            <header className="relative p-4 border-b border-border bg-card/50 backdrop-blur-md flex-shrink-0 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-30 pointer-events-none" />
                 <div className="relative z-10">
                     <div className="flex justify-between items-center mb-3">
-                        <h1 className="text-xl font-bold text-white capitalize tracking-tight">{mailType} Emails</h1>
+                        <h1 className="text-xl font-bold text-foreground capitalize tracking-tight">{mailType} Emails</h1>
                     <div className="flex items-center gap-2">
                         <button
                             onClick={onRefresh}
-                            className="p-2 rounded-lg hover:bg-white/5 text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
+                            className="p-2 rounded-lg hover:bg-muted text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors cursor-pointer"
                             title="Refresh"
                         >
                             <RefreshCw size={18} />
@@ -389,7 +394,7 @@ function EmailListPane({ emails, loading, selectedEmailId, onSelectEmail, mailTy
                         ))}
                     </select>
 
-                    <label className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                    <label className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <input
                             type="checkbox"
                             checked={unreadOnly}
@@ -424,11 +429,11 @@ function EmailListPane({ emails, loading, selectedEmailId, onSelectEmail, mailTy
                 </div>
             ) : (
                 <div className="flex-1 flex items-center justify-center p-6">
-                    <div className="text-center surface-card border border-white/5 rounded-2xl p-10 max-w-sm w-full">
+                    <div className="text-center surface-card border border-border rounded-2xl p-10 max-w-sm w-full">
                         <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
                             <Mail className="text-primary" size={32} />
                         </div>
-                        <p className="text-white font-semibold text-base mb-1">No emails here</p>
+                        <p className="text-foreground font-semibold text-base mb-1">No emails here</p>
                         <p className="text-sm text-[hsl(var(--muted-foreground))]">Your inbox is empty</p>
                     </div>
                 </div>
@@ -509,7 +514,7 @@ function InboxMainComponent() {
     };
 
     return (
-        <div className="flex h-screen bg-background text-white overflow-hidden relative">
+        <div className="flex h-screen bg-background text-foreground overflow-hidden relative">
             {/* Ambient Gradients */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 left-[20%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none" />

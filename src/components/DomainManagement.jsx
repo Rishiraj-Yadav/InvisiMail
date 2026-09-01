@@ -195,14 +195,14 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
     return (
       <div className="mt-4 space-y-3">
-        <h5 className="text-sm font-semibold text-white">Required DNS Records:</h5>
+        <h5 className="text-sm font-semibold text-foreground">Required DNS Records:</h5>
         {allRecords.map((record, index) => (
-          <div key={index} className="surface-interactive border border-white/10 rounded-lg p-4">
+          <div key={index} className="surface-interactive border border-border rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-white uppercase">{record.record_type}</span>
+              <span className="text-xs font-bold text-foreground uppercase">{record.record_type}</span>
               <button
                 onClick={() => copyToClipboard(record.value, `${domain._id}_dns_${index}`)}
-                className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors cursor-pointer"
+                className="text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors cursor-pointer"
               >
                 {copiedRecord === `${domain._id}_dns_${index}` ?
                   <Check className="w-4 h-4" /> :
@@ -212,20 +212,20 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
             </div>
             <div className="space-y-2 text-sm text-[hsl(var(--muted-foreground))]">
               <div className="flex items-start">
-                <span className="font-semibold text-white w-20 flex-shrink-0">Name:</span>
-                <span className="break-all font-mono text-white/90">{record.name || '@'}</span>
+                <span className="font-semibold text-foreground w-20 flex-shrink-0">Name:</span>
+                <span className="break-all font-mono text-foreground/90">{record.name || '@'}</span>
               </div>
               <div className="flex items-start">
-                <span className="font-semibold text-white w-20 flex-shrink-0">Value:</span>
-                <span className="break-all font-mono text-white/90">{record.value}</span>
+                <span className="font-semibold text-foreground w-20 flex-shrink-0">Value:</span>
+                <span className="break-all font-mono text-foreground/90">{record.value}</span>
               </div>
               {record.priority && (
                 <div className="flex items-center">
-                  <span className="font-semibold text-white w-20 flex-shrink-0">Priority:</span>
-                  <span className="font-mono text-white/90">{record.priority}</span>
+                  <span className="font-semibold text-foreground w-20 flex-shrink-0">Priority:</span>
+                  <span className="font-mono text-foreground/90">{record.priority}</span>
                 </div>
               )}
-              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/10">
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
                 {record.valid === 'valid' || record.valid === true ? (
                   <>
                     <Check className="w-4 h-4 text-green-400" />
@@ -255,12 +255,12 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   if (loading) {
     return (
-      <div className="surface-card rounded-xl shadow-xl border border-white/5 p-6">
+      <div className="surface-card rounded-xl shadow-xl border border-border p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-white/10 rounded w-1/4 mb-4"></div>
+          <div className="h-6 bg-muted rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-4 bg-white/10 rounded w-full"></div>
-            <div className="h-4 bg-white/10 rounded w-3/4"></div>
+            <div className="h-4 bg-muted rounded w-full"></div>
+            <div className="h-4 bg-muted rounded w-3/4"></div>
           </div>
         </div>
       </div>
@@ -269,21 +269,21 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
   if (user?.plan !== 'pro') {
     return (
-      <div className="surface-card rounded-xl shadow-xl border border-white/5">
-        <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
-          <h3 className="text-lg font-bold text-white">Custom Domains</h3>
+      <div className="surface-card rounded-xl shadow-xl border border-border">
+        <div className="px-6 py-4 border-b border-border surface-elevated rounded-t-xl">
+          <h3 className="text-lg font-bold text-foreground">Custom Domains</h3>
           <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">
             Use your own domain for email aliases
           </p>
         </div>
         <div className="p-6">
           <div className="text-center py-12">
-            <Info className="w-16 h-16 text-white mx-auto mb-6" />
-            <h4 className="text-xl font-bold text-white mb-2">Pro Feature</h4>
+            <Info className="w-16 h-16 text-foreground mx-auto mb-6" />
+            <h4 className="text-xl font-bold text-foreground mb-2">Pro Feature</h4>
             <p className="text-[hsl(var(--muted-foreground))] mb-8 max-w-md mx-auto">
               Custom domains are available for Pro users. Upgrade to use your own domain for email aliases and build a more professional presence.
             </p>
-            <button className="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-bold transition-all cursor-pointer">
+            <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-bold transition-all cursor-pointer">
               Upgrade to Pro
             </button>
           </div>
@@ -293,11 +293,11 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
   }
 
   return (
-    <div className="surface-card rounded-xl shadow-xl border border-white/5">
-      <div className="px-6 py-4 border-b border-white/5 surface-elevated rounded-t-xl">
+    <div className="surface-card rounded-xl shadow-xl border border-border">
+      <div className="px-6 py-4 border-b border-border surface-elevated rounded-t-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-lg font-bold text-white">Custom Domains</h3>
+            <h3 className="text-lg font-bold text-foreground">Custom Domains</h3>
             <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">
               Manage your custom domains for creating email aliases
             </p>
@@ -305,7 +305,7 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
           {!showAddForm && (
             <button
               onClick={() => setShowAddForm(true)}
-              className="inline-flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 rounded-lg hover:bg-white/90 transition-all font-bold cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2.5 rounded-lg hover:bg-primary/90 transition-all font-bold cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               Add Domain
@@ -316,8 +316,8 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
       <div className="p-6">
         {showAddForm && (
-          <div className="mb-8 p-5 border border-white/10 rounded-xl surface-elevated">
-            <h4 className="text-md font-bold text-white mb-4">Add New Domain</h4>
+          <div className="mb-8 p-5 border border-border rounded-xl surface-elevated">
+            <h4 className="text-md font-bold text-foreground mb-4">Add New Domain</h4>
             <form onSubmit={handleAddDomain} className="flex flex-col sm:flex-row gap-3">
               <input
                 type="text"
@@ -332,7 +332,7 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                 <button
                   type="submit"
                   disabled={submitting || !newDomain.trim()}
-                  className="flex-1 sm:flex-none bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold cursor-pointer"
+                  className="flex-1 sm:flex-none bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold cursor-pointer"
                 >
                   {submitting ? 'Adding...' : 'Add'}
                 </button>
@@ -342,7 +342,7 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                     setShowAddForm(false);
                     setNewDomain('');
                   }}
-                  className="flex-1 sm:flex-none surface-interactive text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors font-semibold border border-white/10 cursor-pointer"
+                  className="flex-1 sm:flex-none surface-interactive text-foreground px-6 py-3 rounded-lg hover:bg-muted transition-colors font-semibold border border-border cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -353,25 +353,25 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
 
         {domains.length === 0 ? (
           <div className="flex items-center justify-center py-16">
-            <div className="text-center surface-card border border-white/5 rounded-2xl p-10 max-w-sm w-full">
-              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Plus className="text-white w-8 h-8" />
+            <div className="text-center surface-card border border-border rounded-2xl p-10 max-w-sm w-full">
+              <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Plus className="text-foreground w-8 h-8" />
               </div>
-              <p className="text-white font-semibold text-base mb-1">No custom domains</p>
+              <p className="text-foreground font-semibold text-base mb-1">No custom domains</p>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">Add your first domain to start using custom email aliases</p>
             </div>
           </div>
         ) : (
           <div className="space-y-6">
             {domains.map((domain) => (
-              <div key={domain._id} className="border border-white/10 rounded-xl p-5 surface-elevated shadow-lg">
+              <div key={domain._id} className="border border-border rounded-xl p-5 surface-elevated shadow-lg">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-4">
-                    <div className="p-2 bg-white/5 rounded-lg border border-white/10">
+                    <div className="p-2 bg-muted rounded-lg border border-border">
                       {getStatusIcon(domain)}
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-lg">{domain.domain}</h4>
+                      <h4 className="font-bold text-foreground text-lg">{domain.domain}</h4>
                       <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                         <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold ${getStatusColor(domain)}`}>
                           {getStatusText(domain)}
@@ -428,18 +428,18 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                     <p className="text-sm text-yellow-400/80 mb-4">
                       Please add the following TXT record to your DNS settings to verify ownership:
                     </p>
-                    <div className="bg-background border border-white/5 rounded-lg p-4 font-mono text-sm shadow-inner">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-3 border-b border-white/5">
+                    <div className="bg-background border border-border rounded-lg p-4 font-mono text-sm shadow-inner">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-3 border-b border-border">
                         <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16">Type:</span>
-                        <span className="text-white text-right font-bold">TXT</span>
+                        <span className="text-foreground text-right font-bold">TXT</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3 pb-3 border-b border-white/5">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3 pb-3 border-b border-border">
                         <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16 flex-shrink-0 mt-0.5">Name:</span>
                         <div className="flex items-center gap-3 justify-end w-full">
-                          <span className="break-all text-white/90">_mailalias-verification.{domain.domain}</span>
+                          <span className="break-all text-foreground/90">_mailalias-verification.{domain.domain}</span>
                           <button
                             onClick={() => copyToClipboard(`_mailalias-verification.${domain.domain}`, `${domain._id}_name`)}
-                            className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors flex-shrink-0 cursor-pointer"
+                            className="text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors flex-shrink-0 cursor-pointer"
                           >
                             {copiedRecord === `${domain._id}_name` ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                           </button>
@@ -448,10 +448,10 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                         <span className="font-semibold text-[hsl(var(--muted-foreground))] w-16 flex-shrink-0 mt-0.5">Value:</span>
                         <div className="flex items-center gap-3 justify-end w-full">
-                          <span className="break-all text-white/90">{domain.verificationToken}</span>
+                          <span className="break-all text-foreground/90">{domain.verificationToken}</span>
                           <button
                             onClick={() => copyToClipboard(domain.verificationToken, `${domain._id}_value`)}
-                            className="text-[hsl(var(--muted-foreground))] hover:text-white transition-colors flex-shrink-0 cursor-pointer"
+                            className="text-[hsl(var(--muted-foreground))] hover:text-foreground transition-colors flex-shrink-0 cursor-pointer"
                           >
                             {copiedRecord === `${domain._id}_value` ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                           </button>
@@ -468,15 +468,15 @@ export default function DomainManagement({ user, onDomainsUpdate }) {
                 )}
 
                 {domain.isVerified && domain.mailgunStatus !== 'active' && (
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-5 mt-4">
-                    <h5 className="text-sm font-bold text-white mb-2">
+                  <div className="bg-muted border border-border rounded-xl p-5 mt-4">
+                    <h5 className="text-sm font-bold text-foreground mb-2">
                       Complete DNS Setup for Email Delivery
                     </h5>
-                    <p className="text-sm text-white/80 mb-4 font-medium">
+                    <p className="text-sm text-foreground/80 mb-4 font-medium">
                       Your domain is verified! Now add these DNS records to enable email sending and receiving:
                     </p>
                     {renderDnsRecords(domain)}
-                    <div className="mt-5 pt-4 border-t border-white/10">
+                    <div className="mt-5 pt-4 border-t border-border">
                       <p className="text-xs font-medium text-[hsl(var(--muted-foreground))]">
                         After adding these records, click "Check Status" button above to verify the configuration.
                       </p>

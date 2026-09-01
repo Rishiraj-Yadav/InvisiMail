@@ -247,10 +247,10 @@ export default function EmailView() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading email...</p>
+          <p className="text-muted-foreground">Loading email...</p>
         </div>
       </div>
     );
@@ -259,7 +259,7 @@ export default function EmailView() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-6">
             <h3 className="font-medium">Error Loading Email</h3>
@@ -287,10 +287,10 @@ export default function EmailView() {
   // Email not loaded
   if (!email) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p className="text-gray-500">Email not found</p>
+            <p className="text-muted-foreground">Email not found</p>
             <Link
               href="/dashboard/inbox"
               className="text-blue-600 hover:text-blue-700 font-medium"
@@ -308,9 +308,9 @@ export default function EmailView() {
 
   // Email view
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-card shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
@@ -320,8 +320,8 @@ export default function EmailView() {
               >
                 ← Inbox
               </Link>
-              <div className="h-6 w-px bg-gray-300"></div>
-              <h1 className="text-xl font-semibold text-gray-900 truncate">
+              <div className="h-6 w-px bg-border"></div>
+              <h1 className="text-xl font-semibold text-foreground truncate">
                 {email.subject || '(No Subject)'}
               </h1>
               {/* Email type badge */}
@@ -331,7 +331,7 @@ export default function EmailView() {
                   ? 'bg-blue-100 text-blue-800'
                   : displayInfo.isReplyToSent
                     ? 'bg-green-100 text-green-800'
-                    : 'bg-gray-100 text-gray-800'
+                    : 'bg-muted text-muted-foreground'
                 }`}>
                 {displayInfo.emailType}
               </span>
@@ -348,7 +348,7 @@ export default function EmailView() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-sm border">
+        <div className="bg-card rounded-lg shadow-sm border">
           {/* Spam Warning */}
           {email.isSpam && (
             <div className={`px-6 py-4 border-b border-red-200 ${getSpamLevelColor(email.spamLevel)}`}>
@@ -373,7 +373,7 @@ export default function EmailView() {
           )}
 
           {/* Email Header */}
-          <div className="px-6 py-6 border-b border-gray-200">
+          <div className="px-6 py-6 border-b border-border">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start space-x-4">
                 {/* Avatar with appropriate letter and color for spam */}
@@ -385,47 +385,47 @@ export default function EmailView() {
                       ? 'bg-gradient-to-br from-green-400 to-green-600'
                       : 'bg-gradient-to-br from-gray-400 to-gray-600'
                   }`}>
-                  <span className="text-white text-lg font-medium">
+                  <span className="text-foreground text-lg font-medium">
                     {displayInfo.avatarLetter?.toUpperCase() || '?'}
                   </span>
                 </div>
 
                 {/* Details */}
                 <div className="min-w-0 flex-1">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h2 className="text-xl font-semibold text-foreground mb-2">
                     {email.subject || '(No Subject)'}
                   </h2>
-                  <div className="space-y-1 text-sm text-gray-600">
+                  <div className="space-y-1 text-sm text-muted-foreground">
                     <div>
-                      <span className="font-medium text-gray-700">From:</span> {displayInfo.displayFrom || 'Unknown'}
+                      <span className="font-medium text-foreground/80">From:</span> {displayInfo.displayFrom || 'Unknown'}
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">To:</span> {displayInfo.displayTo || 'Unknown'}
+                      <span className="font-medium text-foreground/80">To:</span> {displayInfo.displayTo || 'Unknown'}
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">Date:</span>{' '}
+                      <span className="font-medium text-foreground/80">Date:</span>{' '}
                       {email.receivedAt ? formatFullDate(email.receivedAt) : 'Unknown'}
                     </div>
                     {/* Show sender info for sent emails */}
                     {displayInfo.isSentEmail && email.senderName && (
                       <div>
-                        <span className="font-medium text-gray-700">Sent by:</span> {email.senderName}
+                        <span className="font-medium text-foreground/80">Sent by:</span> {email.senderName}
                       </div>
                     )}
                     {/* Show spam details */}
                     {email.isSpam && (
                       <div className="mt-2 space-y-1">
                         <div>
-                          <span className="font-medium text-gray-700">Spam Score:</span> {email.spamScore?.toFixed(1) || 'Unknown'} / {email.spamThreshold || '5.0'}
+                          <span className="font-medium text-foreground/80">Spam Score:</span> {email.spamScore?.toFixed(1) || 'Unknown'} / {email.spamThreshold || '5.0'}
                         </div>
                         <div>
-                          <span className="font-medium text-gray-700">Spam Level:</span>
+                          <span className="font-medium text-foreground/80">Spam Level:</span>
                           <span className={`ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${getSpamLevelColor(email.spamLevel).replace('border-', 'border ')}`}>
                             {email.spamLevel || 'Unknown'}
                           </span>
                         </div>
                         <div>
-                          <span className="font-medium text-gray-700">Mailgun Result:</span> {email.spamResult || 'Unknown'}
+                          <span className="font-medium text-foreground/80">Mailgun Result:</span> {email.spamResult || 'Unknown'}
                         </div>
                       </div>
                     )}
@@ -440,11 +440,11 @@ export default function EmailView() {
                     {/* Show permission info for collaborative aliases */}
                     {alias?.isCollaborative && userRole && (
                       <div>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-muted-foreground">
                           Your role: {userRole}
                           {alias?.isCollaborative && userRole && (
                           <div>
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-muted-foreground">
                               Your role: {userRole}
                               {userRole === 'member' ? ' (can reply)' : userRole === 'viewer' ? ' (view only)' : ' (full access)'}
                             </span>
@@ -455,7 +455,7 @@ export default function EmailView() {
                     )}
                     {email.attachments?.length > 0 && (
                       <div>
-                        <span className="font-medium text-gray-700">Attachments:</span>{' '}
+                        <span className="font-medium text-foreground/80">Attachments:</span>{' '}
                         {email.attachments.length} file
                         {email.attachments.length > 1 ? 's' : ''}
                       </div>
@@ -476,7 +476,7 @@ export default function EmailView() {
                 {displayInfo.canReply && !email.isSpam && (
                   <Link
                     href={`/dashboard/send?reply=${params.id}&alias=${email.aliasEmail}`}
-                    className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                    className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-foreground/80 bg-card hover:bg-background focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
                   >
                     Reply
                   </Link>
@@ -484,14 +484,14 @@ export default function EmailView() {
                 {!email.isSpam && (
                   <button
                     onClick={() => toggleSpamStatus(true)}
-                    className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                    className="inline-flex items-center px-3 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-foreground/80 bg-card hover:bg-background focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                   >
                     Mark as Spam
                   </button>
                 )}
                 <button
                   onClick={deleteEmail}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-foreground bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                 >
                   Delete
                 </button>
@@ -519,11 +519,11 @@ export default function EmailView() {
 
             {email.bodyHtml ? (
               <div
-                className={`prose max-w-none text-gray-700 leading-relaxed ${email.isSpam ? 'opacity-75' : ''}`}
+                className={`prose max-w-none text-foreground/90 leading-relaxed ${email.isSpam ? 'opacity-75' : ''}`}
                 dangerouslySetInnerHTML={{ __html: email.bodyHtml }}
               />
             ) : (
-              <div className={`whitespace-pre-wrap text-gray-700 leading-relaxed font-mono text-sm bg-gray-50 p-4 rounded-md border ${email.isSpam ? 'opacity-75' : ''}`}>
+              <div className={`whitespace-pre-wrap text-foreground/80 leading-relaxed font-mono text-sm bg-background p-4 rounded-md border ${email.isSpam ? 'opacity-75' : ''}`}>
                 {email.bodyPlain || 'No email content available.'}
               </div>
             )}
@@ -531,8 +531,8 @@ export default function EmailView() {
 
           {/* Attachments */}
           {email.attachments?.length > 0 && (
-            <div className="px-6 py-4 border-t border-gray-200">
-              <h4 className="text-sm font-medium text-gray-900 mb-3">
+            <div className="px-6 py-4 border-t border-border">
+              <h4 className="text-sm font-medium text-foreground mb-3">
                 Attachments ({email.attachments.length})
                 {email.isSpam && (
                   <span className="ml-2 text-xs text-red-600 font-normal">
@@ -546,17 +546,17 @@ export default function EmailView() {
                     key={index}
                     className={`flex items-center space-x-3 p-3 rounded-lg border transition-colors ${email.isSpam
                       ? 'bg-red-50 border-red-200 opacity-75'
-                      : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                      : 'bg-background border-border hover:bg-muted'
                       }`}
                   >
                     <div className="flex-shrink-0">
                       <span className="text-xl">📎</span>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {attachment.filename || `Attachment ${index + 1}`}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {attachment.contentType || 'Unknown type'}
                         {attachment.size && ` • ${Math.round(attachment.size / 1024)} KB`}
                       </p>
@@ -582,11 +582,11 @@ export default function EmailView() {
           )}
 
           {/* Enhanced Technical Details */}
-          <details className="px-6 py-4 border-t border-gray-200">
-            <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
+          <details className="px-6 py-4 border-t border-border">
+            <summary className="cursor-pointer text-sm font-medium text-foreground/80 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
               Technical Details
             </summary>
-            <div className="mt-3 space-y-2 text-xs text-gray-600 bg-gray-50 p-4 rounded-md">
+            <div className="mt-3 space-y-2 text-xs text-muted-foreground bg-background p-4 rounded-md">
               <div>
                 <strong>Email ID:</strong> {email._id}
               </div>
@@ -670,7 +670,7 @@ export default function EmailView() {
           <div className="flex space-x-3">
             <Link
               href="/dashboard/inbox"
-              className="text-gray-600 hover:text-gray-700 font-medium"
+              className="text-muted-foreground hover:text-foreground/80 font-medium"
             >
               ← Back to Inbox
             </Link>
@@ -686,7 +686,7 @@ export default function EmailView() {
           <div className="flex space-x-3">
             <button
               onClick={() => window.print()}
-              className="text-gray-600 hover:text-gray-700 font-medium"
+              className="text-muted-foreground hover:text-foreground/80 font-medium"
             >
               Print
             </button>
@@ -699,7 +699,7 @@ export default function EmailView() {
                   alert('Failed to copy email content');
                 });
               }}
-              className="text-gray-600 hover:text-gray-700 font-medium"
+              className="text-muted-foreground hover:text-foreground/80 font-medium"
             >
               Copy Text
             </button>

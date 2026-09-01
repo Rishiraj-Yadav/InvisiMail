@@ -15,25 +15,25 @@ export default function StatsCard({
 }) {
   const themeClasses = {
     blue: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-muted',
+      iconBg: 'bg-muted',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-border'
     },
     green: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-muted',
+      iconBg: 'bg-muted',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-border'
     },
     purple: {
-      bg: 'bg-white/5',
-      iconBg: 'bg-white/10',
-      iconColor: 'text-white',
-      statColor: 'text-white',
-      border: 'border-white/5'
+      bg: 'bg-muted',
+      iconBg: 'bg-muted',
+      iconColor: 'text-foreground',
+      statColor: 'text-foreground',
+      border: 'border-border'
     }
   };
 
