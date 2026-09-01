@@ -331,29 +331,28 @@ export async function POST(request) {
     }
     console.log('Forward to users:', forwardToUsers);
 
-    if (spamAction === 'forward' || spamAction === 'tag') {
-      // Create/get reverse alias (for masking replies)
+    // Deliver every inbound message to the connected real mailbox. Spam
+    // classification remains visible in the dashboard, but does not block
+    // delivery while the current no-quarantine policy is active.
+    {
       const reverseId = await createReverseAlias(db, aliasData._id, sender, aliasData.ownerId.toString(), recipient);
       const reverseAddress = `${reverseId}@${process.env.MAILGUN_DOMAIN}`;
+      let successfulForwardCount = 0;
+      const recipients = [...new Set(forwardToUsers.filter(Boolean))];
 
-      for (const userEmail of forwardToUsers) {
+      for (const userEmail of recipients) {
         try {
           await mg.messages.create(process.env.MAILGUN_DOMAIN, {
             from: `${sender} <${reverseAddress}>`,
             to: userEmail,
-            subject: spamAction === 'tag' ? `[SPAM] ${subject}` : subject,
-            text: `Original sender: ${sender}\n\n${bodyPlain}`,
-            html: spamAction === 'tag' ? `
-              <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                <h3 style="color: #dc2626; margin: 0 0 8px 0;">⚠️ Potential Spam Detected</h3>
-                <p style="margin: 0; color: #7f1d1d;">Reason: ${escapeHtml(spamResult.reason)}</p>
-              </div>
-              ${bodyHtml}
-            ` : bodyHtml,
+            subject,
+            text: `Original sender: ${sender}\n\n${bodyPlain || ''}`,
+            html: bodyHtml || `<pre style="white-space: pre-wrap;">${escapeHtml(bodyPlain || '')}</pre>`,
             'h:Reply-To': reverseAddress,
-            'h:In-Reply-To': messageId,
+            ...(messageId ? { 'h:In-Reply-To': messageId } : {}),
             attachment: attachments
           });
+          successfulForwardCount += 1;
         } catch (forwardError) {
           console.error(`Forward error to ${userEmail}:`, forwardError.message);
         }
@@ -361,50 +360,17 @@ export async function POST(request) {
 
       await db.collection('inbox').updateOne(
         { _id: result.insertedId },
-        { $set: { isForwarded: true, forwardedAt: new Date(), forwardedToCount: forwardToUsers.length } }
+        {
+          $set: {
+            isForwarded: successfulForwardCount > 0,
+            forwardedAt: successfulForwardCount > 0 ? new Date() : null,
+            forwardedToCount: successfulForwardCount,
+            deliveryStatus: successfulForwardCount === recipients.length ? 'delivered' : 'partial'
+          }
+        }
       );
 
-      console.log('Email forwarded successfully');
-    } else if (spamAction === 'quarantine') {
-      console.log(`Email quarantined as spam: ${spamResult.reason}`);
-      
-      // Notify owner if enabled
-      const ownerEmail = aliasData.owner[0].email;
-      if (spamSettings.notifications) {
-        try {
-          await mg.messages.create(process.env.MAILGUN_DOMAIN, {
-            from: `Spam Filter <noreply@${process.env.MAILGUN_DOMAIN}>`,
-            to: ownerEmail,
-            subject: `Spam Email Blocked for ${aliasData.aliasEmail}`,
-            ...buildQuarantineReviewNotification({
-              emailId: result.insertedId.toString(),
-              aliasEmail: aliasData.aliasEmail,
-              sender,
-              subject,
-              bodyPlain,
-              spamReason: spamResult.reason,
-              receivedAt: new Date(),
-              attachments: attachments.map(({ filename, contentType, data }) => ({
-                filename,
-                contentType,
-                size: data.length,
-              })),
-            }),
-            'o:tracking': 'no'
-          });
-
-          await db.collection('inbox').updateOne(
-            { _id: result.insertedId },
-            {
-              $set: {
-                quarantineNotificationSentAt: new Date(),
-              },
-            }
-          );
-        } catch (notificationError) {
-          console.error('Notification error:', notificationError.message);
-        }
-      }
+      console.log(`Inbound email delivered to ${successfulForwardCount}/${recipients.length} mailbox(es)`);
     }
 
     // Update alias stats
@@ -489,7 +455,7 @@ function classifySpam(bodyPlain, subject, sender, sensitivity = 'medium') {
   const reasons = [];
   const words = fullText.split(/[^a-z0-9]+/i).filter(Boolean);
   const containsKeyword = (keyword) => {
-    const keywordWords = keyword.toLowerCase().split(/\\s+/);
+    const keywordWords = keyword.toLowerCase().split(/\s+/);
     return keywordWords.every((word, index) => words.includes(word))
       && words.join(' ').includes(keywordWords.join(' '));
   };
